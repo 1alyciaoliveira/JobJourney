@@ -13,7 +13,7 @@ function Header (props) {
             <button className="btn btn-secondary me-2">Dashboard</button>
             </div>
             <div className="col-6 d-flex justify-content-end">
-            <button className="btn btn-danger">Logout</button>
+            <button className="btn btn-secondary">Logout</button>
             </div>
         </div>
     </div>
