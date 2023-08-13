@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+server/node_modules/
+
 # testing
 /coverage
 
@@ -13,6 +15,7 @@
 
 # misc
 .DS_Store
+package-lock.json
 .env
 .env.local
 .env.development.local
