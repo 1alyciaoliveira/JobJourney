@@ -28,6 +28,7 @@ const userSchema = new Schema(
     jobApplied: [jobApplication],
 })
 
+
 const User = model('User', userSchema);
 
 module.exports = User

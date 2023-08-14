@@ -1,9 +1,9 @@
-const { User } = require('../models/user');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
 
-    async getSingleUSer ({ user = null, params }, res) {
+    async getSingleUser ({ user = null, params }, res) {
         const locateUser = await User.findOne({
             $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
         });
@@ -29,11 +29,17 @@ module.exports = {
 
     async login ({ body }, res) {
         const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
+        
+        console.log('User: ', user);
+
+
         if (!user) {
             return res.status(400).json({ message: 'Sorry, no user with this ID!' });
         }
 
         const correctPw = await user.isCorrectPassword(body.password);
+
+        console.log('correctPw: ', correctPw);
 
         if (!correctPw) {
             return res.status(400).json({ message: 'Oops, wrong password!' });
@@ -42,5 +48,5 @@ module.exports = {
         const token = signToken(user); //Send it back to the client (use it to login form)
         res.json({ token, user });
     }
-    
+
 };
