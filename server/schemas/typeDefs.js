@@ -9,12 +9,13 @@ const typeDefs = gql`
   }
 
   type JobApplication {
+    jobId: String
     dateApplied: String
     company: String
     positionName: String
     salary: Float
     url: String
-    interview: String
+    interview: Boolean
     inverviewDate: String
     industry: String
     comments: String
@@ -33,8 +34,12 @@ const typeDefs = gql`
 
   type Mutation {
     login(email: String!, password: String!): Auth
+
     addUser(username: String!, email: String!, password: String!): Auth
-    addJobApplication(jobApplication: JobApplication): User
+
+    addJobApplication(jobId: Int, dateApplied: String, company: String, positionName: String, salary: Float, url: String, interview: Boolean, inverviewDate: String, industry: String, comments: String, status: String, reminder: String): User
+
+    removeJobbApplication(jobId: String): User
   }
 `;
 
