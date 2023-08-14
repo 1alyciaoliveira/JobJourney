@@ -1,5 +1,8 @@
 const { Thought } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 
+//missing fixes in query and mutation to add authentication info and signToken.
 const resolvers = {
   Query: {
     thoughts: async () => {
