@@ -6589,12 +6589,28 @@ button.bg-dark:focus {
 
 .bg-dheader {
   background-color: #354f52 !important;
+  color: white;
 }
 
 a.bg-dheader:hover, a.bg-dheader:focus,
 button.bg-dheader:hover,
 button.bg-dheader:focus {
   background-color: #2f3e46 !important;
+}
+
+.bg-dmain {
+  background-color: #cad2c5 !important;
+}
+
+.bg-dmodal {
+  background-color: #354f52 !important;
+  color: white;
+}
+
+a.bg-dmain:hover, a.bg-dmain:focus,
+button.bg-dmain:hover,
+button.bg-dmain:focus {
+  background-color: #84a98c !important;
 }
 
 .bg-white {
