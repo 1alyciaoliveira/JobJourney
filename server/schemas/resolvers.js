@@ -42,7 +42,7 @@ const resolvers = {
       { new: true }
     )
   },
-  removeJobbApplication: async (parent, args, contect) => {
+  removeJobbApplication: async (parent, args, context) => {
     return User.findOneAndUpdate(
       { _id: context.user._id },
       { $pull: { jobsApplied: {jobId: args.jobId} } },
