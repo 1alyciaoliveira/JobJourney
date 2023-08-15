@@ -51,8 +51,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `jobApplications` with the number of job offers the user has applied to
-userSchema.virtual('jobApplications').get(function () {
+// when we query a user, we'll also get another field called `jobCount` with the number of job offers the user has applied to
+userSchema.virtual('jobCount').get(function () {
     return this.jobsApplied.length;
 });
 
