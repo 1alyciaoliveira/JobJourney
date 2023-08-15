@@ -39,7 +39,10 @@ function App () {
 
 //export default App;
 
-import React, { useState } from 'react';
+
+
+//LOGIN SIGN IN 
+/* import React, { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import SignForm from './components/SignForm';
 
@@ -61,5 +64,21 @@ function App() {
   );
 }
 
+
+export default App; */
+
+
+// USER PROFILE USE
+import React from 'react';
+import './App.css';
+import UserProfile from './components/UserProfile';
+
+function App() {
+  return (
+    <div className="App">
+      <UserProfile />
+    </div>
+  );
+}
 
 export default App;
