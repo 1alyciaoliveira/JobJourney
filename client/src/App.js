@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+/* import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
 
@@ -7,14 +7,14 @@ function App () {
   return (
     <div>
       <Header />
-      {/* Your main content */}
-      <Main />
-    </div>
-  );
-}
-export default App;
+ 
+     <Main />
+    </div> */
+ // );
+//}
+//export default App;
 
-
+//---------------EN LA LINEA 10 BORRE:     {/* Your main content */}    NO ME DEJABA COMENTARLO
 
 // function App() {
 //   return (
@@ -38,3 +38,28 @@ export default App;
 // }
 
 //export default App;
+
+import React, { useState } from 'react';
+import LoginForm from './components/LoginForm';
+import SignForm from './components/SignForm';
+
+function App() {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+
+  const handleFormSwitch = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
+  return (
+    <div>
+      {showLoginForm ? (
+        <LoginForm onSwitchForm={handleFormSwitch} />
+      ) : (
+        <SignForm onSwitchForm={handleFormSwitch} />
+      )}
+    </div>
+  );
+}
+
+
+export default App;
