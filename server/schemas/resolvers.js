@@ -1,46 +1,60 @@
-const { Thought } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+
 const { AuthenticationError } = require('apollo-server-express');
 
 //missing fixes in query and mutation to add authentication info and signToken.
 const resolvers = {
   Query: {
-    thoughts: async () => {
-      return Thought.find();
-    },
-
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({_id: context.user._id})
+      }
     },
   },
 
   Mutation: {
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      return Thought.create({ thoughtText, thoughtAuthor });
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      // agregar const Token (con funcion de auth)
+      return {user}; //agregar variable token 
     },
-    addComment: async (parent, { thoughtId, commentText }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        {
-          $addToSet: { comments: { commentText } },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
-    },
-    removeComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        { $pull: { comments: { _id: commentId } } },
-        { new: true }
-      );
-    },
+    login: async (parent, {email, password}) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        console.log('Error: auth failed');
+        throw new AuthenticationError('Email or password incorrect!');
+    }
+
+    const correctPassword = await user.isCorrectPassword(password);
+
+    if (!correctPassword) {
+      console.log('Error: auth failed');
+      throw new AuthenticationError('Email or password incorrect!');
+    }
+    //const token 
+
+    return { user };//Agregar const token
+
   },
+  addJobApplication: async (parent, args, context) => {
+    return User.findOneAndUpdate(
+      { _id: context.user._id },
+      { $addToSet: { jobsApplied: args } },
+      { new: true }
+    )
+  },
+  removeJobbApplication: async (parent, args, context) => {
+    return User.findOneAndUpdate(
+      { _id: context.user._id },
+      { $pull: { jobsApplied: {jobId: args.jobId} } },
+      { new: true }
+    )
+  }
+
+  
+}
 };
 
 module.exports = resolvers;
