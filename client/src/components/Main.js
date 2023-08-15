@@ -21,9 +21,10 @@ const Main = () => {
     const [invalidInput, setInvalidInput] = useState({});
     const handleFormChange = (e) => {
         const { name, value } = e.target;
-        const newInvalidInput = { ...invalidInput };
-
+        
         // Validate and set value as an integer
+        const newInvalidInput = { ...invalidInput };
+        
         if (name === "salary" || name === "anyOtherIntegerField") {
             if (!isNaN(value) && Number.isInteger(Number(value))) {
             setFormData((prevData) => ({
@@ -40,8 +41,18 @@ const Main = () => {
             [name]: value,
             }));
         }
-
         setInvalidInput(newInvalidInput);
+
+        // Validate reminder date is not <= today
+        if (name === 'reminderDate' && value) {
+            const selectedDate = new Date(value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set the time to midnight
+            if (selectedDate <= today) {
+              // Prevent selecting a date that is today or before today
+            return;
+            }
+        }
     };
 
     const handleSubmit = (e) => {
@@ -89,6 +100,15 @@ const Main = () => {
                         onChange={handleFormChange}
                         />
                     </Form.Group>
+                    <Form.Group controlId="url">
+                        <Form.Label>Company URL</Form.Label>
+                        <Form.Control
+                        type="text"
+                        name="url"
+                        value={formData.url}
+                        onChange={handleFormChange}
+                        />
+                    </Form.Group>
                     <Form.Group controlId="jobPosition">
                         <Form.Label>Job Position</Form.Label>
                         <Form.Control
@@ -96,6 +116,15 @@ const Main = () => {
                         name="jobPosition"
                         value={formData.jobPosition}
                         onChange={handleFormChange}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId="appliedDate">
+                        <Form.Label>Job Application Date</Form.Label>
+                        <Form.Control
+                            type="date"
+                            name="appliedDate"
+                            value={formData.appliedDate}
+                            onChange={handleFormChange}
                         />
                     </Form.Group>
                     <Form.Group controlId="salary">
@@ -108,13 +137,13 @@ const Main = () => {
                         />
                         {invalidInput.salary && <div className="text-danger">Please enter a valid number</div>}
                     </Form.Group>
-                    <Form.Group controlId="comments">
-                        <Form.Label>Comments</Form.Label>
+                    <Form.Group controlId="notes">
+                        <Form.Label>Notes</Form.Label>
                         <Form.Control
                         as="textarea"
                         rows={5}
-                        name="comments"
-                        value={formData.comments}
+                        name="notes"
+                        value={formData.notes}
                         onChange={handleFormChange}
                         />
                     </Form.Group>
@@ -155,6 +184,7 @@ const Main = () => {
                             name="reminderDate"
                             value={formData.reminderDate}
                             onChange={handleFormChange}
+                            min={new Date().toISOString().split('T')[0]} // Set the min attribute to today's date
                         />
                         </Form.Group>
                     )}
