@@ -37,12 +37,27 @@ const typeDefs = gql`
   user: User
   }
 
+  input InputJobApplication {
+    jobId: String
+    dateApplied: String
+    company: String
+    jobPosition: String
+    salary: Int
+    url: String
+    interview: Boolean
+    interviewDate: String
+    comments: String
+    status: String
+    reminder: Boolean
+    reminderDate: String
+  }
+
   type Mutation {
     login(email: String!, password: String!): Auth
 
     addUser(username: String!, email: String!, password: String!): Auth
 
-    addJobApplication(jobId: String, dateApplied: String, company: String, jobPosition: String, salary: Int, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate:String): User
+    addJobApplication(InputJobApplication: InputJobApplication): User
 
     removeJobbApplication(jobId: String): User
   }
