@@ -20,6 +20,11 @@ const typeDefs = gql`
     thought(thoughtId: ID!): Thought
   }
 
+ type Auth {
+  token: String
+  user: User
+  }
+
   type Mutation {
     addThought(thoughtText: String!, thoughtAuthor: String!): Thought
     addComment(thoughtId: ID!, commentText: String!): Thought
