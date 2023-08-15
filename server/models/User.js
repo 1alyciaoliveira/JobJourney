@@ -57,6 +57,7 @@ userSchema.virtual('jobApplications').get(function () {
 });
 
 
+
 const User = model('User', userSchema);
 
 module.exports = User
