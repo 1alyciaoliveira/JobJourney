@@ -24,7 +24,7 @@ function UserProfile() {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Profile</Modal.Title>
+          <Modal.Title className="align-items-center justify-content-center" >Edit Profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -61,7 +61,7 @@ function UserProfile() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
           <Button variant="primary" onClick={handleUpdate}>
             Update
