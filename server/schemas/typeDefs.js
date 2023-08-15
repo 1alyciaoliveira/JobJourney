@@ -16,7 +16,7 @@ const typeDefs = gql`
     salary: Int
     url: String
     interview: Boolean
-    inverviewDate: String
+    interviewDate: String
     comments: String
     status: String
     reminder: Boolean
@@ -42,7 +42,7 @@ const typeDefs = gql`
 
     addUser(username: String!, email: String!, password: String!): Auth
 
-    addJobApplication(jobId: String, dateApplied: String, company: String, jobPosition: String, salary: Int, url: String, interview: Boolean, inverviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate:String): User
+    addJobApplication(jobId: String, dateApplied: String, company: String, jobPosition: String, salary: Int, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate:String): User
 
     removeJobbApplication(jobId: String): User
   }
