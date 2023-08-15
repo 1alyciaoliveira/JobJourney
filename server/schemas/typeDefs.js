@@ -25,17 +25,12 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: ID!
+    token: String
     user: User
   }
 
   type Query {
     me: User
-  }
-
- type Auth {
-  token: String
-  user: User
   }
 
   input InputJobApplication {
