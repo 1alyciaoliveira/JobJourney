@@ -33,6 +33,10 @@ const typeDefs = gql`
     me: User
   }
 
+  type Query {
+    job: JobApplication
+  }
+
   input InputJobApplication {
     jobId: String
     dateApplied: String
