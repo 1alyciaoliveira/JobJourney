@@ -56,6 +56,8 @@ const typeDefs = gql`
     addJobApplication(InputJobApplication: InputJobApplication): User
 
     removeJobbApplication(jobId: String): User
+
+    updateJobbApplication()
   }
 `;
 
