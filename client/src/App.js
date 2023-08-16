@@ -7,10 +7,9 @@ import Dashboard from './components/Dashboard';
 function App () {
   return (
     <div>
-      <Header />
- 
+    <Header />
      <Main />
-     <Dashboard/>
+    <Dashboard/>
 
     </div> 
   );
