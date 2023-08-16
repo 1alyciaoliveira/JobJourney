@@ -1,24 +1,8 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import "../style/Dashboard.css";
-
-
-/* 
-  input InputJobApplication {
-    jobId: String
-    dateApplied: String
-    company: String
-    jobPosition: String
-    salary: Int
-    url: String
-    interview: Boolean
-    interviewDate: String
-    comments: String
-    status: String
-    reminder: Boolean
-    reminderDate: String
-  } */
+import '../style/Dashboard.css';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const Dashboard = () => {
   const jobData = [
@@ -56,47 +40,78 @@ const Dashboard = () => {
       jobTitle: 'Mobile App Developer',
       jobPosition: 'App Development Engineer',
       status: 1
-    },
-/*     {
-      company: 'Company C',
-      date: 'August 22, 2023',
-      jobTitle: ' DevOps Engineer',
-      jobPosition: 'Infrastructure Specialist',
-    } */
+    }
   ];
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 1:
-        return 'bg-success opacity-75'; // Green
-      case 2:
-        return 'bg-primary opacity-75'; // Blue
-      case 3:
-        return 'bg-warning '; // Orange
-      default:
-        return 'bg-light'; // Default color
-    }
-  };
+  const status1Jobs = jobData.filter((job) => job.status === 1);
+  const status2Jobs = jobData.filter((job) => job.status === 2);
+  const status3Jobs = jobData.filter((job) => job.status === 3);
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        {jobData.map((job, index) => (
-          <div key={index} className="col-md-4 mb-4">
-            <div className={` card ${getStatusColor(job.status)}`}>
-              <div className="card-header font-weight-bold text-center">
-                Status: {job.status}
-              </div>
-              <div className="card-body">
-                <p className="card-text">Date: {job.date}</p>
-                <p className="card-text">Job: {job.jobTitle}</p>
-                <p className="card-text">Position: {job.jobPosition}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Container fluid>
+      <Row className="d-flex justify-content-around">
+        <Col md={4}>
+          <Card className="kanban-column column-status">
+            <Card.Header className="column-header text-center">Applied</Card.Header>
+            <Card.Body>
+              {status1Jobs.map((job, index) => (
+                <div key={index} className="card">
+{/*                   <div className="card-header font-weight-bold text-center">
+                    Status: {job.status}
+                  </div> */}
+                  <div className="card-body">
+                    <p className="card-text">Date: {job.date}</p>
+                    <p className="card-text">Job: {job.jobTitle}</p>
+                    <p className="card-text">Position: {job.jobPosition}</p>
+                    <p className="card-text">Currently: {job.status}</p>
+                  </div>
+                </div>
+              ))}
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="kanban-column column-status">
+            <Card.Header className="column-header text-center">In Progress</Card.Header>
+            <Card.Body>
+              {status2Jobs.map((job, index) => (
+                <div key={index} className="card">
+{/*                   <div className="card-header font-weight-bold text-center">
+                    Status: {job.status}
+                  </div> */}
+                  <div className="card-body">
+                    <p className="card-text">Date: {job.date}</p>
+                    <p className="card-text">Company: {job.company}</p>
+                    <p className="card-text">Position: {job.jobPosition}</p>
+                    <p className="card-text">Currently: {job.status}</p>
+                  </div>
+                </div>
+              ))}
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="kanban-column column-status">
+            <Card.Header className="column-header text-center">Solved</Card.Header>
+            <Card.Body>
+              {status3Jobs.map((job, index) => (
+                <div key={index} className="card">
+{/*                   <div className="card-header font-weight-bold text-center">
+                    Status: {job.status}
+                  </div> */}
+                  <div className="card-body">
+                    <p className="card-text">Date: {job.date}</p>
+                    <p className="card-text">Job: {job.jobTitle}</p>
+                    <p className="card-text">Position: {job.jobPosition}</p>
+                    <p className="card-text">Currently: {job.status}</p>
+                  </div>
+                </div>
+              ))}
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
