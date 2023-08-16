@@ -1,4 +1,4 @@
-body {
+.body {
   background-image: url('../image/startup.jpg'); /* Replace with your desired background color */
   background-size: cover; /* Scale the image to cover the entire element */
   background-repeat: no-repeat; /* Prevent the image from repeating */
