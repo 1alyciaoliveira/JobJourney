@@ -1,52 +1,42 @@
-//import logo from './logo.svg';
- import './App.css';
-import Header from './components/Header';
-import Main from './components/Main';
-import Dashboard from './components/Dashboard';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App () {
-  return (
-    <div>
-    <Header />
-     <Main />
-    <Dashboard/>
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-    </div> 
-  );
-}
-export default App; 
-
-//---------------EN LA LINEA 10 BORRE:     {/* Your main content */}    NO ME DEJABA COMENTARLO
-
-/*  function App() {
-   return (
-     <div className="App">
-       <header className="App-header">
-         <img src={logo} className="App-logo" alt="logo" />
-       <p>
-           Edit <code>src/App.js</code> and save to reload.
-         </p>
-         <a
-           className="App-link"
-           href="https://reactjs.org"
-           target="_blank"
-           rel="noopener noreferrer"
-         >
-           Learn React
-         </a>
-       </header>
-     </div>
-   );
- }
-
-export default App; */
-
-
-
-//LOGIN SIGN IN 
-/* import React, { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import SignForm from './components/SignForm';
+import Dashboard from './components/Dashboard';
+
+
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
+  uri: "/graphql",
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem("id_token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -56,31 +46,21 @@ function App() {
   };
 
   return (
-    <div>
-      {showLoginForm ? (
-        <LoginForm onSwitchForm={handleFormSwitch} />
-      ) : (
-        <SignForm onSwitchForm={handleFormSwitch} />
-      )}
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <Routes>
+        <Route path="/" element={showLoginForm ? (
+            <LoginForm onSwitchForm={handleFormSwitch} />
+          ) : (
+            <SignForm onSwitchForm={handleFormSwitch} />
+          )} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
+
+        
+    </ApolloProvider>
   );
 }
-
-
-export default App; */
-
-
-// USER PROFILE USE
-/* import React from 'react';
-import UserProfile from './components/UserProfile';
-
-function App() {
-  return (
-    <div className="App">
-      <UserProfile />
-    </div>
-  );
-}
-
 export default App;
-  */
+
