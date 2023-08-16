@@ -1,3 +1,10 @@
-.soft-color {
-    background-color: hsla(133, 100%, 42%, 0.877); /* Adjust hue, saturation, and lightness values */
-  }
+.column-header {
+  background-color: #406c49; /* Dark green */
+  color: white;
+
+}
+
+/* Background colors for columns */
+.column-status {
+  background-color: #a2b1ad; /* Light green */
+}
