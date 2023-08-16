@@ -1,6 +1,9 @@
+// DELET THIS LINE PLEASE
+
+console.log(hello);
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai'; // Importing icons
+import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
