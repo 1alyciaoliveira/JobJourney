@@ -12,7 +12,7 @@ import { setContext } from "@apollo/client/link/context";
 import LoginForm from './components/LoginForm';
 import SignForm from './components/SignForm';
 import Dashboard from './components/Dashboard';
-
+import TableDash from './components/TableDash';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -55,6 +55,7 @@ function App() {
             <SignForm onSwitchForm={handleFormSwitch} />
           )} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tabledash" element={<TableDash />} />
         </Routes>
       </Router>
 
