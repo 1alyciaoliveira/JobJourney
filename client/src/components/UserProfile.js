@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai'; // Importing icons
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
@@ -11,7 +12,7 @@ function UserProfile() {
   const handleShow = () => setShowModal(true);
 
   const handleUpdate = () => {
-    // Perform update logic here
+    // TODOD update logic here
     console.log('Updated profile:', { userName, email, password });
     handleClose();
   };
@@ -21,40 +22,50 @@ function UserProfile() {
       <Button variant="primary" onClick={handleShow}>
         Edit Profile
       </Button>
-
       <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title className="align-items-center justify-content-center" >Edit Profile</Modal.Title>
+        <Modal.Header closeButton style={{ backgroundColor: '#406c49', color: 'white' }}>
+          <Modal.Title className="align-items-center justify-content-center">
+            Edit Profile
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="userName">
-              <Form.Label>User Name</Form.Label>
+            <Form.Group  className="my-2" controlId="userName">
+              <Form.Label style={{ fontWeight: 'bold' }}>
+                <AiOutlineUser /> User Name
+              </Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter your user name"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                style={{ borderRadius: '16px' }}
               />
             </Form.Group>
 
-            <Form.Group controlId="email">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="my-2" controlId="email">
+              <Form.Label style={{ fontWeight: 'bold' }}>
+                <AiOutlineMail /> Email
+              </Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{ borderRadius: '16px' }}
               />
             </Form.Group>
 
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
+            <Form.Group className="my-2" controlId="password">
+              <Form.Label style={{ fontWeight: 'bold' }}>
+                <AiOutlineLock /> Password
+              </Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{ borderRadius: '16px' }}
               />
             </Form.Group>
           </Form>
