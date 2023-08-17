@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap components
-
+import { QUERY_ME } from '../utils/queries'
+import { useQuery } from '@apollo/client';
 
 const Main = () => {
     const [showModal, setShowModal] = useState(false);
@@ -14,6 +15,12 @@ const Main = () => {
         status: '',
         reminderDate: '',
     });
+
+    const { loading, data } = useQuery(QUERY_ME);
+console.log(data);
+    // const jobsApplied = data?.jobCount || []
+
+    const jobsAppliedCount = data?.me.jobsApplied.length || []
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -66,7 +73,7 @@ const Main = () => {
             <div className="d-flex justify-content-between mb-3">
                 <div className="rounded p-3 bg-light text-center">
                 {/* <img src={totalJobApplicationsImage} alt="Total Job Applications" width="50" height="50" /> */}
-                <p className="m-0">Total Job Applications:</p>
+                <p className="m-0">Total Job Applications:{jobsAppliedCount}</p>
                 </div>
                 <div className="rounded p-3 bg-light text-center">
                 {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
