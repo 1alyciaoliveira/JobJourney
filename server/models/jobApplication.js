@@ -38,6 +38,10 @@ const jobApplication = new Schema(
         },
         reminderDate: {
             type: String,
+        },
+        userID: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
     }
 );
