@@ -46,9 +46,28 @@ const resolvers = {
     return { token, user };
 
   },
-  addJobApplication: async (parent, args, context) => {
-    const jobbAdded = await Jobs.create(args);
-    return jobbAdded;
+  addJobApplication: async (parent, { dateApplied, company, jobPosition, salary, url, interview, interviewDate, comments, status, reminder, reminderDate }, context) => {
+    const jobAdded = await Jobs.create({
+      dateApplied,
+      company,
+      jobPosition,
+      salary,
+      url,
+      interview,
+      interviewDate,
+      comments,
+      status,
+      reminder,
+      reminderDate,
+      userID: context.user._id,
+      });
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { jobsApplied: jobAdded._id } }
+      );
+
+    return jobAdded;
   },
   removeJobbApplication: async (parent, args, context) => {
     const updatedUser = await User.findOneAndUpdate(

@@ -8,18 +8,18 @@ const jobApplication = new Schema(
         },
         company: {
             type: String,
-            required: true,
+            // required: true,
         },
         jobPosition: {
             type: String,
-            required: true,
+            // required: true,
         },
         salary: {
             type: Number,
         },
         url: {
             type: String,
-            required: true,
+            // required: true,
         },
         interview: {
             type: Boolean,
