@@ -4,9 +4,10 @@ const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
-    email: String
+    email: String!
     jobCount: Int
-    jobsApplied: [JobApplication]
+    # jobsApplied: [JobApplication]
+    jobsApplied: [String]
   }
 
   type JobApplication {
@@ -22,7 +23,8 @@ const typeDefs = gql`
     status: String
     reminder: Boolean
     reminderDate: String
-    userID: ID
+    # userID: ID
+    userID: String
   }
 
   type Auth {
@@ -51,6 +53,7 @@ const typeDefs = gql`
     status: String
     reminder: Boolean
     reminderDate: String
+    userID: String
   }
 
   type Mutation {
@@ -58,14 +61,13 @@ const typeDefs = gql`
 
     addUser(username: String!, email: String!, password: String!): Auth
 
-    addJobApplication(InputJobApplication: InputJobApplication): User
+    addJobApplication(InputJobApplication: InputJobApplication): JobApplication
 
     removeJobbApplication(jobId: String): User
 
-    # updateJobbApplication(InputJobApplication: InputJobApplication): JobApplication
+    updateJobbApplication(InputJobApplication: InputJobApplication): JobApplication
   }
 `;
 
 module.exports = typeDefs;
 
-//Duda: upadate - input y regreso un usuario? - jobb application - se va a updatear el usuario o tengo que usar dos mutations?

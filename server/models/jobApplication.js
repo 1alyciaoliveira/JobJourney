@@ -34,7 +34,7 @@ const jobApplication = new Schema(
             type: String,
         },
         reminder: {
-            type: String,
+            type: Boolean,
         },
         reminderDate: {
             type: String,
