@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Board from './Board';
 
 function Dashboard () {
+    const [showDashboard, setShowDashboard] = useState(false);
+
+    useEffect(() => {
+    setShowDashboard(true); // Set initial value to true when component mounts
+    }, []);
+
+
     return (
         <div>
-            <Header />
-            <Main />
-            <Board />
+            <Header setShowDashboard={setShowDashboard} />
+            {showDashboard ? (
+                <>
+                    <Main />
+                    <Board />
+                </>
+            ) : null}
         </div> 
     );
 }

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import UserProfile from './UserProfile';
 import logo from '../image/logo.png';
+
 function Header(props) {
+
+    const [showDashboard, setShowDashboard] = useState(false);
+    const handleDashboardClick = () => {
+        setShowDashboard(true);
+    };
 
     return (
         <div className="container-fluid bg-dheader text-white">
@@ -16,7 +22,7 @@ function Header(props) {
             
             <div className="row pb-3">
                 <div className="col-4">
-                    <button className="btn btn-warning me-2">Dashboard</button>
+                    <button className="btn btn-warning me-2" onClick={() => props.setShowDashboard(true)}>Dashboard</button>
                 </div>
                 <div className="col-4 d-flex justify-content-center ">
                     
