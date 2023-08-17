@@ -84,7 +84,7 @@ console.log(data);
                 <p className="m-0">Pending Interviews:</p>
                 </div>
                 <div>
-                <Button className= "bg-dheader rounded p-3 text-center" variant= "secondary" onClick={handleShow}>
+                <Button className= "rounded p-3 text-center" variant= "success" onClick={handleShow}>
                 + Add Job
             </Button>
                 </div>
@@ -199,7 +199,7 @@ console.log(data);
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className="justify-content-center bg-dmodal">
-                    <Button variant="secondary" onClick={handleSubmit}>
+                    <Button variant="warning" onClick={handleSubmit}>
                         Submit
                     </Button>
                 </Modal.Footer>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import "../style/LoginForm.css";
+import logo from '../image/logo.png';
 
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
@@ -61,15 +62,27 @@ const LoginForm = ({onSwitchForm}) => {
 
   return (
     <div className="login-container body">
-      <Container>
-        <Row className="align-items-center justify-content-center vh-100">
-          <Col md={7} className="align-items-center justify-content-center welcome-text">
+  <Container>
+    <Row className="align-items-center justify-content-center vh-100">
+      <Col md={12} className="align-items-center justify-content-center login-form">
+        <Row className="welcome-login-container">
+          <Col md={7} className="welcome-text">
+            <img src={logo} alt="JobJourney Logo" className="logo-image" />
+            <br/>
             <h1>Welcome to JobJourney!</h1>
-            <p>This platform is designed to streamline your job search process by easily keeping track of all your job applications in one place. Simply input the relevant details, including the job title, company, application date, salary information, and current status. As you progress through the hiring process, you can update the status of each application, whether it's 'Applied,' 'Interviewing,' 'Offer Extended,' or 'Accepted.' Say goodbye to scattered notes and missed opportunities, stay organized and informed about your job opportunities.Our application is your solution for a successful job search journey</p>
+            <br/>
+            <p>
+            Take control of your job search with our intuitive Job Tracker app. 
+            Effortlessly manage your job applications, from submission to offer acceptance. Stay organized, stay informed, and elevate your job search journey
+            </p>
           </Col>
-          <Col md={4} className="align-items-center justify-content-center login-form">
+          <Col md={1} className="divider-col">
+            <div className="divider-line"></div>
+          </Col>
+          <Col md={3}>
+            <br/>
             <h2>Login</h2>
-            <p>Enter your credentials to acces your account</p>
+            <p>Enter your credentials to access your account</p>
             <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
               <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
                 Something went wrong with your login credentials!
@@ -98,10 +111,9 @@ const LoginForm = ({onSwitchForm}) => {
                 />
                 <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
               </Form.Group>
-              <Button className="login-btn" disabled={!(userFormData.email && userFormData.password)}
-          type='submit'>Login</Button>
+              <Button className="login-btn mb-3 d-block mx-auto" disabled={!(userFormData.email && userFormData.password)} type='submit'>Login</Button>
             </Form>
-            <p>
+            <p className="text-center">
               Don't have an account?{' '}
               <span className="switch-form-link" onClick={onSwitchForm}>
                 Sign up here
@@ -109,8 +121,10 @@ const LoginForm = ({onSwitchForm}) => {
             </p>
           </Col>
         </Row>
-      </Container>
-    </div>
+      </Col>
+    </Row>
+  </Container>
+</div>
   );
 };
 

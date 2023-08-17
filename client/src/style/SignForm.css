@@ -1,95 +1,210 @@
 .body {
-    background-image: url('../image/startup.jpg'); /* Replace with your desired background color */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    background-size: cover; /* Scale the image to cover the entire element */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed;
+  background-image: url('../image/startup.jpg'); /* Replace with your desired background color */
+  background-size: cover; /* Scale the image to cover the entire element */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  opacity:.9;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+.welcome-text {  
+  text-align: center; /* Center the text horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.welcome-text h1 {
+  font-size: 3rem;
+}
+
+.welcome-text p {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.login-form {
+  background-color: rgb(243, 243, 243);
+  /* Replace with the desired gray color */
+  padding: 20px;
+  border-radius: 40px;
+  margin: 20px;
+
+/* Center the text horizontally */
+}
+.login-form h2 {
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+
+  outline: none;
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: rgb(4, 109, 10);
+  background: linear-gradient(0deg, rgb(4, 109, 10) 0%, rgb(4, 109, 10) 100%);
+}
+
+.login-btn:hover {
+  color: #02ac49;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.login-btn:before,
+.login-btn:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #228a0d;
+  box-shadow:
+    -1px -1px 5px 0px #fff,
+    7px 7px 20px 0px #0003,
+    4px 4px 5px 0px #0002;
+  transition: 400ms ease all;
+}
+
+.login-btn:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.login-btn:hover:before,
+.login-btn:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+/* Switch component text for some reason working on both ¿?WHYYYYYYYY */
+.switch-form-link {
+  font-weight: bolder;
+  color: green;
+  cursor: pointer;
+}
+.logo-image {
+  width: 50px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add spacing between image and text */
+}
+
+.divider-line {
+  border-right: 2px solid #ccc;
+  height: 100%;
+}
+
+.divider {
+  border-right: 1px solid #ccc;
+}
+
+
+/* Small devices (phones) */
+@media (max-width: 576px) {
+  .welcome-text h1 {
+    font-size: 10px;
   }
-/*   .welcome-text {  
-    text-align: center; /* Center the text horizontally 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 50px;
-  } */
-  
-  .login-form {
-    background-color: rgb(243, 243, 243);
-    /* Replace with the desired gray color */
-    padding: 20px;
-    border-radius: 40px;
-  
-  /* Center the text horizontally */
+  .welcome-text p {
+    font-size: 6px;
   }
   .login-form h2 {
-    text-align: center; 
-    margin-bottom: 20px;
+    font-size: 10px;
+  }
+  .login-form p {
+    font-size: 6px;
+  }
+
+  .divider-line {
+    border-top: 2px solid #ccc;
+    height: 100%;
   }
   
-  .login-btn {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 130px;
-    height: 40px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-      7px 7px 20px 0px rgba(0, 0, 0, .1),
-      4px 4px 5px 0px rgba(0, 0, 0, .1);
-  
-    outline: none;
-    width: 130px;
-    height: 40px;
-    line-height: 42px;
-    padding: 0;
-    border: none;
-    background: rgb(4, 109, 10);
-    background: linear-gradient(0deg, rgb(4, 109, 10) 0%, rgb(4, 109, 10) 100%);
+  .divider {
+    border-top: 1px solid #ccc;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  .welcome-text h1 {
+    font-size: 28px;
+  }
+  .welcome-text p {
+    font-size: 16px;
+  }
+  .login-form h2 {
+    font-size: 20px;
+  }
+  .login-form p {
+    font-size: 14px;
+  }
+
+  .divider-line {
+    border-top: 2px solid #ccc;
+    height: 100%;
   }
   
-  .login-btn:hover {
-    color: #02ac49;
-    background: transparent;
-    box-shadow: none;
+  .divider {
+    border-top: 1px solid #ccc;
   }
-  
-  .login-btn:before,
-  .login-btn:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 2px;
-    width: 0;
-    background: #228a0d;
-    box-shadow:
-      -1px -1px 5px 0px #fff,
-      7px 7px 20px 0px #0003,
-      4px 4px 5px 0px #0002;
-    transition: 400ms ease all;
+
+}
+
+/* Large devices (desktops) */
+@media (max-width: 992px) {
+  .welcome-text h1 {
+    font-size: 32px;
   }
-  
-  .login-btn:after {
-    right: inherit;
-    top: inherit;
-    left: 0;
-    bottom: 0;
+  .welcome-text p {
+    font-size: 18px;
   }
-  
-  .login-btn:hover:before,
-  .login-btn:hover:after {
-    width: 100%;
-    transition: 800ms ease all;
+  .login-form h2 {
+    font-size: 22px;
   }
-  .switch-form-link {
-    color: green;
+  .login-form p {
+    font-size: 16px;
   }
+}
+
+/* Extra large devices (large desktops) */
+@media (max-width: 1200px) {
+  .welcome-text h1 {
+    font-size: 36px;
+  }
+  .welcome-text p {
+    font-size: 20px;
+  }
+  .login-form h2 {
+    font-size: 24px;
+  }
+  .login-form p {
+    font-size: 18px;
+  }
+}
