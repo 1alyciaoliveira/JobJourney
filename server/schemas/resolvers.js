@@ -14,17 +14,18 @@ const resolvers = {
     },
     jobs: async (parent, args, context) => {
       if (context.user) {
-        return Jobs.findOne({_id: context.user._id})
+        return Jobs.find({userID: context.user._id})
       }
-    } // terminar query
+
+      throw new AuthenticationError('Oops, you are not logged!');
+    } 
   },
 
   Mutation: {
     addUser: async (parent, { username, email, password}) => {
       const user = await User.create({ username, email, password});
-      // agregar const Token (con funcion de auth)
       const token = signToken(user);
-      return { token, user }; //agregar variable token 
+      return { token, user };
     },
     login: async (parent, {email, password}) => {
       const user = await User.findOne({ email });
@@ -40,24 +41,22 @@ const resolvers = {
       console.log('Error: auth failed');
       throw new AuthenticationError('Email or password incorrect!');
     }
-    //const token 
+
     const token = signToken(user);
-    return { token, user };//Agregar const token
+    return { token, user };
 
   },
   addJobApplication: async (parent, args, context) => {
-    return User.findOneAndUpdate(
-      { _id: context.user._id },
-      { $addToSet: { jobsApplied: args } },
-      { new: true }
-    )
+    const jobbAdded = await Jobs.create(args);
+    return jobbAdded;
   },
   removeJobbApplication: async (parent, args, context) => {
-    return User.findOneAndUpdate(
+    const updatedUser = await User.findOneAndUpdate(
       { _id: context.user._id },
-      { $pull: { jobsApplied: {jobId: args.jobId} } },
+      { $pull: { jobsApplied: {jobId: args.jobId} } }, //Duda: se usa objeto o array?
       { new: true }
-    )
+    );
+    return updatedUser;
   },
 }
 };
