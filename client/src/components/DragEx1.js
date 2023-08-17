@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import Draggable from 'react-draggable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 // import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -79,18 +80,37 @@ const Board = () => {
   const status2Jobs = jobData.filter((job) => job.status === 2);
   const status3Jobs = jobData.filter((job) => job.status === 3);
 
+  const [job, setJobData] = useState(jobData);  // Initial job data here
+
+  // ... your other code ...
+
+  const handleDragEnd = (job, newStatus) => {
+    const jobIndex = jobData.findIndex(j => j === job);
+
+    const updatedJobData = [...jobData];
+    updatedJobData[jobIndex] = { ...job, status: newStatus };
+
+    setJobData(updatedJobData);
+  };
+
   return (
     <Container fluid>
+      
       <Row className="d-flex justify-content-around">
         <Col md={4}>
           <Card className="column-status my-3">
             <Card.Header className="column-header text-center">Applied</Card.Header>
             <Card.Body>
               {status1Jobs.map((job, index) => (
-                <div key={index}
+                <Draggable
+                key={index}
+                onStop={(event, data) => handleDragEnd(job, 1)}
+              >
+                <div
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
+                  style={{ cursor: 'pointer' }}
+                >
                   <div key={index} className="card">
                     <div className="card-body">
                       <p className="card-text">Date: {job.date}</p>
@@ -99,7 +119,7 @@ const Board = () => {
                     </div>
                   </div>
                 </div>
-
+                </Draggable>
               ))}
             </Card.Body>
           </Card>
@@ -109,6 +129,7 @@ const Board = () => {
             <Card.Header className="column-header text-center">In Progress</Card.Header>
             <Card.Body>
               {status2Jobs.map((job, index) => (
+                <Draggable>
                 <div key={index}
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
@@ -121,6 +142,7 @@ const Board = () => {
                     </div>
                   </div>
                 </div>
+                </Draggable>
               ))}
             </Card.Body>
           </Card>
@@ -130,6 +152,7 @@ const Board = () => {
             <Card.Header className="column-header text-center">Solved</Card.Header>
             <Card.Body>
               {status3Jobs.map((job, index) => (
+                <Draggable>
                 <div key={index}
                   className="card inner-card m-3"
                   onClick={() => openModal(job)}
@@ -143,14 +166,16 @@ const Board = () => {
                     </div>
                   </div>
                 </div>
+                </Draggable>
               ))}
+              
             </Card.Body>
           </Card>
         </Col>
       </Row>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton >
-          <Modal.Title className="align-items-center justify-content-center">Job Details</Modal.Title>
+        <Modal.Header closeButton>
+          <Modal.Title>Job Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedJob && (
