@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import "../style/SignForm.css";
+import logo from '../image/logo.png';
 
 // Import mutations
 import { useMutation } from "@apollo/client";
@@ -66,12 +67,24 @@ const SignForm = ({ onSwitchForm }) => {
     
     <div className="login-container body">
       <Container>
-        <Row className="align-items-center justify-content-center vh-100">
-          <Col md={6} className="align-items-center justify-content-center welcome-text">
-            <h1>Welcome to JobTracker!</h1>
-            <p>This platform is designed to streamline your job search process by easily keeping track of all your job applications in one place. Simply input the relevant details, including the job title, company, application date, salary information, and current status. As you progress through the hiring process, you can update the status of each application, whether it's 'Applied,' 'Interviewing,' 'Offer Extended,' or 'Accepted.' Say goodbye to scattered notes and missed opportunities, stay organized and informed about your job opportunities.Our application is your solution for a successful job search journey</p>
+      <Row className="align-items-center justify-content-center vh-100">
+      <Col md={12} className="align-items-center justify-content-center login-form">
+        <Row className="welcome-login-container">
+          <Col md={7} className="welcome-text">
+          <img src={logo} alt="JobJourney Logo" className="logo-image" />
+            <br/>
+            <h1>Welcome to JobJourney!</h1>
+            <br/>
+            <p>
+            Take control of your job search with our intuitive Job Tracker app. 
+            Effortlessly manage your job applications, from submission to offer acceptance. Stay organized, stay informed, and elevate your job search journey
+            </p>
           </Col>
-          <Col md={5} className="align-items-center justify-content-center login-form">
+          <Col md={1} className="divider-col">
+            <div className="divider-line"></div>
+          </Col>
+          <Col md={3}>
+            <br/>
             <h2>Get started!</h2>
             
 
@@ -120,19 +133,21 @@ const SignForm = ({ onSwitchForm }) => {
                 <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
               </Form.Group>
 
-              <Button className="login-btn" disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+              <Button className="login-btn mb-3 d-block mx-auto" disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'>Sign up</Button>
             </Form>
 
 
-            <p>       Already have an account?{' '}
+            <p className="text-center">       Already have an account?{' '}
               <span className="switch-form-link" onClick={onSwitchForm}>
                 Login here
               </span>
             </p>
-          </Col>
+            </Col>
         </Row>
-      </Container>
+      </Col>
+    </Row>
+  </Container>
     </div>
   );
 };

@@ -20,11 +20,11 @@ function UserProfile() {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="warning" onClick={handleShow}>
         Edit Profile
       </Button>
       <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton style={{ backgroundColor: '#406c49', color: 'white' }}>
+        <Modal.Header closeButton style={{ backgroundColor: '#2f3e46', color: 'white' }}>
           <Modal.Title className="align-items-center justify-content-center">
             Edit Profile
           </Modal.Title>
@@ -71,11 +71,11 @@ function UserProfile() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ backgroundColor: '#2f3e46', color: 'white', display: 'flex', justifyContent: 'center' }}>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleUpdate}>
+          <Button variant="warning" onClick={handleUpdate}>
             Update
           </Button>
         </Modal.Footer>
