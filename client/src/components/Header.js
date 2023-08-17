@@ -1,12 +1,17 @@
 import React, { useState }  from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import logo from '../image/logo.png';
 
 function Header(props) {
 
+    const navigate = useNavigate();
+    
     const [showDashboard, setShowDashboard] = useState(false);
-    const handleDashboardClick = () => {
-        setShowDashboard(true);
+    const handleLogout = () => {
+        // Clear token and redirect to login page
+        localStorage.removeItem('id_token');
+        navigate('/'); // Redirect to the login page
     };
 
     return (
@@ -30,7 +35,7 @@ function Header(props) {
                     
                 </div>
                 <div className="col-4 d-flex justify-content-end ">
-                    <button className="btn btn-warning me-2">Logout</button>
+                    <button className="btn btn-warning me-2" onClick={handleLogout}>Logout</button>
                 </div>
             </div>
         </div>

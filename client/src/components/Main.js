@@ -4,15 +4,21 @@ import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap
 import { QUERY_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
 
+import { useMutation } from '@apollo/client';
+import { ADD_APPLICATION } from '../utils/mutations';
+
 const Main = () => {
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
     const [formData, setFormData] = useState({
         company: '',
+        url: '',
         jobPosition: '',
+        dateApplied:'',
         salary: '',
         comments: '',
         status: '',
+        reminder: '',
         reminderDate: '',
     });
 
@@ -62,11 +68,37 @@ console.log(data);
         }
     };
 
+    const [addJobApplication] = useMutation(ADD_APPLICATION);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData); 
-        handleClose();
-    };
+        addJobApplication({
+            variables: {
+                InputJobApplication: {
+                    dateApplied: formData.dateApplied,
+                    company: formData.company,
+                    jobPosition: formData.jobPosition,
+                    salary: formData.salary,
+                    url: formData.url,
+                    comments: formData.comments,
+                    status: formData.status,
+                    reminder: formData.reminder,
+                    reminderDate: formData.reminderDate,
+                    
+                },
+                },
+            })
+                .then(({ data }) => {
+                // Do something with the response data if needed
+                console.log(data);
+                handleClose();
+                })
+                .catch((error) => {
+                // Handle errors here
+                console.error(error);
+            });
+        };
 
     return (
         <div className="container-fluid bg-dmain py-4">
@@ -125,12 +157,12 @@ console.log(data);
                         onChange={handleFormChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="appliedDate">
+                    <Form.Group controlId="dateApplied">
                         <Form.Label>Job Application Date</Form.Label>
                         <Form.Control
                             type="date"
-                            name="appliedDate"
-                            value={formData.appliedDate}
+                            name="dateApplied"
+                            value={formData.dateApplied}
                             onChange={handleFormChange}
                         />
                     </Form.Group>
@@ -144,13 +176,13 @@ console.log(data);
                         />
                         {invalidInput.salary && <div className="text-danger">Please enter a valid number</div>}
                     </Form.Group>
-                    <Form.Group controlId="notes">
+                    <Form.Group controlId="comments">
                         <Form.Label>Notes</Form.Label>
                         <Form.Control
                         as="textarea"
                         rows={5}
-                        name="notes"
-                        value={formData.notes}
+                        name="comments"
+                        value={formData.comments}
                         onChange={handleFormChange}
                         />
                     </Form.Group>
