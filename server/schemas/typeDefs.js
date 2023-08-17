@@ -34,9 +34,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-  }
-
-  type Query {
+  
     jobs: JobApplication
   }
 

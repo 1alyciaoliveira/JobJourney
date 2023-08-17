@@ -12,10 +12,13 @@ const Main = () => {
     const [reminder, setReminder] = useState(false);
     const [formData, setFormData] = useState({
         company: '',
+        url: '',
         jobPosition: '',
+        dateApplied:'',
         salary: '',
         comments: '',
         status: '',
+        reminder: '',
         reminderDate: '',
     });
 
@@ -73,13 +76,16 @@ console.log(data);
         addJobApplication({
             variables: {
                 InputJobApplication: {
+                    dateApplied: formData.dateApplied,
                     company: formData.company,
                     jobPosition: formData.jobPosition,
                     salary: formData.salary,
+                    url: formData.url,
                     comments: formData.comments,
                     status: formData.status,
+                    reminder: formData.reminder,
                     reminderDate: formData.reminderDate,
-                    // ... Add more variables if needed
+                    
                 },
                 },
             })
@@ -151,12 +157,12 @@ console.log(data);
                         onChange={handleFormChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="appliedDate">
+                    <Form.Group controlId="dateApplied">
                         <Form.Label>Job Application Date</Form.Label>
                         <Form.Control
                             type="date"
-                            name="appliedDate"
-                            value={formData.appliedDate}
+                            name="dateApplied"
+                            value={formData.dateApplied}
                             onChange={handleFormChange}
                         />
                     </Form.Group>
@@ -170,13 +176,13 @@ console.log(data);
                         />
                         {invalidInput.salary && <div className="text-danger">Please enter a valid number</div>}
                     </Form.Group>
-                    <Form.Group controlId="notes">
+                    <Form.Group controlId="comments">
                         <Form.Label>Notes</Form.Label>
                         <Form.Control
                         as="textarea"
                         rows={5}
-                        name="notes"
-                        value={formData.notes}
+                        name="comments"
+                        value={formData.comments}
                         onChange={handleFormChange}
                         />
                     </Form.Group>
