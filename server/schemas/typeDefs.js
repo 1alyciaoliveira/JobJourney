@@ -22,6 +22,7 @@ const typeDefs = gql`
     status: String
     reminder: Boolean
     reminderDate: String
+    userID: ID
   }
 
   type Auth {
@@ -34,7 +35,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    job: JobApplication
+    jobs: JobApplication
   }
 
   input InputJobApplication {
@@ -61,8 +62,10 @@ const typeDefs = gql`
 
     removeJobbApplication(jobId: String): User
 
-    updateJobbApplication()
+    # updateJobbApplication(InputJobApplication: InputJobApplication): JobApplication
   }
 `;
 
 module.exports = typeDefs;
+
+//Duda: upadate - input y regreso un usuario? - jobb application - se va a updatear el usuario o tengo que usar dos mutations?

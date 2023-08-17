@@ -10,9 +10,9 @@ query me {
     }
 }`
 
-export const QUERY_JOB = gql `
-query job {
-    job {
+export const QUERY_JOBS = gql `
+query jobs {
+    jobs {
         jobId
         dateApplied
         company

@@ -9,7 +9,7 @@ const jobApplication = require('./jobApplication');
 const userSchema = new Schema(
     {
     username: {
-        type:String,
+        type: String,
         required: true,
         unique: true,
         maxlength: 50,
@@ -27,7 +27,12 @@ const userSchema = new Schema(
         required: true,
     },
 
-    jobsApplied: [jobApplication],
+    jobsApplied: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Jobs'
+        }
+    ],
 },
 {
     toJSON: {

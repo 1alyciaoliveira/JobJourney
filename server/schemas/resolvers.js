@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Jobs } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
@@ -12,6 +12,11 @@ const resolvers = {
 
       throw new AuthenticationError('Oops, you are not logged!');
     },
+    jobs: async (parent, args, context) => {
+      if (context.user) {
+        return Jobs.findOne({_id: context.user._id})
+      }
+    } // terminar query
   },
 
   Mutation: {
@@ -53,9 +58,7 @@ const resolvers = {
       { $pull: { jobsApplied: {jobId: args.jobId} } },
       { new: true }
     )
-  }
-
-  
+  },
 }
 };
 
