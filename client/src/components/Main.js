@@ -4,6 +4,9 @@ import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap
 import { QUERY_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
 
+import { useMutation } from '@apollo/client';
+import { ADD_APPLICATION } from '../utils/mutations';
+
 const Main = () => {
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
@@ -62,11 +65,34 @@ console.log(data);
         }
     };
 
+    const [addJobApplication] = useMutation(ADD_APPLICATION);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData); 
-        handleClose();
-    };
+        addJobApplication({
+            variables: {
+                InputJobApplication: {
+                    company: formData.company,
+                    jobPosition: formData.jobPosition,
+                    salary: formData.salary,
+                    comments: formData.comments,
+                    status: formData.status,
+                    reminderDate: formData.reminderDate,
+                    // ... Add more variables if needed
+                },
+                },
+            })
+                .then(({ data }) => {
+                // Do something with the response data if needed
+                console.log(data);
+                handleClose();
+                })
+                .catch((error) => {
+                // Handle errors here
+                console.error(error);
+            });
+        };
 
     return (
         <div className="container-fluid bg-dmain py-4">
