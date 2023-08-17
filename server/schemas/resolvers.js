@@ -69,13 +69,18 @@ const resolvers = {
 
     return jobAdded;
   },
-  removeJobbApplication: async (parent, args, context) => {
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: context.user._id },
-      { $pull: { jobsApplied: {jobId: args.jobId} } }, //Duda: se usa objeto o array?
+  removeJobApplication: async (parent, args, context) => {
+    const removedJobApplication = await Jobs.findOneAndDelete({
+      _id: args._id
+    });
+    console.log(args._id)
+console.log(removedJobApplication);
+    await User.findOneAndUpdate (
+      { _id: context.user._id},
+      { $pull: { jobsApplied: args._id } }, //Duda: se usa objeto o array?
       { new: true }
     );
-    return updatedUser;
+    return removedJobApplication;
   },
 }
 };

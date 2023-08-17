@@ -63,7 +63,7 @@ const typeDefs = gql`
 
     addJobApplication(dateApplied: String, company: String, jobPosition: String, salary: Int, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate: String, userID: String): JobApplication
 
-    removeJobbApplication(jobId: String): User
+    removeJobApplication(_id: ID): JobApplication
 
     # updateJobbApplication(InputJobApplication: InputJobApplication): JobApplication
   }

@@ -7,13 +7,28 @@ query me {
         username
         email
         jobCount
+        jobsApplied {
+            _id
+            dateApplied
+            company
+            jobPosition
+            salary
+            url
+            interview
+            interviewDate
+            comments
+            status
+            reminder
+            reminderDate
+            userID
+        }
     }
 }`
 
 export const QUERY_JOBS = gql `
 query jobs {
     jobs {
-        jobId
+        _id
         dateApplied
         company
         jobPosition
@@ -25,6 +40,7 @@ query jobs {
         status
         reminder
         reminderDate
+        userID
     }
 }
 `
