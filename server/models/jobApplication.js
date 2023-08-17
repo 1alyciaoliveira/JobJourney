@@ -1,37 +1,31 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const jobApplication = new Schema(
     {
-        // creator: {
-        //     type: String,
-        // },
         dateApplied: {
             type: Date,
             default: Date.now,
         },
         company: {
             type: String,
-            required: true,
+            // required: true,
         },
-        positionName: {
+        jobPosition: {
             type: String,
-            required: true,
+            // required: true,
         },
         salary: {
             type: Number,
         },
         url: {
             type: String,
-            required: true,
+            // required: true,
         },
         interview: {
             type: Boolean,
         },
         interviewDate: {
             type: Date,
-        },
-        industry: {
-            type: String,
         },
         comments: {
             type: String,
@@ -40,9 +34,18 @@ const jobApplication = new Schema(
             type: String,
         },
         reminder: {
+            type: Boolean,
+        },
+        reminderDate: {
             type: String,
+        },
+        userID: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
     }
 );
 
-module.exports = jobApplication;
+const Jobs = model('Jobs', jobApplication);
+
+module.exports = Jobs;

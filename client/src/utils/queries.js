@@ -7,19 +7,24 @@ query me {
         username
         email
         jobCount
-        jobsApplied {
-            jobId
-            dateApplied
-            company
-            jobPosition
-            salary
-            url
-            interview
-            interviewDate
-            comments
-            status
-            reminder
-            reminderDate
-        }
     }
 }`
+
+export const QUERY_JOBS = gql `
+query jobs {
+    jobs {
+        jobId
+        dateApplied
+        company
+        jobPosition
+        salary
+        url
+        interview
+        interviewDate
+        comments
+        status
+        reminder
+        reminderDate
+    }
+}
+`
