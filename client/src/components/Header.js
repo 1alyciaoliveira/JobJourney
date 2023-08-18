@@ -15,7 +15,7 @@ function Header(props) {
     };
 
     return (
-        <div className="container-fluid bg-dheader text-white">
+        <div className="container-fluid bg-light text-black align-middle">
             <div className="row py-3">
             <div className="col-12 text-center">
             <div className="d-flex align-items-center">
@@ -27,20 +27,17 @@ function Header(props) {
             
             <div className="row pb-3">
                 <div className="col-4">
-                    <button className="btn btn-warning me-2" onClick={() => props.setShowDashboard(true)}>Dashboard</button>
+                    <button className="btn" onClick={() => props.setShowDashboard(true)}>Dashboard</button>
                 </div>
-                <div className="col-4 d-flex justify-content-center ">
-                    
-                        <UserProfile />                    
-                    
+
+                <div className="btn col-4 d-flex justify-content-center ">
+                        <UserProfile/>                    
                 </div>
                 <div className="col-4 d-flex justify-content-end ">
-                    <button className="btn btn-warning me-2" onClick={handleLogout}>Logout</button>
+                    <button className="btn" onClick={handleLogout}>Logout</button>
                 </div>
             </div>
         </div>
     );
 };
 export default Header;
-
-//prueba gitadd

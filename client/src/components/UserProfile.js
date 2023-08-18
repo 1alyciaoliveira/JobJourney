@@ -20,8 +20,8 @@ function UserProfile() {
 
   return (
     <div>
-      <Button variant="warning" onClick={handleShow}>
-        Edit Profile
+      <Button variant="btn" onClick={handleShow}>
+        Profile
       </Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton style={{ backgroundColor: '#2f3e46', color: 'white' }}>
