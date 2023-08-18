@@ -7,7 +7,6 @@ const typeDefs = gql`
     email: String!
     jobCount: Int
     jobsApplied: [JobApplication]
-    # jobsApplied: [String]
   }
 
   type JobApplication {
@@ -23,7 +22,6 @@ const typeDefs = gql`
     status: String
     reminder: Boolean
     reminderDate: String
-    # userID: ID
     userID: String
   }
 
@@ -37,7 +35,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    jobs: JobApplication
+    jobs: [JobApplication]
   }
 
   # input InputJobApplication {
@@ -65,7 +63,7 @@ const typeDefs = gql`
 
     removeJobApplication(_id: ID): JobApplication
 
-    updateJobApplication(_id: ID, dateApplied: String, company: String, jobPosition: String, salary: Int, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate: String, userID: String): JobApplication
+    updateJobApplication(_id: ID, dateApplied: String, company: String, jobPosition: String, salary: String, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate: String, userID: String): JobApplication
   }
 `;
 

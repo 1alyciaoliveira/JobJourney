@@ -12,13 +12,13 @@ const resolvers = {
 
       throw new AuthenticationError('Oops, you are not logged!');
     },
-    // jobs: async (parent, { userID } ) => {
-    //   const params = userID ? { userID } : {};
-    //   return Jobs.find(params).sort({ createdAt: -1 })
-
-    //   // throw new AuthenticationError('Oops, you are not logged!');
-    // } 
-    
+    jobs: async (parent, args, context) => {
+      if (context.user) {
+        const response = await Jobs.find({userID: context.user._id});
+        return response;
+      }
+      throw new AuthenticationError('Oops, you are not logged!');
+    }
   },
   Mutation: {
     addUser: async (parent, { username, email, password}) => {
