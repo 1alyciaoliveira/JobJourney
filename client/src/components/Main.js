@@ -11,15 +11,19 @@ const Main = () => {
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
     const [formData, setFormData] = useState({
-        company: '',
-        url: '',
-        jobPosition: '',
+        _id: '',
         dateApplied:'',
+        company: '',
+        jobPosition: '',
         salary: '',
+        url: '',
+        interview: '',
+        interviewDate: '',
         comments: '',
         status: '',
-        reminder: '',
+        reminder: true,
         reminderDate: '',
+        userID: '',
     });
 
     const { loading, data } = useQuery(QUERY_ME);
@@ -39,7 +43,8 @@ console.log(data);
         const newInvalidInput = { ...invalidInput };
         
         if (name === "salary" || name === "anyOtherIntegerField") {
-            if (!isNaN(value) && Number.isInteger(Number(value))) {
+            // if (!isNaN(value) && Number.isInteger(Number(value))) {
+            if (!isNaN(value)) {
             setFormData((prevData) => ({
                 ...prevData,
                 [name]: value,
@@ -75,19 +80,30 @@ console.log(data);
         console.log(formData); 
         addJobApplication({
             variables: {
-                InputJobApplication: {
-                    dateApplied: formData.dateApplied,
-                    company: formData.company,
-                    jobPosition: formData.jobPosition,
-                    salary: formData.salary,
-                    url: formData.url,
-                    comments: formData.comments,
-                    status: formData.status,
-                    reminder: formData.reminder,
-                    reminderDate: formData.reminderDate,
+                // InputJobApplication: {
+                //     dateApplied: formData.dateApplied,
+                //     company: formData.company,
+                //     jobPosition: formData.jobPosition,
+                //     salary: formData.salary,
+                //     url: formData.url,
+                //     comments: formData.comments,
+                //     status: formData.status,
+                //     reminder: formData.reminder,
+                //     reminderDate: formData.reminderDate,
                     
-                },
-                },
+                // },
+                _id: formData._id,
+                dateApplied: formData.dateApplied,
+                company: formData.company,
+                jobPosition: formData.jobPosition,
+                salary: formData.salary,
+                url: formData.url,
+                comments: formData.comments,
+                status: formData.status,
+                reminder: formData.reminder,
+                reminderDate: formData.reminderDate,
+                userID: formData.userID,
+                }
             })
                 .then(({ data }) => {
                 // Do something with the response data if needed
@@ -169,7 +185,7 @@ console.log(data);
                     <Form.Group controlId="salary">
                         <Form.Label>Salary</Form.Label>
                         <Form.Control
-                        type="number"
+                        type="text"
                         name="salary"
                         value={formData.salary}
                         onChange={handleFormChange}
