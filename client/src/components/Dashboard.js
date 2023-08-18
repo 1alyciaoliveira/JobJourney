@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Board from './Board';
+import ViewButton from './ViewButton';
 
 function Dashboard () {
     const [showDashboard, setShowDashboard] = useState(false);
@@ -17,6 +18,7 @@ function Dashboard () {
             {showDashboard ? (
                 <>
                     <Main />
+                    <ViewButton />
                     <Board />
                 </>
             ) : null}
