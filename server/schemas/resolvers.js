@@ -7,20 +7,19 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({_id: context.user._id})
+        return User.findOne({_id: context.user._id}).populate('jobsApplied');
       }
 
       throw new AuthenticationError('Oops, you are not logged!');
     },
-    jobs: async (parent, args, context) => {
-      if (context.user) {
-        return Jobs.find({userID: context.user._id})
-      }
+    // jobs: async (parent, { userID } ) => {
+    //   const params = userID ? { userID } : {};
+    //   return Jobs.find(params).sort({ createdAt: -1 })
 
-      throw new AuthenticationError('Oops, you are not logged!');
-    } 
+    //   // throw new AuthenticationError('Oops, you are not logged!');
+    // } 
+    
   },
-
   Mutation: {
     addUser: async (parent, { username, email, password}) => {
       const user = await User.create({ username, email, password});
@@ -84,8 +83,8 @@ console.log(removedJobApplication);
   },
   updateJobApplication: async (parent, args, context) => {
     const updatedJobApplication = await Jobs.findOneAndUpdate(
-      { _id: args._id },
-      { $addToSet: {
+      { _id: args._id }, //Construir el boton onclik
+      { 
         dateApplied: args.dateApplied,
         company: args.company,
         jobPosition: args.jobPosition,
@@ -97,7 +96,7 @@ console.log(removedJobApplication);
         status: args.status,
         reminder: args.reminder,
         reminderDate: args.reminderDate
-      }},
+      },
       { new: true }
       );
       return updatedJobApplication;
