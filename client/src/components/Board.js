@@ -53,11 +53,10 @@ const Board = () => {
      setShowDeleteModal(true);
    }
 
-  const status1Jobs = userJobs.filter((job) => job.status === 'approved');
-  const status2Jobs = userJobs.filter((job) => job.status === 'pending');
-  const status3Jobs = userJobs.filter((job) => job.status === 'rejected');
-
-
+  const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
+  const status2Jobs = userJobs.filter((job) => job.status === 'Interview' || job.status === 'Waiting for response');
+  const status3Jobs = userJobs.filter((job) => job.status === 'Accepted' || job.status === 'Job Offer' || job.status === 'Rejected by Company' || job.status === 'Rejected by Me');
+  
   return (
     <Container fluid>
       <Row className="d-flex justify-content-around">
@@ -72,7 +71,7 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.interviewDate}</p>
+                      <p className="card-text">Date: {job.dateApplied}</p>
                       <p className="card-text">Position: {job.jobPosition}</p>
                       <p className="card-text">Status: {job.status}</p>
                     </div>
@@ -94,7 +93,7 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.interviewDate}</p>
+                      <p className="card-text">Date: {job.dateApplied}</p>
                       <p className="card-text">Position: {job.jobPosition}</p>
                       <p className="card-text">Status: {job.status}</p>
                     </div>
@@ -115,7 +114,7 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.interviewDate}</p>
+                      <p className="card-text">Date: {job.dateApplied}</p>
                       <p className="card-text">Position: {job.jobPosition}</p>
                       <p className="card-text">Status: {job.status}</p>
                     </div>
@@ -133,7 +132,7 @@ const Board = () => {
         <Modal.Body>
           {selectedJob && (
             <div>
-              <p>Date: {selectedJob.interviewDate}</p>
+              <p>Date: {selectedJob.dateApplied}</p>
               <p>Company: {selectedJob.company}</p>
               <p>Position: {selectedJob.jobPosition}</p>
               <p>Currently: {selectedJob.status}</p>
