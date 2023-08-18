@@ -22,6 +22,7 @@
           "salary": "60000",
           "url": "https://www.ejemplo.com/trabajo2",
           "interview": false,
+          "interviewDate": "2023-08-12",
           "comments": "Comentarios sobre la solicitud 2",
           "status": "rejected",
           "reminder": false,
