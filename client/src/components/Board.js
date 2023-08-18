@@ -1,17 +1,40 @@
 import React from 'react';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Card, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 import "../style/Board.css";
 import BoardJobEdit from './BoardJobEdit';
-import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
+import { REMOVE_APPLICATION } from '../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
 
 
 const Board = () => {
+  
+  // const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
+
+  // const confirmDelete = async () => {
+  //   try {
+  //     await removeJobApplication({
+  //       variables: { _id: jobToDelete._id },
+  //     });
+
+  //     const updateJobData = jobData.filter(job => job !== jobToDelete);
+  //     setJobData(updatedJobData);
+
+  //     setShowDeleteModal(false);
+  //   } catch (error) {
+  //     console.error('Error deleting job:', error);
+  //   };
+  // };
+  
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
+   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // const [jobToDelete, setJobToDelete] = useState(null);
+
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -24,6 +47,11 @@ const Board = () => {
     setShowModal(true);
   };
 
+  const handleDelete = (e, job) => {
+     e.stopPropagation();
+    // setJobToDelete(job);
+     setShowDeleteModal(true);
+   }
 
   const status1Jobs = userJobs.filter((job) => job.status === 'approved');
   const status2Jobs = userJobs.filter((job) => job.status === 'pending');
@@ -117,8 +145,27 @@ const Board = () => {
         </Modal.Body>
         <Modal.Footer>
           <BoardJobEdit />
+          <Button variant="danger" onClick={(e) => handleDelete(e, selectedJob)}>Delete</Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Delete</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to delete this job application?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" /* onClick={confirmDelete} */> 
+                Delete
+              </Button>
+            </Modal.Footer>
+      </Modal>
+
     </Container>
 
 
