@@ -55,7 +55,6 @@ function App() {
             <SignForm onSwitchForm={handleFormSwitch} />
           )} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tabledash" element={<TableDash />} />
         </Routes>
       </Router>
 

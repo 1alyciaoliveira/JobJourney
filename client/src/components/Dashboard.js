@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Board from './Board';
+import TableDash from './TableDash';
 
 function Dashboard () {
     const [showDashboard, setShowDashboard] = useState(false);
@@ -18,6 +19,7 @@ function Dashboard () {
                 <>
                     <Main />
                     <Board />
+                    <TableDash/>
                 </>
             ) : null}
         </div> 
