@@ -15,7 +15,7 @@ const ViewButton = ({ setShowTableDash }) => {
         <input type="checkbox" checked={isChecked} onChange={toggleSwitch} />
         <span className="slider"></span>
         <span className={`text ${isChecked ? 'on' : 'off'}`}>
-          {isChecked ? 'Board' : 'Table'}
+          {isChecked ? 'Table' : 'Board'}
         </span>
       </label>
     </div>
