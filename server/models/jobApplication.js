@@ -15,7 +15,7 @@ const jobApplication = new Schema(
             // required: true,
         },
         salary: {
-            type: Number,
+            type: String,
         },
         url: {
             type: String,

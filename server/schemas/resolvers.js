@@ -7,7 +7,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({_id: context.user._id})
+        return User.findOne({_id: context.user._id}).populate('jobsApplied');
       }
 
       throw new AuthenticationError('Oops, you are not logged!');
@@ -65,7 +65,7 @@ const resolvers = {
       await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { jobsApplied: jobAdded._id } }
-      );
+      ).populate('jobsApplied');
 
     return jobAdded;
   },
