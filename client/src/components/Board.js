@@ -31,7 +31,7 @@ const Board = () => {
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
-   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   // const [jobToDelete, setJobToDelete] = useState(null);
 
   
@@ -42,16 +42,21 @@ const Board = () => {
   const user = data.me;
   const userJobs = user.jobsApplied;
 
+  const formatDate = (isoDate) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(isoDate).toLocaleDateString(undefined, options);
+  };
+
   const openModal = (job) => {
     setSelectedJob(job);
     setShowModal(true);
   };
 
   const handleDelete = (e, job) => {
-     e.stopPropagation();
-    // setJobToDelete(job);
-     setShowDeleteModal(true);
-   }
+      e.stopPropagation();
+      // setJobToDelete(job);
+      setShowDeleteModal(true);
+    }
 
   const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
   const status2Jobs = userJobs.filter((job) => job.status === 'Interview' || job.status === 'Waiting for response');
@@ -71,9 +76,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.dateApplied}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Status: {job.status}</p>
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
@@ -93,9 +98,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.dateApplied}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Status: {job.status}</p>
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
@@ -114,9 +119,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.dateApplied}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Status: {job.status}</p>
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
