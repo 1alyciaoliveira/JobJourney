@@ -3,8 +3,7 @@ const { Schema, model } = require('mongoose');
 const jobApplication = new Schema(
     {
         dateApplied: {
-            type: Date,
-            default: Date.now,
+            type: String,
         },
         company: {
             type: String,
