@@ -77,11 +77,31 @@ const resolvers = {
 console.log(removedJobApplication);
     await User.findOneAndUpdate (
       { _id: context.user._id},
-      { $pull: { jobsApplied: args._id } }, //Duda: se usa objeto o array?
+      { $pull: { jobsApplied: args._id } },
       { new: true }
     );
     return removedJobApplication;
   },
+  updateJobApplication: async (parent, args, context) => {
+    const updatedJobApplication = await Jobs.findOneAndUpdate(
+      { _id: args._id },
+      { $addToSet: {
+        dateApplied: args.dateApplied,
+        company: args.company,
+        jobPosition: args.jobPosition,
+        salary: args.salary,
+        url: args.url,
+        interview: args.interview,
+        interviewDate: args.interviewDate,
+        comments: args.comments,
+        status: args.status,
+        reminder: args.reminder,
+        reminderDate: args.reminderDate
+      }},
+      { new: true }
+      );
+      return updatedJobApplication;
+  }
 }
 };
 
