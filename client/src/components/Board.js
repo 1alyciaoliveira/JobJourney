@@ -25,11 +25,10 @@ const Board = () => {
   };
 
 
-  const status1Jobs = userJobs.filter((job) => job.status === 'approved');
-  const status2Jobs = userJobs.filter((job) => job.status === 'pending');
-  const status3Jobs = userJobs.filter((job) => job.status === 'rejected');
-
-
+  const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
+  const status2Jobs = userJobs.filter((job) => job.status === 'Interview' || job.status === 'Waiting for response');
+  const status3Jobs = userJobs.filter((job) => job.status === 'Accepted' || job.status === 'Job Offer' || job.status === 'Rejected by Company' || job.status === 'Rejected by Me');
+  
   return (
     <Container fluid>
       <Row className="d-flex justify-content-around">

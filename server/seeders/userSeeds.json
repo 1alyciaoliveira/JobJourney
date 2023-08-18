@@ -12,7 +12,7 @@
           "interview": true,
           "interviewDate": "2023-08-25",
           "comments": "Comentarios sobre la solicitud 1",
-          "status": "pending",
+          "status": "Job Offer",
           "reminder": true,
           "reminderDate": "2023-08-20"
         },
@@ -24,7 +24,7 @@
           "interview": false,
           "interviewDate": "2023-08-12",
           "comments": "Comentarios sobre la solicitud 2",
-          "status": "rejected",
+          "status": "Applied",
           "reminder": false,
           "reminderDate": null
         },
@@ -35,7 +35,7 @@
             "url": "https://www.ejemplo.com/trabajo2",
             "interview": false,
             "comments": "Comentarios sobre la solicitud 2",
-            "status": "approved",
+            "status": "Rejected by Company",
             "reminder": false,
             "reminderDate": null
           },
@@ -46,7 +46,7 @@
             "url": "https://www.ejemplo.com/trabajo2",
             "interview": false,
             "comments": "Comentarios sobre la solicitud 2",
-            "status": "approved",
+            "status": "Interview",
             "reminder": false,
             "reminderDate": null
           },
@@ -58,7 +58,7 @@
             "interview": true,
             "interviewDate": "2023-09-05",
             "comments": "Comentarios sobre la solicitud 4",
-            "status": "pending",
+            "status": "Rejected by Company",
             "reminder": true,
             "reminderDate": "2023-09-02"
           },
@@ -70,7 +70,7 @@
             "interview": true,
             "interviewDate": "2023-09-05",
             "comments": "Comentarios sobre la solicitud 4",
-            "status": "rejected",
+            "status": "Waiting for response",
             "reminder": true,
             "reminderDate": "2023-09-02"
           }
