@@ -90,10 +90,39 @@ mutation addJobApplication(
 export const REMOVE_APPLICATION = gql `
 mutation removeJobApplication($jobId: jobId) {
     removeJobApplication(jobId: $jobId) {
-            _id
-            username
-            email
-            jobCount
+        _id
+        dateApplied
+        company
+        jobPosition
+        salary
+        url
+        interview
+        interviewDate
+        comments
+        status
+        reminder
+        reminderDate
+        userID
     }
+}
+`;
+
+export const UPDATE_APPLICATION = gql `
+mutation updateJobApplication(_id: ID, dateApplied: String, company: String, jobPosition: String, salary: String, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate: String, userID: String) {
+    updateJobApplication(_id: $_id, dateApplied: $dateApplied, company: $company, jobPosition: $jobPosition, salary: $salary, url: $url, interview: $interview, interviewDate: $interviewDate, comments: $comments, status: $status, reminder: $reminder, reminderDate: $reminderDate, userID: $userID)
+} {
+    _id
+    dateApplied
+    company
+    jobPosition
+    salary
+    url
+    interview
+    interviewDate
+    comments
+    status
+    reminder
+    reminderDate
+    userID
 }
 `;
