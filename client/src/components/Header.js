@@ -17,24 +17,16 @@ function Header(props) {
     return (
         <div className="container-fluid bg-light text-black align-middle">
             <div className="row py-3">
-            <div className="col-12 text-center">
-            <div className="d-flex align-items-center">
-                <img src={logo} alt="JobJourney Logo" className="logo-image" />
-                <h1 className="mb-4">JobJourney</h1>
-            </div>
-            </div>
-            </div>
-            
-            <div className="row pb-3">
-                <div className="col-4">
-                    <button className="btn" onClick={() => props.setShowDashboard(true)}>Dashboard</button>
-                </div>
-
-                <div className="btn col-4 d-flex justify-content-center ">
-                        <UserProfile/>                    
-                </div>
-                <div className="col-4 d-flex justify-content-end ">
-                    <button className="btn" onClick={handleLogout}>Logout</button>
+                <div className="col-12 text-center d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                        <img src={logo} alt="JobJourney Logo" className="logo-image" />
+                        <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <button className="btn" onClick={() => props.setShowDashboard(true)}>Dashboard</button>
+                        <UserProfile />
+                        <button className="btn" onClick={handleLogout}>Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
