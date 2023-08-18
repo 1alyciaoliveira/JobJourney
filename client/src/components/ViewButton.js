@@ -12,7 +12,7 @@ const ViewButton = () => {
       <input type="checkbox" checked={isChecked} onChange={toggleSwitch} />
       <span className="slider"></span>
       <span className={`text ${isChecked ? 'on' : 'off'}`}>
-        {isChecked ? 'On' : 'Off'}
+        {isChecked ? 'Board' : 'Table'}
       </span>
     </label>
   );

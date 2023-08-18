@@ -3,7 +3,7 @@
     font-size: 17px;
     position: relative;
     display: inline-block;
-    width: 5.2em;
+    width: 6em;
     height: 2em;
     overflow: hidden;
     margin-top:10px;
@@ -44,15 +44,16 @@
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+
+    background-color: #406c49;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #cad2c5;
   }
   
   input:checked + .slider:before {
-    transform: translateX(3em);
+    transform: translateX(3.9em);
   }
   
   .switch .text {
