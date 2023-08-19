@@ -26,14 +26,14 @@ function UserProfile() {
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton style={{ backgroundColor: '#2f3e46', color: 'white' }}>
           <Modal.Title className="align-items-center justify-content-center">
-            Edit Profile
+            Change your password
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group  className="my-2" controlId="userName">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineUser /> User Name
+                <AiOutlineUser /> Enter your username
               </Form.Label>
               <Form.Control
                 type="text"
@@ -46,7 +46,7 @@ function UserProfile() {
 
             <Form.Group className="my-2" controlId="email">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineMail /> Email
+                <AiOutlineMail /> Enter your email
               </Form.Label>
               <Form.Control
                 type="email"
@@ -59,7 +59,7 @@ function UserProfile() {
 
             <Form.Group className="my-2" controlId="password">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineLock /> Password
+                <AiOutlineLock /> New Password
               </Form.Label>
               <Form.Control
                 type="password"
