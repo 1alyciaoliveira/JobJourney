@@ -26,6 +26,7 @@ function Header(props) {
                     <UserProfile />
                     <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>
+
                 </div>
             </div>
         </div>

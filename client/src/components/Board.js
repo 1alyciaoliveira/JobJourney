@@ -7,9 +7,11 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
+import { BsExclamationDiamond} from 'react-icons/bs';
 
 const Board = () => {
   
+ 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -17,6 +19,7 @@ const Board = () => {
   const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
   const [selectedJobIdToDelete, setSelectedJobIdToDelete] = useState(null);
 
+  const currentDate = new Date().toISOString().slice(0, 10);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -43,10 +46,15 @@ const Board = () => {
     };
 
   
-  const formatDate = (isoDate) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(isoDate).toLocaleDateString(undefined, options);
-  };
+const formatDate = (dateApplied) => {
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+
+  return formattedDate;
+};
+
 
   const openModal = (job) => {
     setSelectedJob(job);
@@ -73,20 +81,25 @@ const Board = () => {
           <Card className="column-status my-3">
             <Card.Header className="column-header text-center">Applied</Card.Header>
             <Card.Body>
-              {status1Jobs.map((job, index) => (
-                <div key={index}
+            {status1Jobs.map((job, index) => (
+                <div
+                  key={index}
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
+                  style={{ cursor: 'pointer' }}
+                >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
-
               ))}
             </Card.Body>
           </Card>
@@ -95,14 +108,20 @@ const Board = () => {
           <Card className=" column-status my-3">
             <Card.Header className="column-header text-center">In Progress</Card.Header>
             <Card.Body>
-              {status2Jobs.map((job, index) => (
-                <div key={index}
+            {status2Jobs.map((job, index) => (
+                <div
+                  key={index}
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
+                  style={{ cursor: 'pointer' }}
+                >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
@@ -116,14 +135,20 @@ const Board = () => {
           <Card className="column-status my-3">
             <Card.Header className="column-header text-center">Solved</Card.Header>
             <Card.Body>
-              {status3Jobs.map((job, index) => (
-                <div key={index}
-                  className="card inner-card m-3"
+            {status3Jobs.map((job, index) => (
+                <div
+                  key={index}
+                  className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
+                  style={{ cursor: 'pointer' }}
+                >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
