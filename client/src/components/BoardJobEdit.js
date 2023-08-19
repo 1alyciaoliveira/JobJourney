@@ -62,6 +62,9 @@ function BoardJobEdit() {
             <Button className="bg-dheader" variant="secondary" onClick={handleShow}>
                 Edit
             </Button>
+            <Button className="bg-dheader" variant="secondary" onClick={handleShow}>
+                Delete
+            </Button>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton className="justify-content-center bg-dmodal">
                     <Modal.Title>Edit Job Application</Modal.Title>

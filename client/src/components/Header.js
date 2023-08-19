@@ -23,9 +23,9 @@ function Header(props) {
                         <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
                     </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn" onClick={() => props.setShowDashboard(true)}><span><i class="fas fa-home"></i></span>   Dashboard</button>
+                    <button className="btn" onClick={() => props.setShowDashboard(true)}><span><i className="fas fa-home"></i></span>   Dashboard</button>
                     <UserProfile />
-                    <button className="btn"  onClick={handleLogout}><span><i class="fas fa-sign-out-alt"></i></span>   Logout</button>
+                    <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>
                 </div>
             </div>
