@@ -7,20 +7,19 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({_id: context.user._id})
+        return User.findOne({_id: context.user._id}).populate('jobsApplied');
       }
 
       throw new AuthenticationError('Oops, you are not logged!');
     },
     jobs: async (parent, args, context) => {
       if (context.user) {
-        return Jobs.find({userID: context.user._id})
+        const response = await Jobs.find({userID: context.user._id});
+        return response;
       }
-
       throw new AuthenticationError('Oops, you are not logged!');
-    } 
+    }
   },
-
   Mutation: {
     addUser: async (parent, { username, email, password}) => {
       const user = await User.create({ username, email, password});
@@ -65,7 +64,7 @@ const resolvers = {
       await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { jobsApplied: jobAdded._id } }
-      );
+      ).populate('jobsApplied');
 
     return jobAdded;
   },
@@ -77,11 +76,31 @@ const resolvers = {
 console.log(removedJobApplication);
     await User.findOneAndUpdate (
       { _id: context.user._id},
-      { $pull: { jobsApplied: args._id } }, //Duda: se usa objeto o array?
+      { $pull: { jobsApplied: args._id } },
       { new: true }
     );
     return removedJobApplication;
   },
+  updateJobApplication: async (parent, args, context) => {
+    const updatedJobApplication = await Jobs.findOneAndUpdate(
+      { _id: args._id }, //Construir el boton onclik
+      { 
+        dateApplied: args.dateApplied,
+        company: args.company,
+        jobPosition: args.jobPosition,
+        salary: args.salary,
+        url: args.url,
+        interview: args.interview,
+        interviewDate: args.interviewDate,
+        comments: args.comments,
+        status: args.status,
+        reminder: args.reminder,
+        reminderDate: args.reminderDate
+      },
+      { new: true }
+      );
+      return updatedJobApplication;
+  }
 }
 };
 

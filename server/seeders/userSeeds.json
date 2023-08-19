@@ -1,0 +1,113 @@
+[
+    {
+      "username": "user1",
+      "email": "user1@example.com",
+      "password": "contraseña1",
+      "jobsApplied": [
+        {
+          "company": "Empresa A",
+          "jobPosition": "Posición 1",
+          "salary": "50000",
+          "url": "https://www.ejemplo.com/trabajo1",
+          "interview": true,
+          "dateApplied:": "2023-08-25",
+          "comments": "Comentarios sobre la solicitud 1",
+          "status": "Job Offer",
+          "reminder": true,
+          "reminderDate": "2023-08-20"
+        },
+        {
+          "company": "Empresa B",
+          "jobPosition": "Posición 2",
+          "salary": "60000",
+          "url": "https://www.ejemplo.com/trabajo2",
+          "interview": false,
+          "dateApplied:": "2023-08-12",
+          "comments": "Comentarios sobre la solicitud 2",
+          "status": "Applied",
+          "reminder": false,
+          "reminderDate": null
+        },
+        {
+            "company": "Empresa C",
+            "jobPosition": "Posición 2",
+            "salary": "60000",
+            "url": "https://www.ejemplo.com/trabajo2",
+            "interview": false,
+            "comments": "Comentarios sobre la solicitud 2",
+            "status": "Rejected by Company",
+            "reminder": false,
+            "reminderDate": null,
+            "dateApplied:": "2023-09-12"
+          },
+          {
+            "company": "Empresa D",
+            "jobPosition": "Posición 2",
+            "salary": "60000",
+            "url": "https://www.ejemplo.com/trabajo2",
+            "interview": false,
+            "comments": "Comentarios sobre la solicitud 2",
+            "status": "Interview",
+            "reminder": false,
+            "reminderDate": null
+          },
+          {
+            "company": "Empresa E",
+            "jobPosition": "Posición 4",
+            "salary": "70000",
+            "url": "https://www.ejemplo.com/trabajo4",
+            "interview": true,
+            "dateApplied:": "2023-09-05",
+            "comments": "Comentarios sobre la solicitud 4",
+            "status": "Rejected by Company",
+            "reminder": true,
+            "reminderDate": "2023-09-02"
+          },
+          {
+            "company": "Empresa E",
+            "jobPosition": "Posición 4",
+            "salary": "70000",
+            "url": "https://www.ejemplo.com/trabajo4",
+            "interview": true,
+            "dateApplied:": "2023-09-05",
+            "comments": "Comentarios sobre la solicitud 4",
+            "status": "Waiting for response",
+            "reminder": true,
+            "reminderDate": "2023-09-02"
+          }
+        
+      ]
+    },
+    {
+      "username": "usuario2",
+      "email": "usuario2@example.com",
+      "password": "contraseña2",
+      "jobsApplied": [
+        {
+          "company": "Empresa C",
+          "jobPosition": "Posición 3",
+          "salary": "55000",
+          "url": "https://www.ejemplo.com/trabajo3",
+          "interview": true,
+          "interviewDate": "2023-08-30",
+          "comments": "Comentarios sobre la solicitud 3",
+          "status": "approved",
+          "reminder": true,
+          "reminderDate": "2023-08-28"
+        },
+        {
+          "company": "Empresa D",
+          "jobPosition": "Posición 4",
+          "salary": "70000",
+          "url": "https://www.ejemplo.com/trabajo4",
+          "interview": true,
+          "interviewDate": "2023-09-05",
+          "comments": "Comentarios sobre la solicitud 4",
+          "status": "pending",
+          "reminder": true,
+          "reminderDate": "2023-09-02"
+        }
+      ]
+    }
+  ]
+  

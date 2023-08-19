@@ -3,8 +3,7 @@ const { Schema, model } = require('mongoose');
 const jobApplication = new Schema(
     {
         dateApplied: {
-            type: Date,
-            default: Date.now,
+            type: String,
         },
         company: {
             type: String,
@@ -15,7 +14,7 @@ const jobApplication = new Schema(
             // required: true,
         },
         salary: {
-            type: Number,
+            type: String,
         },
         url: {
             type: String,

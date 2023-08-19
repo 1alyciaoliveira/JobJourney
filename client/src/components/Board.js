@@ -2,83 +2,66 @@ import React from 'react';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import "../style/Board.css";
 import BoardJobEdit from './BoardJobEdit';
+import { QUERY_ME } from '../utils/queries';
+import { REMOVE_APPLICATION } from '../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
 
 
 const Board = () => {
-  const jobData = [
-    {
-      company: 'Company A',
-      date: 'August 10, 2023',
-      jobTitle: 'Web Developer',
-      jobPosition: 'Frontend Engineer',
-      status: 3,
-      url: 'https://www.companya.com/web-developer',
-      salary: 75000,
-      interview: 'yes',
-      comment: 'Exciting opportunity to shape user experiences!'
-    },
-    {
-      company: 'Company B',
-      date: 'August 12, 2023',
-      jobTitle: 'Software Engineer',
-      jobPosition: 'Full Stack Developer',
-      status: 2,
-      url: 'https://www.companyb.com/software-engineer',
-      salary: 85000,
-      interview: 'no',
-      comment: 'Join a team working on cutting-edge technologies.'
-    },
-    {
-      company: 'Company C',
-      date: 'August 15, 2023',
-      jobTitle: 'Data Analyst',
-      jobPosition: 'Data Science Specialist',
-      status: 1,
-      url: 'https://www.companyc.com/data-analyst',
-      salary: 65000,
-      interview: 'yes',
-      comment: 'Use data to uncover insights and drive decisions.'
-    },
-    {
-      company: 'Company D',
-      date: 'August 18, 2023',
-      jobTitle: 'UX Designer',
-      jobPosition: 'User Experience Specialist',
-      status: 3,
-      url: 'https://www.companyd.com/ux-designer',
-      salary: 70000,
-      interview: 'yes',
-      comment: 'Shape digital products for optimal user satisfaction.'
-    },
-    {
-      company: 'Company E',
-      date: 'August 20, 2023',
-      jobTitle: 'Mobile App Developer',
-      jobPosition: 'App Development Engineer',
-      status: 1,
-      url: 'https://www.companye.com/mobile-app-developer',
-      salary: 72000,
-      interview: 'no',
-      comment: 'Build innovative mobile applications to impact users.'
-    }
-  ];
+  
+  // const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
 
+  // const confirmDelete = async () => {
+  //   try {
+  //     await removeJobApplication({
+  //       variables: { _id: jobToDelete._id },
+  //     });
+
+  //     const updateJobData = jobData.filter(job => job !== jobToDelete);
+  //     setJobData(updatedJobData);
+
+  //     setShowDeleteModal(false);
+  //   } catch (error) {
+  //     console.error('Error deleting job:', error);
+  //   };
+  // };
+  
+  const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // const [jobToDelete, setJobToDelete] = useState(null);
+
+  
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const user = data.me;
+  const userJobs = user.jobsApplied;
+
+  const formatDate = (isoDate) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(isoDate).toLocaleDateString(undefined, options);
+  };
 
   const openModal = (job) => {
     setSelectedJob(job);
     setShowModal(true);
   };
 
+  const handleDelete = (e, job) => {
+      e.stopPropagation();
+      // setJobToDelete(job);
+      setShowDeleteModal(true);
+    }
 
-  const status1Jobs = jobData.filter((job) => job.status === 1);
-  const status2Jobs = jobData.filter((job) => job.status === 2);
-  const status3Jobs = jobData.filter((job) => job.status === 3);
-
+  const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
+  const status2Jobs = userJobs.filter((job) => job.status === 'Interview' || job.status === 'Waiting for response');
+  const status3Jobs = userJobs.filter((job) => job.status === 'Accepted' || job.status === 'Job Offer' || job.status === 'Rejected by Company' || job.status === 'Rejected by Me');
+  
   return (
     <Container fluid>
       <Row className="d-flex justify-content-around">
@@ -93,9 +76,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.date}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Currently: {job.status}</p>
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
@@ -115,9 +98,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.date}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Currently: {job.status}</p>
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
@@ -136,10 +119,9 @@ const Board = () => {
                   style={{ cursor: 'pointer' }}>
                   <div key={index} className="card">
                     <div className="card-body">
-                      <p className="card-text">Date: {job.date}</p>
-                      <p className="card-text">Position: {job.jobPosition}</p>
-                      <p className="card-text">Currently: {job.status}</p>
-                      
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      <p className="card-text">{job.jobPosition} at {job.company}</p>
+                      <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
@@ -155,21 +137,39 @@ const Board = () => {
         <Modal.Body>
           {selectedJob && (
             <div>
-              <p>Date: {selectedJob.date}</p>
+              <p>Date: {selectedJob.dateApplied}</p>
               <p>Company: {selectedJob.company}</p>
-              <p>Job: {selectedJob.jobTitle}</p>
               <p>Position: {selectedJob.jobPosition}</p>
               <p>Currently: {selectedJob.status}</p>
               <p>URL: {selectedJob.url}</p>
-              <p>Comments: {selectedJob.comment}</p>
-              <p>Salary: {selectedJob.salary}</p>
+              <p>Comments:<div>{selectedJob.comments}</div></p>
+              <p>Salary: ${selectedJob.salary}</p>
             </div>
           )}
         </Modal.Body>
         <Modal.Footer>
           <BoardJobEdit />
+          <Button variant="danger" onClick={(e) => handleDelete(e, selectedJob)}>Delete</Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Delete</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to delete this job application?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" /* onClick={confirmDelete} */> 
+                Delete
+              </Button>
+            </Modal.Footer>
+      </Modal>
+
     </Container>
 
 
