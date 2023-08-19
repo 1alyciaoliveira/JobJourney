@@ -66,30 +66,13 @@ mutation addJobApplication(
         reminderDate
         userID
         _id
-        # _id
-        # username
-        # email
-        # jobsApplied {
-        #     jobId
-        #     dateApplied
-        #     company
-        #     jobPosition
-        #     salary
-        #     url
-        #     interview
-        #     interviewDate
-        #     comments
-        #     status
-        #     reminder
-        #     reminderDate
-        # }
     }
 } 
 `;
 
 export const REMOVE_APPLICATION = gql `
-mutation removeJobApplication($jobId: jobId) {
-    removeJobApplication(jobId: $jobId) {
+mutation removeJobApplication($_id: ID) {
+    removeJobApplication(_id: $_id) {
         _id
         dateApplied
         company

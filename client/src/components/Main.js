@@ -80,18 +80,6 @@ console.log(data);
         console.log(formData); 
         addJobApplication({
             variables: {
-                // InputJobApplication: {
-                //     dateApplied: formData.dateApplied,
-                //     company: formData.company,
-                //     jobPosition: formData.jobPosition,
-                //     salary: formData.salary,
-                //     url: formData.url,
-                //     comments: formData.comments,
-                //     status: formData.status,
-                //     reminder: formData.reminder,
-                //     reminderDate: formData.reminderDate,
-                    
-                // },
                 _id: formData._id,
                 dateApplied: formData.dateApplied,
                 company: formData.company,
@@ -109,6 +97,7 @@ console.log(data);
                 // Do something with the response data if needed
                 console.log(data);
                 handleClose();
+                window.location.reload();
                 })
                 .catch((error) => {
                 // Handle errors here

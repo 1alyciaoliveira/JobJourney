@@ -38,21 +38,6 @@ const typeDefs = gql`
     jobs: [JobApplication]
   }
 
-  # input InputJobApplication {
-  #   jobId: String
-  #   dateApplied: String
-  #   company: String
-  #   jobPosition: String
-  #   salary: Int
-  #   url: String
-  #   interview: Boolean
-  #   interviewDate: String
-  #   comments: String
-  #   status: String
-  #   reminder: Boolean
-  #   reminderDate: String
-  #   userID: String
-  # }
 
   type Mutation {
     login(email: String!, password: String!): Auth

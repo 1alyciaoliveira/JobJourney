@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import logo from '../image/logo.png';
@@ -7,7 +7,6 @@ function Header(props) {
 
     const navigate = useNavigate();
     
-    const [showDashboard, setShowDashboard] = useState(false);
     const handleLogout = () => {
         // Clear token and redirect to login page
         localStorage.removeItem('id_token');
@@ -23,9 +22,9 @@ function Header(props) {
                         <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
                     </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn" onClick={() => props.setShowDashboard(true)}><span><i class="fas fa-home"></i></span>   Dashboard</button>
+                    <button className="btn" onClick={() => props.setShowDashboard(true)}><span><i className="fas fa-home"></i></span>   Dashboard</button>
                     <UserProfile />
-                    <button className="btn"  onClick={handleLogout}><span><i class="fas fa-sign-out-alt"></i></span>   Logout</button>
+                    <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>
                 </div>
             </div>
