@@ -100,7 +100,15 @@ console.log(removedJobApplication);
       { new: true }
       );
       return updatedJobApplication;
-  }
+  },
+  // updatePassword: async (parent, args, context) => {
+  //   const userUpdated = await User.findOneAndUpdate(
+  //     { username: args.username },
+  //     { password: args.password }, 
+  //     { new: true }
+  //   );
+  //   return userUpdated;
+  // }
 }
 };
 
