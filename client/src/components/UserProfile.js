@@ -1,7 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
+import { useMutation } from '@apollo/client';
+// import { UPDATE_PASSWORD } from '../utils/mutations'
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
@@ -9,12 +11,24 @@ function UserProfile() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // const [updatePassword] = useMutation(UPDATE_PASSWORD);
+
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const handleUpdate = () => {
+  const handleChangePassword = async (newPassword) => {
     // TODOD update logic here
     console.log('Updated profile:', { userName, email, password });
+    try {
+      const response = await updatePassword({
+        variables: {
+          newPassword,
+        },
+      });
+      console.log(response.data);
+    } catch(error) {
+      console.log(error);
+    };
     handleClose();
   };
 
@@ -44,7 +58,7 @@ function UserProfile() {
               />
             </Form.Group>
 
-            <Form.Group className="my-2" controlId="email">
+            {/* <Form.Group className="my-2" controlId="email">
               <Form.Label style={{ fontWeight: 'bold' }}>
                 <AiOutlineMail /> Enter your email
               </Form.Label>
@@ -55,7 +69,7 @@ function UserProfile() {
                 onChange={(e) => setEmail(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="my-2" controlId="password">
               <Form.Label style={{ fontWeight: 'bold' }}>
@@ -63,7 +77,7 @@ function UserProfile() {
               </Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Enter your new password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
@@ -75,7 +89,7 @@ function UserProfile() {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="warning" onClick={handleUpdate}>
+          <Button variant="warning" onClick={()=>handleChangePassword(password)}>
             Update
           </Button>
         </Modal.Footer>
