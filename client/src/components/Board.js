@@ -137,7 +137,7 @@ const Board = () => {
         <Modal.Body>
           {selectedJob && (
             <div>
-              <p>Date: {selectedJob.dateApplied}</p>
+              <p>Date: {formatDate(selectedJob.dateApplied)}</p>
               <p>Company: {selectedJob.company}</p>
               <p>Position: {selectedJob.jobPosition}</p>
               <p>Currently: {selectedJob.status}</p>
