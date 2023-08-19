@@ -59,7 +59,7 @@ const Board = () => {
     e.stopPropagation();
     setShowDeleteModal(true);
     confirmDelete(selectedJobIdToDelete); 
-    };
+  };
 
 
   const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
@@ -154,7 +154,6 @@ const Board = () => {
         <Modal.Footer>
           <BoardJobEdit />
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
-
         </Modal.Footer>
       </Modal>
 

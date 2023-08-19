@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import logo from '../image/logo.png';
@@ -7,7 +7,6 @@ function Header(props) {
 
     const navigate = useNavigate();
     
-    const [showDashboard, setShowDashboard] = useState(false);
     const handleLogout = () => {
         // Clear token and redirect to login page
         localStorage.removeItem('id_token');
