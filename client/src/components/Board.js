@@ -74,7 +74,7 @@ const Board = () => {
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
                   style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  <div key={job._id} className="card">
                     <div className="card-body">
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
@@ -96,7 +96,7 @@ const Board = () => {
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
                   style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  <div key={job._id} className="card">
                     <div className="card-body">
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
@@ -117,7 +117,7 @@ const Board = () => {
                   className="card inner-card m-3"
                   onClick={() => openModal(job)}
                   style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  <div key={job._id} className="card">
                     <div className="card-body">
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
