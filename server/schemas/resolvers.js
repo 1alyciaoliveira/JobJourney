@@ -1,6 +1,7 @@
 const { User, Jobs } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
+const bcrypt = require('bcrypt');
 
 //missing fixes in query and mutation to add authentication info and signToken.
 const resolvers = {
@@ -101,14 +102,17 @@ console.log(removedJobApplication);
       );
       return updatedJobApplication;
   },
-  // updatePassword: async (parent, args, context) => {
-  //   const userUpdated = await User.findOneAndUpdate(
-  //     { username: args.username },
-  //     { password: args.password }, 
-  //     { new: true }
-  //   );
-  //   return userUpdated;
-  // }
+  updatePassword: async (parent, args, context) => {
+    const psw = args.password;
+    const hashPassword = await bcrypt.hash(psw, 10);
+    
+    const userUpdated = await User.findOneAndUpdate(
+      { username: args.username },
+      { password: hashPassword }, 
+      { new: true }
+    );
+    return userUpdated;
+  }
 }
 };
 
