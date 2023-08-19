@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
@@ -31,6 +31,7 @@ function TableDash() {
       await removeJobApplication({
         variables: { _id },
       });
+      
     } catch (err) {
       console.error(err);
     }
@@ -89,7 +90,8 @@ function TableDash() {
                   </Button>
                   <Button
                     variant="danger btn-sm"
-                    onClick={() => openModal(job)}
+                    onClick={handleDelete}
+                    
                   >
                     Delete
                   </Button>
@@ -100,49 +102,25 @@ function TableDash() {
         </table>
       </div>
 
-      <div
-        id="delModal"
-        className="modal fade"
-        role="dialog"
-      >
-        {/* Delete Modal */}
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Delete Job Application</h4>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>
-                Are you sure you want to delete this job application?
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-danger"
-                id="confirmDel"
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                id="cancelDel"
-                data-dismiss="modal"
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Delete</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to delete this job application?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={() => {
+                confirmDelete(selectedJobIdToDelete);
+                window.location.reload();
+              }} > 
+                Delete
+              </Button>
+            </Modal.Footer>
+      </Modal>
     </div>
   );
 }
