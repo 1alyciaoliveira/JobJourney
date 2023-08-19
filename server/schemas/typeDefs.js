@@ -50,6 +50,7 @@ const typeDefs = gql`
 
     updateJobApplication(_id: ID, dateApplied: String, company: String, jobPosition: String, salary: String, url: String, interview: Boolean, interviewDate: String, comments: String, status: String, reminder: Boolean, reminderDate: String, userID: String): JobApplication
 
+    updatePassword(username: String, password: String): User
     # updatePassword(username: String, password: String): User
   }
 `;
