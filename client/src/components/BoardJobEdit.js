@@ -202,8 +202,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                         <Form.Group controlId="comments">
                             <Form.Label>Notes</Form.Label>
                             <Form.Control
-                                // as="textarea"
-                                // rows={5}
+                                as="textarea"
+                                rows={5}
                                 type="text"
                                 name="comments"
                                 value={formData.comments}
