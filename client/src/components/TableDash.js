@@ -6,6 +6,7 @@ import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 
+
 function TableDash() {
 
   const [showModal, setShowModal] = useState(false);
@@ -30,11 +31,26 @@ function TableDash() {
     try {
       await removeJobApplication({
         variables: { _id },
+        
       });
-      
+
+    
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const formatDate = (dateApplied) => {
+    // Return a blank string if dateApplied is empty or falsy
+    if (!dateApplied) {
+      return ''; 
+    }
+    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+    const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+  
+    return formattedDate;
   };
 
   const openModal = (job) => {
@@ -42,10 +58,10 @@ function TableDash() {
     setShowModal(true);
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = (e, jobId) => {
     e.stopPropagation();
     setShowDeleteModal(true);
-    confirmDelete(selectedJobIdToDelete);
+    setSelectedJobIdToDelete(jobId);
   };
 
   // Create a sorted copy of userJobs array
@@ -67,6 +83,7 @@ function TableDash() {
               <th>Salary</th>
               <th>Notes</th>
               <th>Status</th>
+              <th>Applied on</th>
               <th>Reminder Date</th>
               <th></th>
             </tr>
@@ -80,7 +97,8 @@ function TableDash() {
                 <td>{job.salary}</td>
                 <td>{job.comments}</td>
                 <td>{job.status}</td>
-                <td>{job.reminderDate}</td>
+                <td>{formatDate(job.dateApplied)}</td>
+                <td>{formatDate(job.reminderDate)}</td>
                 <td>
                   <Button
                       variant="dark btn-sm mr-2"
@@ -90,7 +108,7 @@ function TableDash() {
                   </Button>
                   <Button
                     variant="danger btn-sm"
-                    onClick={handleDelete}
+                    onClick={(e) => handleDelete(e, job._id)}
                     
                   >
                     Delete
@@ -114,6 +132,7 @@ function TableDash() {
                 Cancel
               </Button>
               <Button variant="danger" onClick={() => {
+                setShowDeleteModal(false);
                 confirmDelete(selectedJobIdToDelete);
                 window.location.reload();
               }} > 

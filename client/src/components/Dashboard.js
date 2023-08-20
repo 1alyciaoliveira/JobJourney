@@ -11,7 +11,29 @@ function Dashboard() {
 
   useEffect(() => {
     setShowDashboard(true);
+    
+    // Check if the view was stored in local storage and set it accordingly
+    const storedView = localStorage.getItem('activeView');
+    if (storedView === 'tableDash') {
+      setShowTableDash(true);
+    } else {
+      setShowTableDash(false);
+    }
+
   }, []);
+
+  // Handle toggle view function
+  const handleViewToggle = (view) => {
+    if (view === 'tableDash') {
+      setShowTableDash(true);
+      localStorage.setItem('activeView', 'tableDash');
+    } else {
+      setShowTableDash(false);
+      localStorage.setItem('activeView', 'board');
+    }
+  };
+
+  
 
   return (
     <div>
