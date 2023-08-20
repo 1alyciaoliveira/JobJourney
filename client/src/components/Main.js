@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap components
-import { QUERY_ME } from '../utils/queries'
+import { QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
 import { useMutation } from '@apollo/client';
@@ -10,18 +10,15 @@ import { ADD_APPLICATION } from '../utils/mutations';
 const Main = () => {
     //We fetch the data from the DB using this query
     const { loading, data } = useQuery(QUERY_ME);
-    console.log(data);
-    console.log(loading);
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
     const [meData, setMeData] = useState({});
-    const [formData, setFormData] = useState({_id: '', dateApplied:'', company: '', jobPosition: '', salary: '', url: '', interview: '', interviewDate: '', comments: '', status: '', reminder: true, reminderDate: '', userID: '', });
+    const [formData, setFormData] = useState({_id: '', dateApplied:'', company: '', jobPosition: '', salary: '', url: '', interview: false, interviewDate: '', comments: '', status: '', reminder: true, reminderDate: '', userID: '', });
     const [invalidInput, setInvalidInput] = useState({});
 
     // Mutations that will be used on the main page and triggered by submitForm events.
     const [addJobApplication] = useMutation(ADD_APPLICATION);
-    // const [updateUserData] = useMutation(UPDATE_USER);
-    
+
     const [jobCounter, setJobCount] = useState(0);
     const [interviewCounter, setInterviewCount] = useState(0);
     const [interviewRatioState, setInterviewRatio] = useState(0);
@@ -42,10 +39,6 @@ const Main = () => {
         }
     }, [loading, data]);
 
-    // console log to check if the data has been retrieved from the DB. TODO: delete for production
-    console.log('User Data:', meData);
-    
-    // TODO: All this code was not going through if the MeData state hasn't been updated. It seems that the call for the data is taking more time than the execution of the rest of the code, so when that happens the code breaks as it is looking for information that is still not inside the Me object. At first login the code will break . Comment these out to check functionality once the Me query executes correctly. 
     const jobCount = meData.jobCount;
     console.log('Total Job Applications:', jobCount);
 
@@ -59,8 +52,6 @@ const Main = () => {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    //ORIGINAL LOCATION OF THIS CODE
-    // const [invalidInput, setInvalidInput] = useState({});
     const handleFormChange = (e) => {
         const { name, value } = e.target;
         
@@ -98,12 +89,15 @@ const Main = () => {
         }
     };
 
-    // Original location of the mutation to addJobApplication
-    // const [addJobApplication] = useMutation(ADD_APPLICATION);
-    
+    if (formData.status === 'Interview') {
+        formData.interview = true
+    } else {
+        formData.interview = false
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); 
+        console.log(formData);
         addJobApplication({
             variables: {
                 _id: formData._id,
@@ -117,6 +111,7 @@ const Main = () => {
                 reminder: formData.reminder,
                 reminderDate: formData.reminderDate,
                 userID: formData.userID,
+                interview: formData.interview
                 }
             })
                 .then(({ data }) => {
@@ -131,16 +126,6 @@ const Main = () => {
             });
         };
 
-    /*const handleUpdateUserForm = (e) => {
-        e.preventDefault();
-        updateUserData({
-            variables: {
-                _id: meData._id,
-
-
-            }
-        })
-    }*/
 
 
     
@@ -166,12 +151,16 @@ const Main = () => {
                 <p className="m-0">Total Job Applications  <span style={styles.indicatorsCards}>{jobCount}</span></p>
                 </div>
                 <div className="rounded p-3 bg-light text-center">
+                {/* <img src={pendingInterviewsImage} alt="Pending Interviews" width="50" height="50" /> */}
+                <p className="m-0">Applications waiting for Interview <span style={styles.indicatorsCards}>{pendingInterviews}</span></p>
+                </div>
+                <div className="rounded p-3 bg-light text-center">
                 {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
                 <p className="m-0">Interview Ratio <span style={styles.indicatorsCards}>{interviewRatio}</span></p>
                 </div>
                 <div className="rounded p-3 bg-light text-center">
-                {/* <img src={pendingInterviewsImage} alt="Pending Interviews" width="50" height="50" /> */}
-                <p className="m-0">Pending Interviews <span style={styles.indicatorsCards}>{pendingInterviews}</span></p>
+                {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
+                <p className="m-0">Upcoming Interviews <span style={styles.indicatorsCards}>TBD</span></p>
                 </div>
                 <div>
                 <Button className= "rounded p-3 text-center" variant= "success" onClick={handleShow}>
