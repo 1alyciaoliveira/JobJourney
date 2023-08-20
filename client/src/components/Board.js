@@ -96,7 +96,7 @@ const Board = () => {
                       {job.reminderDate === currentDate && (
                         <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
                           <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
-                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this JA!</p>
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
                         </div>
                       )}
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
@@ -122,10 +122,12 @@ const Board = () => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      {job.reminderDate === currentDate && (
-                        <CiFaceSmile style={{ display: 'block', margin: 'auto', color: 'orange', fontSize: '1.5rem', }} />
+                    {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
+                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        </div>
                       )}
-
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
@@ -149,10 +151,12 @@ const Board = () => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      {job.reminderDate === currentDate && (
-                        <CiFaceSmile style={{ display: 'block', margin: 'auto', color: 'orange', fontSize: '1.5rem', }} />
+                    {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
+                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        </div>
                       )}
-
                       <p className="card-text">{formatDate(job.dateApplied)}</p>
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
