@@ -164,37 +164,37 @@ const formatDate = (dateApplied) => {
         </Col>
       </Row>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton >
-          <Modal.Title className="align-items-center justify-content-center">Job Details</Modal.Title>
+        <Modal.Header className='justify-content-center bg-dmodal'closeButton >
+          <Modal.Title>Detailed Job Application</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedJob && (
             <div>
-              <p>Date: {selectedJob.dateApplied}</p>
-              <p>Company: {selectedJob.company}</p>
-              <p>Position: {selectedJob.jobPosition}</p>
-              <p>Currently: {selectedJob.status}</p>
-              <p>URL: {selectedJob.url}</p>
-              <p>Comments:<div>{selectedJob.comments}</div></p>
-              <p>Salary: ${selectedJob.salary}</p>
+              <p><span className="font-weight-bold">Applied on:</span> {selectedJob.dateApplied}</p>
+              <p><span className="font-weight-bold">Company:</span> {selectedJob.company}</p>
+              <p><span className="font-weight-bold">URL:</span>{selectedJob.url}</p>
+              <p><span className="font-weight-bold">Position:</span> {selectedJob.jobPosition}</p>
+              <p><span className="font-weight-bold">Status:</span> {selectedJob.status}</p>
+              <p><span className="font-weight-bold">Salary:</span> ${selectedJob.salary}</p>
+              <p><span className="font-weight-bold">Notes:</span><div>{selectedJob.comments}</div></p>
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='justify-content-center bg-dmodal'>
           <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className="justify-content-center bg-warning">
               <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="text-center justify-content-center" >
               Are you sure you want to delete this job application?
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+              <br/>
+              <br/>
+              <Button className="mr-2 bg-dmodal" variant='dark' onClick={() => setShowDeleteModal(false)}>
                 Cancel
               </Button>
               <Button variant="danger" onClick={() => {
@@ -203,7 +203,8 @@ const formatDate = (dateApplied) => {
               }} > 
                 Delete
               </Button>
-            </Modal.Footer>
+            </Modal.Body>
+
       </Modal>
 
     </Container>
