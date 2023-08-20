@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap components
 import { QUERY_ME } from '../utils/queries'
@@ -8,34 +8,59 @@ import { useMutation } from '@apollo/client';
 import { ADD_APPLICATION } from '../utils/mutations';
 
 const Main = () => {
+    //We fetch the data from the DB using this query
+    const { loading, data } = useQuery(QUERY_ME);
+    console.log(data);
+    console.log(loading);
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
-    const [formData, setFormData] = useState({
-        _id: '',
-        dateApplied:'',
-        company: '',
-        jobPosition: '',
-        salary: '',
-        url: '',
-        interview: '',
-        interviewDate: '',
-        comments: '',
-        status: '',
-        reminder: true,
-        reminderDate: '',
-        userID: '',
-    });
+    const [meData, setMeData] = useState({});
+    const [formData, setFormData] = useState({_id: '', dateApplied:'', company: '', jobPosition: '', salary: '', url: '', interview: '', interviewDate: '', comments: '', status: '', reminder: true, reminderDate: '', userID: '', });
+    const [invalidInput, setInvalidInput] = useState({});
 
-    const { loading, data } = useQuery(QUERY_ME);
-console.log(data);
-    // const jobsApplied = data?.jobCount || []
+    // Mutations that will be used on the main page and triggered by submitForm events.
+    const [addJobApplication] = useMutation(ADD_APPLICATION);
+    // const [updateUserData] = useMutation(UPDATE_USER);
+    
+    const [jobCounter, setJobCount] = useState(0);
+    const [interviewCounter, setInterviewCount] = useState(0);
+    const [interviewRatioState, setInterviewRatio] = useState(0);
+    const [pendingInterviewsState, setPendingInterviews] = useState(0);
 
-    const jobsAppliedCount = data?.me.jobsApplied.length || []
+    // we use the useEffect hook so that the page waits until the data from the query has been retrieved, then stores it on meData.
+    useEffect(() => {
+        if (!loading) {
+            const fetchedMeData = data?.me || {};
+
+            // Update the state variables based on fetched data
+            setMeData(fetchedMeData);
+            setJobCount(fetchedMeData.jobCount);
+            setInterviewCount(fetchedMeData.jobsApplied.filter(job => job.interview).length);
+            setInterviewRatio((interviewCounter / jobCount).toFixed(2));
+            setPendingInterviews(jobCount - interviewCounter);
+
+        }
+    }, [loading, data]);
+
+    // console log to check if the data has been retrieved from the DB. TODO: delete for production
+    console.log('User Data:', meData);
+    
+    // TODO: All this code was not going through if the MeData state hasn't been updated. It seems that the call for the data is taking more time than the execution of the rest of the code, so when that happens the code breaks as it is looking for information that is still not inside the Me object. At first login the code will break . Comment these out to check functionality once the Me query executes correctly. 
+    const jobCount = meData.jobCount;
+    console.log('Total Job Applications:', jobCount);
+
+    console.log('Interview Count:',interviewCounter);
+    const interviewRatio = (interviewCounter / jobCount).toFixed(2);
+    console.log('Interview Ratio:', interviewRatio);
+    
+    const pendingInterviews = jobCount - interviewCounter;
+    console.log('Pending Interviews:', pendingInterviews);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    const [invalidInput, setInvalidInput] = useState({});
+    //ORIGINAL LOCATION OF THIS CODE
+    // const [invalidInput, setInvalidInput] = useState({});
     const handleFormChange = (e) => {
         const { name, value } = e.target;
         
@@ -73,25 +98,14 @@ console.log(data);
         }
     };
 
-    const [addJobApplication] = useMutation(ADD_APPLICATION);
+    // Original location of the mutation to addJobApplication
+    // const [addJobApplication] = useMutation(ADD_APPLICATION);
     
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData); 
         addJobApplication({
             variables: {
-                // InputJobApplication: {
-                //     dateApplied: formData.dateApplied,
-                //     company: formData.company,
-                //     jobPosition: formData.jobPosition,
-                //     salary: formData.salary,
-                //     url: formData.url,
-                //     comments: formData.comments,
-                //     status: formData.status,
-                //     reminder: formData.reminder,
-                //     reminderDate: formData.reminderDate,
-                    
-                // },
                 _id: formData._id,
                 dateApplied: formData.dateApplied,
                 company: formData.company,
@@ -109,6 +123,7 @@ console.log(data);
                 // Do something with the response data if needed
                 console.log(data);
                 handleClose();
+                window.location.reload();
                 })
                 .catch((error) => {
                 // Handle errors here
@@ -116,20 +131,51 @@ console.log(data);
             });
         };
 
+    /*const handleUpdateUserForm = (e) => {
+        e.preventDefault();
+        updateUserData({
+            variables: {
+                _id: meData._id,
+
+
+            }
+        })
+    }*/
+
+
+    
+        if (loading) {
+        return <p>Loading....</p>
+    }
+
+    const styles = {
+        indicatorsCards: {
+            color: 'green',
+            display: 'flex',
+            flexDirection: 'Column',
+            fontSize: 'xx-large',
+            fontWeight: 'bold',
+        },
+    }
+
     return (
         <div className="container-fluid bg-dmain py-4">
-            <div className="d-flex justify-content-between mb-3">
+            <h2 className="mb-5 ml-4">
+            Welcome {meData.username} let´s track!
+            </h2>
+
+            <div className="d-flex justify-content-around mb-3">
                 <div className="rounded p-3 bg-light text-center">
                 {/* <img src={totalJobApplicationsImage} alt="Total Job Applications" width="50" height="50" /> */}
-                <p className="m-0">Total Job Applications:{jobsAppliedCount}</p>
+                <p className="m-0">Total Job Applications  <span style={styles.indicatorsCards}>{jobCount}</span></p>
                 </div>
                 <div className="rounded p-3 bg-light text-center">
                 {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
-                <p className="m-0">Interviews Ratio:</p>
+                <p className="m-0">Interview Ratio <span style={styles.indicatorsCards}>{interviewRatio}</span></p>
                 </div>
                 <div className="rounded p-3 bg-light text-center">
                 {/* <img src={pendingInterviewsImage} alt="Pending Interviews" width="50" height="50" /> */}
-                <p className="m-0">Pending Interviews:</p>
+                <p className="m-0">Pending Interviews <span style={styles.indicatorsCards}>{pendingInterviews}</span></p>
                 </div>
                 <div>
                 <Button className= "rounded p-3 text-center" variant= "success" onClick={handleShow}>

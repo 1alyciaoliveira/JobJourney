@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 import "../style/Board.css";
@@ -7,34 +6,20 @@ import BoardJobEdit from './BoardJobEdit';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
-
+import Auth from '../utils/auth';
+import { BsExclamationDiamond , MdEventAvailable , MdHourglassFull, MdToday, MdWatchLater} from 'react-icons/bs';
 
 const Board = () => {
   
-  // const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
-
-  // const confirmDelete = async () => {
-  //   try {
-  //     await removeJobApplication({
-  //       variables: { _id: jobToDelete._id },
-  //     });
-
-  //     const updateJobData = jobData.filter(job => job !== jobToDelete);
-  //     setJobData(updatedJobData);
-
-  //     setShowDeleteModal(false);
-  //   } catch (error) {
-  //     console.error('Error deleting job:', error);
-  //   };
-  // };
-  
+ 
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  // const [jobToDelete, setJobToDelete] = useState(null);
+  const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
+  const [selectedJobIdToDelete, setSelectedJobIdToDelete] = useState(null);
 
-  
+  const currentDate = new Date().toISOString().slice(0, 10);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -42,21 +27,48 @@ const Board = () => {
   const user = data.me;
   const userJobs = user.jobsApplied;
 
-  const formatDate = (isoDate) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(isoDate).toLocaleDateString(undefined, options);
-  };
+  
+  const confirmDelete = async (_id) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if(!token) {
+      return false;
+    }
+
+      try {
+        const data = await removeJobApplication({
+          variables: { _id },
+      })
+       removeJobApplication(_id);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+  
+const formatDate = (dateApplied) => {
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+
+  return formattedDate;
+};
+
 
   const openModal = (job) => {
     setSelectedJob(job);
+    setSelectedJobIdToDelete(job._id); 
     setShowModal(true);
   };
+  
 
-  const handleDelete = (e, job) => {
-      e.stopPropagation();
-      // setJobToDelete(job);
-      setShowDeleteModal(true);
-    }
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    setShowDeleteModal(true);
+    confirmDelete(selectedJobIdToDelete); 
+  };
+
 
   const status1Jobs = userJobs.filter((job) => job.status === 'Applied');
   const status2Jobs = userJobs.filter((job) => job.status === 'Interview' || job.status === 'Waiting for response');
@@ -69,20 +81,25 @@ const Board = () => {
           <Card className="column-status my-3">
             <Card.Header className="column-header text-center">Applied</Card.Header>
             <Card.Body>
-              {status1Jobs.map((job, index) => (
-                <div key={index}
+            {status1Jobs.map((job, index) => (
+                <div
+                  key={index}
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
                   </div>
                 </div>
-
               ))}
             </Card.Body>
           </Card>
@@ -91,14 +108,20 @@ const Board = () => {
           <Card className=" column-status my-3">
             <Card.Header className="column-header text-center">In Progress</Card.Header>
             <Card.Body>
-              {status2Jobs.map((job, index) => (
-                <div key={index}
+            {status2Jobs.map((job, index) => (
+                <div
+                  key={index}
                   className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
@@ -112,14 +135,20 @@ const Board = () => {
           <Card className="column-status my-3">
             <Card.Header className="column-header text-center">Solved</Card.Header>
             <Card.Body>
-              {status3Jobs.map((job, index) => (
-                <div key={index}
-                  className="card inner-card m-3"
+            {status3Jobs.map((job, index) => (
+                <div
+                  key={index}
+                  className="card inner-card my-3"
                   onClick={() => openModal(job)}
-                  style={{ cursor: 'pointer' }}>
-                  <div key={index} className="card">
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div key={job._id} className="card">
                     <div className="card-body">
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>
+                      {job.reminderDate === currentDate && (
+                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                      )}
+
+                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
                     </div>
@@ -149,7 +178,7 @@ const Board = () => {
         </Modal.Body>
         <Modal.Footer>
           <BoardJobEdit />
-          <Button variant="danger" onClick={(e) => handleDelete(e, selectedJob)}>Delete</Button>
+          <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
 
@@ -164,7 +193,10 @@ const Board = () => {
               <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
                 Cancel
               </Button>
-              <Button variant="danger" /* onClick={confirmDelete} */> 
+              <Button variant="danger" onClick={() => {
+                confirmDelete(selectedJobIdToDelete);
+                window.location.reload();
+              }} > 
                 Delete
               </Button>
             </Modal.Footer>
