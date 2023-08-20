@@ -41,8 +41,9 @@ function TableDash() {
   };
 
   const formatDate = (dateApplied) => {
+    // Return a blank string if dateApplied is empty or falsy
     if (!dateApplied) {
-      return ''; // Return a blank string if dateApplied is empty or falsy
+      return ''; 
     }
     const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
     const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
