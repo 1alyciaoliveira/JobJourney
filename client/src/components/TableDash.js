@@ -31,12 +31,25 @@ function TableDash() {
     try {
       await removeJobApplication({
         variables: { _id },
+        
       });
 
     
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const formatDate = (dateApplied) => {
+    if (!dateApplied) {
+      return ''; // Return a blank string if dateApplied is empty or falsy
+    }
+    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+    const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+  
+    return formattedDate;
   };
 
   const openModal = (job) => {
@@ -69,6 +82,7 @@ function TableDash() {
               <th>Salary</th>
               <th>Notes</th>
               <th>Status</th>
+              <th>Applied on</th>
               <th>Reminder Date</th>
               <th></th>
             </tr>
@@ -82,7 +96,8 @@ function TableDash() {
                 <td>{job.salary}</td>
                 <td>{job.comments}</td>
                 <td>{job.status}</td>
-                <td>{job.reminderDate}</td>
+                <td>{formatDate(job.dateApplied)}</td>
+                <td>{formatDate(job.reminderDate)}</td>
                 <td>
                   <Button
                       variant="dark btn-sm mr-2"
@@ -118,6 +133,7 @@ function TableDash() {
               <Button variant="danger" onClick={() => {
                 setShowDeleteModal(false);
                 confirmDelete(selectedJobIdToDelete);
+                window.location.reload();
               }} > 
                 Delete
               </Button>
