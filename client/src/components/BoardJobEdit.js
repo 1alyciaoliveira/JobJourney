@@ -5,21 +5,11 @@ import { UPDATE_APPLICATION } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-function BoardJobEdit() {
+function BoardJobEdit({job, onClose, context}) {
     const [updateJobApplication] = useMutation(UPDATE_APPLICATION);
     const { loading, error, data } = useQuery(QUERY_ME);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(true);
     const [reminder, setReminder] = useState(false);
-
-    const [selectedJob, setSelectedJob] = useState({
-        _id: '',
-        company: '',
-        jobPosition: '',
-        salary: '',
-        comments: '',
-        status: '',
-        reminderDate: '',
-    });
 
     const [formData, setFormData] = useState({
         company: '',
@@ -31,11 +21,17 @@ function BoardJobEdit() {
     });
 
     useEffect(() => {
-        if (selectedJob._id) {
-            setFormData(selectedJob);
-            setShowModal(true);
+        if (job) {
+            setFormData({
+                company: job.company,
+                jobPosition: job.jobPosition,
+                salary: job.salary,
+                comments: job.comments,
+                status: job.status,
+                reminderDate: job.reminderDate || '',
+            });
         }
-    }, [selectedJob]);
+    }, [job]);
 
     const handleUpdateJobApplication = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -49,7 +45,7 @@ function BoardJobEdit() {
         try {
             const { data } = await updateJobApplication({
                 variables: {
-                    _id: selectedJob._id,
+                    _id: job._id,
                     company,
                     jobPosition,
                     salary,
@@ -62,31 +58,6 @@ function BoardJobEdit() {
         } catch (err) {
             console.error(err);
         }
-    };
-
-    const handleSelectJob = (job) => {
-        setSelectedJob(job);
-    };
-
-    const handleClose = () => {
-        setShowModal(false);
-        setSelectedJob({
-            _id: '',
-            company: '',
-            jobPosition: '',
-            salary: '',
-            comments: '',
-            status: '',
-            reminderDate: '',
-        });
-        setFormData({
-            company: '',
-            jobPosition: '',
-            salary: '',
-            comments: '',
-            status: '',
-            reminderDate: '',
-        });
     };
 
     const [invalidInput, setInvalidInput] = useState({});
@@ -126,24 +97,14 @@ function BoardJobEdit() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    const user = data.me;
-    const userJobs = user.jobsApplied;
-
+    const handleClose = () => {
+        setShowModal(false);
+        onClose();
+    };
 
     return (
-        <div>
-            {userJobs.map((job) => (
-                <div key={job._id}>
-            <Button className="bg-dheader" variant="secondary" onClick={() =>handleSelectJob(job)}>
-                Edit
-            </Button>
-           
-            <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton className="justify-content-center bg-dmodal">
-                    <Modal.Title>Edit Job Application</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form onSubmit={handleUpdateJobApplication}>
+            <div>
+                        <Form onSubmit={handleUpdateJobApplication}>
                         <Form.Group controlId="company">
                             <Form.Label>Company</Form.Label>
                             <Form.Control
@@ -243,22 +204,18 @@ function BoardJobEdit() {
                         )}
                         <br />
                     </Form>
-                </Modal.Body>
-                <Modal.Footer className="justify-content-center bg-dmodal">
-                    <Button variant="secondary" onClick={handleUpdateJobApplication}>
-                        Submit
-                    </Button>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+                    <Modal.Footer className="justify-content-center bg-dmodal">
+                        <Button variant="secondary" onClick={handleUpdateJobApplication}>
+                            Submit
+                        </Button>
+                        <Button variant="secondary" onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </Modal.Footer>
 
-            ))}
-                        </div>
-    );
+            </div>
+        );
+    }
 
-}
 
 export default BoardJobEdit;

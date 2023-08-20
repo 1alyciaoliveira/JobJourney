@@ -13,9 +13,11 @@ const Board = () => {
   const { loading, error, data } = useQuery(QUERY_ME);
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
   const [selectedJobIdToDelete, setSelectedJobIdToDelete] = useState(null);
+  const [selectedJobIdToEdit, setSelectedJobIdToEdit] = useState(null);
 
 
   if (loading) return <p>Loading...</p>;
@@ -53,7 +55,12 @@ const Board = () => {
     setSelectedJobIdToDelete(job._id); 
     setShowModal(true);
   };
-  
+
+  const openEditModal = (job) => {
+    setSelectedJobIdToEdit(job);
+    setShowEditModal(true);
+  };
+
 
   const handleDelete = (e) => {
     e.stopPropagation();
@@ -152,9 +159,19 @@ const Board = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <BoardJobEdit />
+        {/*  <BoardJobEdit /> */}
+          <Button className="btn btn-primary" onClick={openEditModal}>Edit</Button>
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Job Application</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <BoardJobEdit job={selectedJobIdToEdit} onClose={() => setShowEditModal(false)} context="cards" />
+        </Modal.Body>
       </Modal>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
