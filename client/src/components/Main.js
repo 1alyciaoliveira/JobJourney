@@ -40,14 +40,14 @@ const Main = () => {
     }, [loading, data]);
 
     const jobCount = meData.jobCount;
-    console.log('Total Job Applications:', jobCount);
+    // console.log('Total Job Applications:', jobCount);
 
-    console.log('Interview Count:',interviewCounter);
+    // console.log('Interview Count:',interviewCounter);
     const interviewRatio = (interviewCounter / jobCount).toFixed(2);
-    console.log('Interview Ratio:', interviewRatio);
+    // console.log('Interview Ratio:', interviewRatio);
     
     const pendingInterviews = jobCount - interviewCounter;
-    console.log('Pending Interviews:', pendingInterviews);
+    // console.log('Pending Interviews:', pendingInterviews);
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
