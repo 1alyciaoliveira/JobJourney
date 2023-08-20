@@ -5,7 +5,7 @@ import { UPDATE_APPLICATION } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-function BoardJobEdit({job, onClose, context}) {
+function BoardJobEdit({job, onClose, context, userJobs, setUserJobs}) {
     const [updateJobApplication] = useMutation(UPDATE_APPLICATION);
     const { loading, error, data } = useQuery(QUERY_ME);
     const [showModal, setShowModal] = useState(true);
@@ -38,6 +38,8 @@ function BoardJobEdit({job, onClose, context}) {
 
         const { company, jobPosition, salary, comments, status, reminderDate } = formData;
 
+        console.log(context);
+
         if (!token) {
             return false;
         }
@@ -46,14 +48,55 @@ function BoardJobEdit({job, onClose, context}) {
             const { data } = await updateJobApplication({
                 variables: {
                     _id: job._id,
-                    company,
-                    jobPosition,
-                    salary,
-                    comments,
-                    status,
-                    reminderDate,
+                    dateApplied: formData.dateApplied,
+                    company: formData.company,
+                    jobPosition: formData.jobPosition,
+                    salary: formData.salary,
+                    url: formData.url,
+                    comments: formData.comments,
+                    status: formData.status,
+                    reminder: formData.reminder,
+                    reminderDate: formData.reminderDate,
+                    userID: formData.userID,
+
                 },
+
             });
+
+            console.log(job._id,
+                formData.dateApplied,
+                formData.company,
+                formData.jobPosition,
+               formData.salary,
+                formData.url,
+                formData.comments,
+                formData.status,
+                formData.reminder,
+                formData.reminderDate,
+                formData.userID);
+
+            if (userJobs) { // Check if userJobs is defined
+                const updatedUserJobs = userJobs.map((userJob) => {
+                    if (userJob._id === job._id) {
+                        return {
+                            ...userJob,
+                            company,
+                            jobPosition,
+                            salary,
+                            comments,
+                            status,
+                            reminderDate,
+                        };
+                    } else {
+                        return userJob;
+                    }
+                });
+
+                console.log("this is updatedUserJobs:", updatedUserJobs);
+    
+                // Update the userJobs array in the local state
+                setUserJobs(updatedUserJobs);
+            }
             handleClose();
         } catch (err) {
             console.error(err);
