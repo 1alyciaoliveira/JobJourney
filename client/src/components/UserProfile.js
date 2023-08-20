@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import { useMutation } from '@apollo/client';
-// import { UPDATE_PASSWORD } from '../utils/mutations'
+import { UPDATE_PASSWORD } from '../utils/mutations'
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
@@ -11,7 +11,7 @@ function UserProfile() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [updatePassword] = useMutation(UPDATE_PASSWORD);
+  const [updatePassword] = useMutation(UPDATE_PASSWORD);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
