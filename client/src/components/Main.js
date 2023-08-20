@@ -307,15 +307,19 @@ const Main = () => {
 
             {/* Modal for displaying missing mandatory fields */}
             <Modal show={showMissingFieldsModal} onHide={handleCloseMissingFieldsModal} >
-                <Modal.Body className='text-center bg-danger' >
+                <Modal.Header closeButton className="justify-content-center bg-danger">
+                <Modal.Title>Required Fields</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="text-center justify-content-center" >
                     <br/>
                     <p>⚠️ Please fill out all mandatory fields</p>
-                </Modal.Body>
-                <Modal.Footer className='justify-content-center bg-light'>
-                    <Button variant="warning" onClick={handleCloseMissingFieldsModal}>
+                    <br/>
+
+                    <Button className="mr-2 bg-dmodal" variant='dark' onClick={handleCloseMissingFieldsModal}>
                         OK
                     </Button>
-                </Modal.Footer >
+                </Modal.Body>
+
                 
             </Modal>
         </div>

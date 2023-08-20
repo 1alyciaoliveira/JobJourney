@@ -63,6 +63,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                 },
             });
             handleClose();
+            window.location.reload();
+            
         } catch (err) {
             console.error(err);
         }
@@ -143,7 +145,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
         <div>
             {/* {userJobs.map((job) => ( */}
                 <div key={selectedJob._id}>
-            <Button className="bg-dheader" variant="secondary" onClick={() =>handleSelectJob(selectedJob)}>
+            <Button variant="warning" onClick={() =>handleSelectJob(selectedJob)}>
                 Edit
             </Button>
            
@@ -255,11 +257,11 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className="justify-content-center bg-dmodal">
-                    <Button variant="secondary" onClick={handleUpdateJobApplication}>
-                        Submit
-                    </Button>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
+                    </Button>
+                    <Button variant="warning" onClick={handleUpdateJobApplication}>
+                        Update
                     </Button>
                 </Modal.Footer>
             </Modal>

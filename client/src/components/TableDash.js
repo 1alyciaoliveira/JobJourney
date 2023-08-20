@@ -88,6 +88,7 @@ function TableDash() {
               <th>Applied on</th>
               <th>Reminder Date</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -100,12 +101,12 @@ function TableDash() {
                 <td>{selectedJob.comments}</td>
                 <td>{selectedJob.status}</td>
                 <td>{selectedJob.reminderDate}</td>
+                <td></td>
                 <td>
                 <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
                   <Button
-                    variant="danger btn-sm"
+                    variant="danger mt-2"
                     onClick={(e) => handleDelete(e, selectedJob._id)}
-                    
                   >
                     Delete
                   </Button>
@@ -117,14 +118,14 @@ function TableDash() {
       </div>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-            <Modal.Header closeButton>
+            <Modal.Header className="justify-content-center bg-warning" closeButton>
               <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="text-center justify-content-center">
               Are you sure you want to delete this job application?
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+              <br/>
+              <br/>
+              <Button className="mr-2 bg-dmodal" variant='dark' onClick={() => setShowDeleteModal(false)}>
                 Cancel
               </Button>
               <Button variant="danger" onClick={() => {
@@ -134,7 +135,8 @@ function TableDash() {
               }} > 
                 Delete
               </Button>
-            </Modal.Footer>
+            </Modal.Body>
+
       </Modal>
     </div>
   );
