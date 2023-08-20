@@ -180,11 +180,11 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
-                        <Form.Group controlId="appliedDate">
+                        <Form.Group controlId="dateApplied">
                             <Form.Label>Job Application Date</Form.Label>
                             <Form.Control
                                 type="date"
-                                name="appliedDate"
+                                name="dateApplied"
                                 value={formData.dateApplied}
                                 onChange={handleFormChange}
                             />
@@ -199,12 +199,13 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                             />
                             {invalidInput.salary && <div className="text-danger">Please enter a valid number</div>}
                         </Form.Group>
-                        <Form.Group controlId="notes">
+                        <Form.Group controlId="comments">
                             <Form.Label>Notes</Form.Label>
                             <Form.Control
-                                as="textarea"
-                                rows={5}
-                                name="notes"
+                                // as="textarea"
+                                // rows={5}
+                                type="text"
+                                name="comments"
                                 value={formData.comments}
                                 onChange={handleFormChange}
                             />
