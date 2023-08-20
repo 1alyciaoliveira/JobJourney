@@ -181,7 +181,7 @@ const formatDate = (dateApplied) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <BoardJobEdit />
+          <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>

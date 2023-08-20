@@ -1,20 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { useMutation, useQuery } from '@apollo/client';
+import { UPDATE_APPLICATION } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 
-function BoardJobEdit() {
+function BoardJobEdit({selectedJob, setSelectedJob}) {
+    const [updateJobApplication] = useMutation(UPDATE_APPLICATION);
+    const { loading, error, data } = useQuery(QUERY_ME);
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
+
+    // const [selectedJob, setSelectedJob] = useState({
+    //     _id: jobInfo._id,
+    //     company: jobInfo.company,
+    //     jobPosition: jobInfo.jobPosition,
+    //     salary: jobInfo.salary,
+    //     comments: jobInfo.comments,
+    //     status: jobInfo.status,
+    //     reminderDate: jobInfo.reminderDate,
+    // });
+
     const [formData, setFormData] = useState({
-        company: '',
-        jobPosition: '',
-        salary: '',
-        comments: '',
-        status: '',
-        reminderDate: '',
+        company: selectedJob.company,
+        url: selectedJob.url,
+        dateApplied: selectedJob.dateApplied,
+        jobPosition: selectedJob.jobPosition,
+        salary: selectedJob.salary,
+        comments: selectedJob.comments,
+        status: selectedJob.status,
+        reminderDate: selectedJob.reminderDate,
     });
 
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    // useEffect(() => {
+    //     if (selectedJob._id) {
+    //         setFormData(selectedJob);
+    //         setShowModal(true);
+    //     }
+    // }, [selectedJob]);
+
+    const handleUpdateJobApplication = async () => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        const { company, url, dateApplied, jobPosition, salary, comments, status, reminderDate } = formData;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const { data } = await updateJobApplication({
+                variables: {
+                    _id: selectedJob._id,
+                    url,
+                    dateApplied,
+                    company,
+                    jobPosition,
+                    salary,
+                    comments,
+                    status,
+                    reminderDate,
+                },
+            });
+            handleClose();
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleSelectJob = (job) => {
+        // setSelectedJob(job);
+        setShowModal(true);
+    };
+
+    const handleClose = () => {
+        setShowModal(false);
+        setSelectedJob({
+            _id: formData._id,
+            url: formData.url,
+            dateApplied: formData.dateApplied,
+            company: formData.company,
+            jobPosition: formData.jobPosition,
+            salary: formData.salary,
+            comments: formData.comments,
+            status: formData.status,
+            reminderDate: formData.reminderDate,
+        });
+        setFormData({
+            company: '',
+            url: '',
+            dateApplied: '',
+            jobPosition: '',
+            salary: '',
+            comments: '',
+            status: '',
+            reminderDate: '',
+        });
+    };
 
     const [invalidInput, setInvalidInput] = useState({});
     const handleFormChange = (e) => {
@@ -50,24 +132,27 @@ function BoardJobEdit() {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-        handleClose();
-    };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+
+    const user = data.me;
+    const userJobs = user.jobsApplied;
+
 
     return (
         <div>
-
-            <Button className="bg-dheader" variant="secondary" onClick={handleShow}>
+            {/* {userJobs.map((job) => ( */}
+                <div key={selectedJob._id}>
+            <Button className="bg-dheader" variant="secondary" onClick={() =>handleSelectJob(selectedJob)}>
                 Edit
             </Button>
+           
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton className="justify-content-center bg-dmodal">
                     <Modal.Title>Edit Job Application</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleUpdateJobApplication}>
                         <Form.Group controlId="company">
                             <Form.Label>Company</Form.Label>
                             <Form.Control
@@ -95,12 +180,12 @@ function BoardJobEdit() {
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
-                        <Form.Group controlId="appliedDate">
+                        <Form.Group controlId="dateApplied">
                             <Form.Label>Job Application Date</Form.Label>
                             <Form.Control
                                 type="date"
-                                name="appliedDate"
-                                value={formData.appliedDate}
+                                name="dateApplied"
+                                value={formData.dateApplied}
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
@@ -114,13 +199,14 @@ function BoardJobEdit() {
                             />
                             {invalidInput.salary && <div className="text-danger">Please enter a valid number</div>}
                         </Form.Group>
-                        <Form.Group controlId="notes">
+                        <Form.Group controlId="comments">
                             <Form.Label>Notes</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows={5}
-                                name="notes"
-                                value={formData.notes}
+                                type="text"
+                                name="comments"
+                                value={formData.comments}
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
@@ -169,15 +255,18 @@ function BoardJobEdit() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className="justify-content-center bg-dmodal">
-                    <Button variant="secondary" onClick={handleSubmit}>
+                    <Button variant="secondary" onClick={handleUpdateJobApplication}>
                         Submit
                     </Button>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
                 </Modal.Footer>
             </Modal>
         </div>
+
+
+                        </div>
     );
 
 }
