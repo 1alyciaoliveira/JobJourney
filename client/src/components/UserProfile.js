@@ -1,21 +1,40 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
+import {  AiOutlineLock } from 'react-icons/ai';
+import { useMutation } from '@apollo/client';
+import { UPDATE_PASSWORD } from '../utils/mutations'
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
+  // const [username, setUserName] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
+  const [updatePassword] = useMutation(UPDATE_PASSWORD);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+// Function that triggers when the user clicks the button on the modal and sends info to the DB.
+  const handleChangePassword = async (newPassword) => {
 
-  const handleUpdate = () => {
-    // TODOD update logic here
-    console.log('Updated profile:', { userName, email, password });
+
+    if (oldPassword === password) {
+      console.log('CANT USE THE SAME PASSWORD!')
+    } else {
+
+    try {
+      const response = await updatePassword({
+        variables: {
+          password
+        },
+      });
+      console.log(response.data);
+    } catch(error) {
+      console.log(error);
+    };
     handleClose();
+
+  }
   };
 
   return (
@@ -31,43 +50,45 @@ function UserProfile() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group  className="my-2" controlId="userName">
+            {/* <Form.Group  className="my-2" controlId="userName">
               <Form.Label style={{ fontWeight: 'bold' }}>
                 <AiOutlineUser /> Enter your username
               </Form.Label>
               <Form.Control
                 type="text"
+                name="username"
                 placeholder="Enter your user name"
-                value={userName}
+                value={username}
                 onChange={(e) => setUserName(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
-            </Form.Group>
+            </Form.Group> */}
 
-            <Form.Group className="my-2" controlId="email">
+            <Form.Group className="my-2" controlId="oldPassword">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineMail /> Enter your email
+                <AiOutlineLock /> Enter your current password
               </Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="password"
+                placeholder="Current password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
             </Form.Group>
 
             <Form.Group className="my-2" controlId="password">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineLock /> New Password
+                <AiOutlineLock /> Enter your new password
               </Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Enter your new password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
+              {/* {<div id="warningMsg" className="text-danger">New password cannot be the same as old one!</div>} */}
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -75,7 +96,7 @@ function UserProfile() {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="warning" onClick={handleUpdate}>
+          <Button variant="warning" onClick={handleChangePassword}>
             Update
           </Button>
         </Modal.Footer>

@@ -18,14 +18,18 @@ function Header(props) {
             <div className="row py-3">
                 <div className="col-12 text-center d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
-                        <img src={logo} alt="JobJourney Logo" className="logo-image" />
-                        <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
+                        <button className="btn" onClick={() => window.location.reload()}>
+                            <div className="d-flex align-items-center">
+                                <img src={logo} alt="JobJourney Logo" className="logo-image" />
+                                <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
+                            </div>
+                        </button>
                     </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn" onClick={() => props.setShowDashboard(true)}><span><i className="fas fa-home"></i></span>   Dashboard</button>
                     <UserProfile />
                     <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>
+
                 </div>
             </div>
         </div>

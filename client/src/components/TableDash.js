@@ -7,6 +7,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import BoardJobEdit from './BoardJobEdit';
 import Auth from '../utils/auth';
 
+
 function TableDash() {
 
   const [showModal, setShowModal] = useState(false);
@@ -32,11 +33,26 @@ function TableDash() {
     try {
       await removeJobApplication({
         variables: { _id },
+        
       });
-      
+
+    
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const formatDate = (dateApplied) => {
+    // Return a blank string if dateApplied is empty or falsy
+    if (!dateApplied) {
+      return ''; 
+    }
+    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+    const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+  
+    return formattedDate;
   };
 
   const openModal = (job) => {
@@ -44,10 +60,10 @@ function TableDash() {
     setShowModal(true);
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = (e, jobId) => {
     e.stopPropagation();
     setShowDeleteModal(true);
-    confirmDelete(selectedJobIdToDelete);
+    setSelectedJobIdToDelete(jobId);
   };
 
   // Create a sorted copy of userJobs array
@@ -69,6 +85,7 @@ function TableDash() {
               <th>Salary</th>
               <th>Notes</th>
               <th>Status</th>
+              <th>Applied on</th>
               <th>Reminder Date</th>
               <th></th>
             </tr>
@@ -87,7 +104,7 @@ function TableDash() {
                 <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
                   <Button
                     variant="danger btn-sm"
-                    onClick={handleDelete}
+                    onClick={(e) => handleDelete(e, selectedJob._id)}
                     
                   >
                     Delete
@@ -111,6 +128,7 @@ function TableDash() {
                 Cancel
               </Button>
               <Button variant="danger" onClick={() => {
+                setShowDeleteModal(false);
                 confirmDelete(selectedJobIdToDelete);
                 window.location.reload();
               }} > 

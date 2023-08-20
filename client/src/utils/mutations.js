@@ -112,8 +112,8 @@ mutation updateJobApplication($_id: ID, $dateApplied: String, $company: String, 
 `;
 
 export const UPDATE_PASSWORD = gql `
-mutation updatePassword($username: String, $password: String) {
-    updatePassword(username: $username, password: $password) {
+mutation updatePassword($_id: ID, $password: String) {
+    updatePassword(_id: $_id, password: $password) {
         _id
         username
         email
