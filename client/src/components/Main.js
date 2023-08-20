@@ -11,6 +11,9 @@ const Main = () => {
     //We fetch the data from the DB using this query
     const { loading, data } = useQuery(QUERY_ME);
     const [showModal, setShowModal] = useState(false);
+    const [showMissingFieldsModal, setShowMissingFieldsModal] = useState(false);
+    const [missingFields, setMissingFields] = useState([]); // Define missingFields state
+
     const [reminder, setReminder] = useState(false);
     const [meData, setMeData] = useState({});
     const [formData, setFormData] = useState({_id: '', dateApplied:'', company: '', jobPosition: '', salary: '', url: '', interview: false, interviewDate: '', comments: '', status: '', reminder: true, reminderDate: '', userID: '', });
@@ -95,9 +98,23 @@ const Main = () => {
         formData.interview = false
     }
 
+    const handleCloseMissingFieldsModal = () => {
+        setShowMissingFieldsModal(false);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        console.log("Submit button clicked");
+
+        // Check if all mandatory fields are filled out
+        const mandatoryFields = ['company', 'jobPosition', 'dateApplied', 'status'];
+        const missingFields = mandatoryFields.filter(field => !formData[field]);
+
+        if (missingFields.length > 0) {
+        setShowMissingFieldsModal(true);
+        return;
+        }
+        
         addJobApplication({
             variables: {
                 _id: formData._id,
@@ -182,7 +199,7 @@ const Main = () => {
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="company">
-                        <Form.Label>Company</Form.Label>
+                        <Form.Label> <span style={{ color: 'red', fontWeight: 'bold' }}>*</span> Company</Form.Label>
                         <Form.Control
                         type="text"
                         name="company"
@@ -200,7 +217,7 @@ const Main = () => {
                         />
                     </Form.Group>
                     <Form.Group controlId="jobPosition">
-                        <Form.Label>Job Position</Form.Label>
+                        <Form.Label><span style={{ color: 'red', fontWeight: 'bold' }}>*</span> Job Position</Form.Label>
                         <Form.Control
                         type="text"
                         name="jobPosition"
@@ -209,7 +226,7 @@ const Main = () => {
                         />
                     </Form.Group>
                     <Form.Group controlId="dateApplied">
-                        <Form.Label>Job Application Date</Form.Label>
+                        <Form.Label><span style={{ color: 'red', fontWeight: 'bold' }}>*</span> Job Application Date</Form.Label>
                         <Form.Control
                             type="date"
                             name="dateApplied"
@@ -238,7 +255,7 @@ const Main = () => {
                         />
                     </Form.Group>
                     <Form.Group controlId="status">
-                        <Form.Label>Status</Form.Label>
+                        <Form.Label><span style={{ color: 'red', fontWeight: 'bold' }}>*</span> Status</Form.Label>
                         <Form.Control
                         as="select"
                         name="status"
@@ -286,6 +303,20 @@ const Main = () => {
                         Submit
                     </Button>
                 </Modal.Footer>
+            </Modal>
+
+            {/* Modal for displaying missing mandatory fields */}
+            <Modal show={showMissingFieldsModal} onHide={handleCloseMissingFieldsModal} >
+                <Modal.Body className='text-center bg-danger' >
+                    <br/>
+                    <p>⚠️ Please fill out all mandatory fields</p>
+                </Modal.Body>
+                <Modal.Footer className='justify-content-center bg-light'>
+                    <Button variant="warning" onClick={handleCloseMissingFieldsModal}>
+                        OK
+                    </Button>
+                </Modal.Footer >
+                
             </Modal>
         </div>
     );
