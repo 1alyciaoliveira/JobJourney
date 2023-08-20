@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
+import {  AiOutlineLock } from 'react-icons/ai';
 import { useMutation } from '@apollo/client';
 import { UPDATE_PASSWORD } from '../utils/mutations'
 
 function UserProfile() {
   const [showModal, setShowModal] = useState(false);
-  const [username, setUserName] = useState('');
+  // const [username, setUserName] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [updatePassword] = useMutation(UPDATE_PASSWORD);
@@ -17,7 +17,6 @@ function UserProfile() {
 // Function that triggers when the user clicks the button on the modal and sends info to the DB.
   const handleChangePassword = async (newPassword) => {
 
-    console.log('Updated profile:', { username, password });
 
     if (oldPassword === password) {
       console.log('CANT USE THE SAME PASSWORD!')
@@ -26,7 +25,6 @@ function UserProfile() {
     try {
       const response = await updatePassword({
         variables: {
-          username,
           password
         },
       });
@@ -52,7 +50,7 @@ function UserProfile() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group  className="my-2" controlId="userName">
+            {/* <Form.Group  className="my-2" controlId="userName">
               <Form.Label style={{ fontWeight: 'bold' }}>
                 <AiOutlineUser /> Enter your username
               </Form.Label>
@@ -64,7 +62,7 @@ function UserProfile() {
                 onChange={(e) => setUserName(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="my-2" controlId="oldPassword">
               <Form.Label style={{ fontWeight: 'bold' }}>
@@ -81,7 +79,7 @@ function UserProfile() {
 
             <Form.Group className="my-2" controlId="password">
               <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineLock /> Enter your new Password
+                <AiOutlineLock /> Enter your new password
               </Form.Label>
               <Form.Control
                 type="password"
@@ -90,6 +88,7 @@ function UserProfile() {
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
+              {/* {<div id="warningMsg" className="text-danger">New password cannot be the same as old one!</div>} */}
             </Form.Group>
           </Form>
         </Modal.Body>
