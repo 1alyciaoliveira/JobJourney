@@ -7,7 +7,7 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-import { BsExclamationDiamond} from 'react-icons/bs';
+import { BsExclamationDiamond , MdEventAvailable , MdHourglassFull, MdToday, MdWatchLater} from 'react-icons/bs';
 
 const Board = () => {
   
