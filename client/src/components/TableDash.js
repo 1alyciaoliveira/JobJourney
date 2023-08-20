@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
+import BoardJobEdit from './BoardJobEdit';
 import Auth from '../utils/auth';
 
 function TableDash() {
@@ -12,6 +13,7 @@ function TableDash() {
   const [selectedJobIdToDelete, setSelectedJobIdToDelete] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [removeJobApplication] = useMutation(REMOVE_APPLICATION);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   const { loading, error, data } = useQuery(QUERY_ME);
   if (loading) return <p>Loading...</p>;
@@ -72,22 +74,17 @@ function TableDash() {
             </tr>
           </thead>
           <tbody>
-            {userJobs.map((job, index) => (
-              <tr key={job._id} className="text-center">
-                <td>{job.company}</td>
-                <td>{job.url}</td>
-                <td>{job.jobPosition}</td>
-                <td>{job.salary}</td>
-                <td>{job.comments}</td>
-                <td>{job.status}</td>
-                <td>{job.reminderDate}</td>
+            {userJobs.map((selectedJob, index) => (
+              <tr key={selectedJob._id} className="text-center">
+                <td>{selectedJob.company}</td>
+                <td>{selectedJob.url}</td>
+                <td>{selectedJob.jobPosition}</td>
+                <td>{selectedJob.salary}</td>
+                <td>{selectedJob.comments}</td>
+                <td>{selectedJob.status}</td>
+                <td>{selectedJob.reminderDate}</td>
                 <td>
-                  <Button
-                      variant="dark btn-sm mr-2"
-                      onClick={() => openModal(job)}
-                    >
-                      Edit
-                  </Button>
+                <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
                   <Button
                     variant="danger btn-sm"
                     onClick={handleDelete}
