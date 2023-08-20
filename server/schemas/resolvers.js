@@ -107,7 +107,7 @@ console.log(removedJobApplication);
     const hashPassword = await bcrypt.hash(psw, 10);
     
     const userUpdated = await User.findOneAndUpdate(
-      { username: args.username },
+      { _id: context.user._id },
       { password: hashPassword }, 
       { new: true }
     );
