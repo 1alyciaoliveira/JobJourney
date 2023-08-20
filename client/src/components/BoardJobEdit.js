@@ -5,37 +5,37 @@ import { UPDATE_APPLICATION } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
-function BoardJobEdit() {
+function BoardJobEdit({selectedJob, setSelectedJob}) {
     const [updateJobApplication] = useMutation(UPDATE_APPLICATION);
     const { loading, error, data } = useQuery(QUERY_ME);
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
 
-    const [selectedJob, setSelectedJob] = useState({
-        _id: '',
-        company: '',
-        jobPosition: '',
-        salary: '',
-        comments: '',
-        status: '',
-        reminderDate: '',
-    });
+    // const [selectedJob, setSelectedJob] = useState({
+    //     _id: jobInfo._id,
+    //     company: jobInfo.company,
+    //     jobPosition: jobInfo.jobPosition,
+    //     salary: jobInfo.salary,
+    //     comments: jobInfo.comments,
+    //     status: jobInfo.status,
+    //     reminderDate: jobInfo.reminderDate,
+    // });
 
     const [formData, setFormData] = useState({
-        company: '',
-        jobPosition: '',
-        salary: '',
-        comments: '',
-        status: '',
-        reminderDate: '',
+        company: selectedJob.company,
+        jobPosition: selectedJob.jobPosition,
+        salary: selectedJob.salary,
+        comments: selectedJob.comments,
+        status: selectedJob.status,
+        reminderDate: selectedJob.reminderDate,
     });
 
-    useEffect(() => {
-        if (selectedJob._id) {
-            setFormData(selectedJob);
-            setShowModal(true);
-        }
-    }, [selectedJob]);
+    // useEffect(() => {
+    //     if (selectedJob._id) {
+    //         setFormData(selectedJob);
+    //         setShowModal(true);
+    //     }
+    // }, [selectedJob]);
 
     const handleUpdateJobApplication = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -65,19 +65,20 @@ function BoardJobEdit() {
     };
 
     const handleSelectJob = (job) => {
-        setSelectedJob(job);
+        // setSelectedJob(job);
+        setShowModal(true);
     };
 
     const handleClose = () => {
         setShowModal(false);
         setSelectedJob({
-            _id: '',
-            company: '',
-            jobPosition: '',
-            salary: '',
-            comments: '',
-            status: '',
-            reminderDate: '',
+            _id: formData._id,
+            company: formData.company,
+            jobPosition: formData.jobPosition,
+            salary: formData.salary,
+            comments: formData.comments,
+            status: formData.status,
+            reminderDate: formData.reminderDate,
         });
         setFormData({
             company: '',
@@ -132,9 +133,9 @@ function BoardJobEdit() {
 
     return (
         <div>
-            {userJobs.map((job) => (
-                <div key={job._id}>
-            <Button className="bg-dheader" variant="secondary" onClick={() =>handleSelectJob(job)}>
+            {/* {userJobs.map((job) => ( */}
+                <div key={selectedJob._id}>
+            <Button className="bg-dheader" variant="secondary" onClick={() =>handleSelectJob(selectedJob)}>
                 Edit
             </Button>
            
@@ -255,7 +256,7 @@ function BoardJobEdit() {
             </Modal>
         </div>
 
-            ))}
+
                         </div>
     );
 
