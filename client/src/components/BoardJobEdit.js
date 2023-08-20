@@ -23,6 +23,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
 
     const [formData, setFormData] = useState({
         company: selectedJob.company,
+        url: selectedJob.url,
+        dateApplied: selectedJob.dateApplied,
         jobPosition: selectedJob.jobPosition,
         salary: selectedJob.salary,
         comments: selectedJob.comments,
@@ -40,7 +42,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
     const handleUpdateJobApplication = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        const { company, jobPosition, salary, comments, status, reminderDate } = formData;
+        const { company, url, dateApplied, jobPosition, salary, comments, status, reminderDate } = formData;
 
         if (!token) {
             return false;
@@ -50,6 +52,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
             const { data } = await updateJobApplication({
                 variables: {
                     _id: selectedJob._id,
+                    url,
+                    dateApplied,
                     company,
                     jobPosition,
                     salary,
@@ -73,6 +77,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
         setShowModal(false);
         setSelectedJob({
             _id: formData._id,
+            url: formData.url,
+            dateApplied: formData.dateApplied,
             company: formData.company,
             jobPosition: formData.jobPosition,
             salary: formData.salary,
@@ -82,6 +88,8 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
         });
         setFormData({
             company: '',
+            url: '',
+            dateApplied: '',
             jobPosition: '',
             salary: '',
             comments: '',
@@ -177,7 +185,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                             <Form.Control
                                 type="date"
                                 name="appliedDate"
-                                value={formData.appliedDate}
+                                value={formData.dateApplied}
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
@@ -197,7 +205,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                                 as="textarea"
                                 rows={5}
                                 name="notes"
-                                value={formData.notes}
+                                value={formData.comments}
                                 onChange={handleFormChange}
                             />
                         </Form.Group>
