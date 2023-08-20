@@ -47,6 +47,10 @@ const Board = () => {
 
   
 const formatDate = (dateApplied) => {
+  // Return a blank string if dateApplied is empty or falsy
+  if (!dateApplied) {
+    return ''; 
+  }
   const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
   const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
