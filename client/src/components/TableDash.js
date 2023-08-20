@@ -6,6 +6,7 @@ import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 
+
 function TableDash() {
 
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +32,8 @@ function TableDash() {
       await removeJobApplication({
         variables: { _id },
       });
-      
+
+    
     } catch (err) {
       console.error(err);
     }
@@ -42,10 +44,10 @@ function TableDash() {
     setShowModal(true);
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = (e, jobId) => {
     e.stopPropagation();
     setShowDeleteModal(true);
-    confirmDelete(selectedJobIdToDelete);
+    setSelectedJobIdToDelete(jobId);
   };
 
   // Create a sorted copy of userJobs array
@@ -90,7 +92,7 @@ function TableDash() {
                   </Button>
                   <Button
                     variant="danger btn-sm"
-                    onClick={handleDelete}
+                    onClick={(e) => handleDelete(e, job._id)}
                     
                   >
                     Delete
@@ -114,8 +116,8 @@ function TableDash() {
                 Cancel
               </Button>
               <Button variant="danger" onClick={() => {
+                setShowDeleteModal(false);
                 confirmDelete(selectedJobIdToDelete);
-                window.location.reload();
               }} > 
                 Delete
               </Button>
