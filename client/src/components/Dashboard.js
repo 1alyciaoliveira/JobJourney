@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Board from './Board';
 import ViewButton from './ViewButton';
 import TableDash from './TableDash';
 import Auth from '../utils/auth';
+import Pricing from './Pricing';
+import Payment from './Payment';
 import Subscription from './Subscription';
 
 function Dashboard() {
@@ -43,15 +45,17 @@ function Dashboard() {
     }
   };
 
-
+  
 
   return (
     <div>
       <Header setShowDashboard={setShowDashboard} />
       {showDashboard ? (
         <>
-          <Subscription />
           <Main />
+          <Subscription/>
+          <Pricing/>
+          <Payment/>
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
         </>

@@ -1,10 +1,15 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-const Subscription = () => {
+
+const Subscription = ({ onPricingClick }) => {
   return (
     <div className="d-flex justify-content-end">
-      <button className="btn btn-success d-flex flex-column align-items-end mx-5">
-       Suscribe
+      <button className="btn btn-success d-flex flex-column align-items-end" onClick={onPricingClick}>
+        <div className="d-flex justify-content-center">
+          <span>Become</span>
+        </div>
+        <div className="d-flex justify-content-center">
+          <span>a member</span>
+        </div>
       </button>
     </div>
   );
