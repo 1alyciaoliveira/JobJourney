@@ -44,3 +44,11 @@ query jobs {
     }
 }
 `
+
+export const QUERY_PAYMENT = gql `
+query payment {
+    payment {
+        createCheckoutSession
+    }
+}
+`
