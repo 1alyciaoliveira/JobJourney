@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserProfile from './UserProfile';
 import logo from '../image/logo.png';
+import CheckoutButton from './checkoutButton';
 
 function Header(props) {
 
@@ -27,6 +28,7 @@ function Header(props) {
                     </div>
                 <div className="d-flex align-items-center">
                     <UserProfile />
+                    <CheckoutButton />
                     <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>
 

@@ -18,7 +18,7 @@ const server = new ApolloServer({
 });
 
 const corsOption = {
-  origin: URL_HEROKU,
+  origin: ['http://localhost:3000/graphQL','http://localhost:3000/graphQL'],
   credentials: true
 };
 
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app, path:'/graphQL', cors:false });
+  server.applyMiddleware({ app, cors:false });
   
   db.once('open', () => {
     app.listen(PORT, () => {

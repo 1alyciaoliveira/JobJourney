@@ -46,8 +46,8 @@ query jobs {
 `
 
 export const QUERY_PAYMENT = gql `
-query payment {
-    payment {
+query createCheckoutSession {
+    createCheckoutSession {
         createCheckoutSession
     }
 }

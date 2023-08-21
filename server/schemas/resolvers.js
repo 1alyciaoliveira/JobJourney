@@ -2,7 +2,7 @@ const { User, Jobs } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
-const stripe = require('stripe')('sk_test_51NhNG8F9kLAVf4oMSpuyFtgsaRLsqYzMeBWSuqLGHtpmJbSLmZUjqhkmpeGpze22IO0F4OOxgklasabRyfeyYi9o007kFRMglT');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const URL_HEROKU = 'http://localhost:3000'; //add heroku url
 
@@ -32,8 +32,8 @@ const resolvers = {
           }
         ],
         mode: 'payment',
-        // success_url: URL_HEROKU + '/success',
-        // cancel_url: URL_HEROKU + '/cancel'
+        success_url: URL_HEROKU + '/success',
+        cancel_url: URL_HEROKU + '/cancel'
       });
 
       return JSON.stringify({
