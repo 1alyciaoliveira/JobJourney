@@ -52,7 +52,6 @@ function Dashboard() {
       {showDashboard ? (
         <>
           <Main />
-          <Subscription/>
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
         </>
