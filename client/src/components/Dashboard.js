@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Board from './Board';
 import ViewButton from './ViewButton';
 import TableDash from './TableDash';
 import Auth from '../utils/auth';
-
+import Subscription from './Subscription';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -43,13 +43,14 @@ function Dashboard() {
     }
   };
 
-  
+
 
   return (
     <div>
       <Header setShowDashboard={setShowDashboard} />
       {showDashboard ? (
         <>
+          <Subscription />
           <Main />
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
