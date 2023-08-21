@@ -40,7 +40,7 @@ function UserProfile() {
   return (
     <div>
       <Button variant="btn" onClick={handleShow}>
-        <i class="fas fa-user-cog"></i>   Settings
+        <i className="fas fa-user-cog"></i>   Settings
       </Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton style={{ backgroundColor: '#2f3e46', color: 'white' }}>

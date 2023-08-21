@@ -46,7 +46,7 @@ const Main = () => {
     // console.log('Total Job Applications:', jobCount);
 
     // console.log('Interview Count:',interviewCounter);
-    const interviewRatio = (interviewCounter / jobCount).toFixed(2);
+    const interviewRatio = jobCount !== 0 ? (interviewCounter / jobCount).toFixed(2) : 0
     // console.log('Interview Ratio:', interviewRatio);
     
     const pendingInterviews = jobCount - interviewCounter;
