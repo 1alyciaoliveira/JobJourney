@@ -7,6 +7,7 @@ import ViewButton from './ViewButton';
 import TableDash from './TableDash';
 import Auth from '../utils/auth';
 
+import Subscription from './Subscription';
 
 function Dashboard() {
   const navigate = useNavigate();
