@@ -36,10 +36,10 @@ const Board = () => {
     }
 
       try {
-        const data = await removeJobApplication({
+        await removeJobApplication({
           variables: { _id },
       })
-       removeJobApplication(_id);
+        removeJobApplication(_id);
       } catch (err) {
         console.error(err);
       }

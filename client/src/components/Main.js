@@ -163,7 +163,7 @@ const Main = () => {
     return (
         <div className="container-fluid bg-dmain py-4">
             <h2 className="mb-5 ml-4">
-                Welcome {meData.username} let´s track!
+            Welcome {meData.username} let´s track your job applications!
             </h2>
 
             <div className="d-flex justify-content-around mb-3">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_APPLICATION } from '../utils/mutations';
@@ -7,19 +7,9 @@ import Auth from '../utils/auth';
 
 function BoardJobEdit({selectedJob, setSelectedJob}) {
     const [updateJobApplication] = useMutation(UPDATE_APPLICATION);
-    const { loading, error, data } = useQuery(QUERY_ME);
+    const { loading, error } = useQuery(QUERY_ME);
     const [showModal, setShowModal] = useState(false);
     const [reminder, setReminder] = useState(false);
-
-    // const [selectedJob, setSelectedJob] = useState({
-    //     _id: jobInfo._id,
-    //     company: jobInfo.company,
-    //     jobPosition: jobInfo.jobPosition,
-    //     salary: jobInfo.salary,
-    //     comments: jobInfo.comments,
-    //     status: jobInfo.status,
-    //     reminderDate: jobInfo.reminderDate,
-    // });
 
     const [formData, setFormData] = useState({
         company: selectedJob.company,
@@ -32,13 +22,6 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
         reminderDate: selectedJob.reminderDate,
         interview: selectedJob.interview,
     });
-
-    // useEffect(() => {
-    //     if (selectedJob._id) {
-    //         setFormData(selectedJob);
-    //         setShowModal(true);
-    //     }
-    // }, [selectedJob]);
 
     const handleUpdateJobApplication = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -146,10 +129,6 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    const user = data.me;
-    const userJobs = user.jobsApplied;
-
-
     return (
         <div>
             {/* {userJobs.map((job) => ( */}
@@ -157,7 +136,6 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
             <Button variant="warning" onClick={() =>handleSelectJob(selectedJob)}>
                 Edit
             </Button>
-           
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton className="justify-content-center bg-dmodal">
                     <Modal.Title>Edit Job Application</Modal.Title>
@@ -275,9 +253,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                 </Modal.Footer>
             </Modal>
         </div>
-
-
-                        </div>
+    </div>
     );
 
 }
