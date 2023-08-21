@@ -38,6 +38,10 @@ const typeDefs = gql`
     jobs: [JobApplication]
   }
 
+  type Query {
+    createCheckoutSession: String
+  }
+
 
   type Mutation {
     login(email: String!, password: String!): Auth
