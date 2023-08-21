@@ -30,6 +30,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
         comments: selectedJob.comments,
         status: selectedJob.status,
         reminderDate: selectedJob.reminderDate,
+        interview: selectedJob.interview,
     });
 
     // useEffect(() => {
@@ -42,10 +43,15 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
     const handleUpdateJobApplication = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        const { company, url, dateApplied, jobPosition, salary, comments, status, reminderDate } = formData;
+        let { company, url, dateApplied, jobPosition, salary, comments, status, reminderDate, interview } = formData;
 
         if (!token) {
             return false;
+        }
+        if (status === 'Interview' || 'Accepted') {
+            interview = true
+        } else {
+            interview = false
         }
 
         try {
@@ -60,11 +66,13 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                     comments,
                     status,
                     reminderDate,
+                    interview
                 },
             });
             handleClose();
             window.location.reload();
-            
+            console.log(data);
+            console.log(formData);
         } catch (err) {
             console.error(err);
         }
@@ -87,6 +95,7 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
             comments: formData.comments,
             status: formData.status,
             reminderDate: formData.reminderDate,
+            interview: formData.interview,
         });
         setFormData({
             company: '',
