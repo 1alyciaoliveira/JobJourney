@@ -10072,4 +10072,15 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+.button-cell {
+  display: flex;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adjust the gap as needed */
+}
 /*# sourceMappingURL=bootstrap.css.map */

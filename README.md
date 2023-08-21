@@ -116,7 +116,7 @@ ADD HEROKU Link here
 </br>
 
 
-![Screenshot](/assets/screenshot.png)
+![Screenshot](./assets/screenshot.png)
 
 </br>
 

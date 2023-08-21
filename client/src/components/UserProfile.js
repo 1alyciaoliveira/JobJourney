@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import {  AiOutlineLock } from 'react-icons/ai';
 import { useMutation } from '@apollo/client';
@@ -88,7 +88,7 @@ function UserProfile() {
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
-              {oldPassword!='' && oldPassword === password && (<div className="text-danger">New password cannot be the same as old one!</div>)}
+              {oldPassword!=='' && oldPassword === password && (<div className="text-danger">New password cannot be the same as old one!</div>)}
             </Form.Group>
           </Form>
         </Modal.Body>

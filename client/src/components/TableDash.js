@@ -42,23 +42,23 @@ function TableDash() {
     }
   };
 
-  const formatDate = (dateApplied) => {
-    // Return a blank string if dateApplied is empty or falsy
-    if (!dateApplied) {
-      return ''; 
-    }
-    const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-    const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = appliedDate.toLocaleDateString('en-US', options);
+  // const formatDate = (dateApplied) => {
+  //   // Return a blank string if dateApplied is empty or falsy
+  //   if (!dateApplied) {
+  //     return ''; 
+  //   }
+  //   const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  //   const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
+  //   const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  //   // const formattedDate = appliedDate.toLocaleDateString('en-US', options);
   
-    return formattedDate;
-  };
+  //   return formatDate;
+  // };
 
-  const openModal = (job) => {
-    setSelectedJobIdToDelete(job._id);
-    setShowModal(true);
-  };
+  // const openModal = (job) => {
+  //   setSelectedJobIdToDelete(job._id);
+  //   setShowModal(true);
+  // };
 
   const handleDelete = (e, jobId) => {
     e.stopPropagation();
@@ -66,10 +66,10 @@ function TableDash() {
     setSelectedJobIdToDelete(jobId);
   };
 
-  // Create a sorted copy of userJobs array
-  const sortedUserJobs = [...userJobs].sort((jobA, jobB) =>
-    jobA.status.localeCompare(jobB.status)
-  );
+  // // Create a sorted copy of userJobs array
+  // const sortedUserJobs = [...userJobs].sort((jobA, jobB) =>
+  //   jobA.status.localeCompare(jobB.status)
+  // );
 
   return (
     <div>
@@ -88,7 +88,6 @@ function TableDash() {
               <th>Applied on</th>
               <th>Reminder Date</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -102,15 +101,16 @@ function TableDash() {
                 <td>{selectedJob.status}</td>
                 <td>{selectedJob.dateApplied }</td>
                 <td>{selectedJob.reminderDate }</td>
-                <td></td>
-                <td>
-                <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
-                  <Button
-                    variant="danger mt-2"
-                    onClick={(e) => handleDelete(e, selectedJob._id)}
-                  >
-                    Delete
-                  </Button>
+                <td className="button-cell">
+                  <div className="button-container">
+                    <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
+                    <Button
+                      variant="danger"
+                      onClick={(e) => handleDelete(e, selectedJob._id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}

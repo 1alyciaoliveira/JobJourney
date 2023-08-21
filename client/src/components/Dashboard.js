@@ -32,19 +32,6 @@ function Dashboard() {
     }
   }, [navigate]);
 
-  // Handle toggle view function
-  const handleViewToggle = (view) => {
-    if (view === 'tableDash') {
-      setShowTableDash(true);
-      localStorage.setItem('activeView', 'tableDash');
-    } else {
-      setShowTableDash(false);
-      localStorage.setItem('activeView', 'board');
-    }
-  };
-
-  
-
   return (
     <div>
       <Header setShowDashboard={setShowDashboard} />
