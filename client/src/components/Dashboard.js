@@ -52,8 +52,6 @@ function Dashboard() {
       {showDashboard ? (
         <>
           <Main />
-          <Pricing/>
-          <Payment/>
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
         </>
