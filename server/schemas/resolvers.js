@@ -2,6 +2,9 @@ const { User, Jobs } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
+
+const URL_HEROKU = 'http://localhost:3000'; //add heroku url
 
 //missing fixes in query and mutation to add authentication info and signToken.
 const resolvers = {
@@ -19,6 +22,23 @@ const resolvers = {
         return response;
       }
       throw new AuthenticationError('Oops, you are not logged!');
+    },
+    createCheckoutSession: async () => {
+      const session = await stripe.checkout.sessions.create({
+        line_items: [
+          {
+            price: 'price_1NhNJIF9kLAVf4oMYHB7b9Gh',
+            quantity: 1
+          }
+        ],
+        mode: 'payment',
+        success_url: URL_HEROKU + '/success',
+        cancel_url: URL_HEROKU + '/cancel'
+      });
+
+      return JSON.stringify({
+        url: session.url
+      });
     }
   },
   Mutation: {

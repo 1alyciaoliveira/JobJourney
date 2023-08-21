@@ -1,11 +1,13 @@
 const express = require('express');
 const db = require('./config/connection');
 const path = require('path');
+const cors = require('cors');
 
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 
+const URL_HEROKU = 'http://localhost:3000'; //add heroku url
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -15,8 +17,15 @@ const server = new ApolloServer({
   context: authMiddleware
 });
 
+const corsOption = {
+  origin: ['http://localhost:3000/graphQL','http://localhost:3000/graphQL'],
+  credentials: true
+};
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(cors(corsOption));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -30,7 +39,7 @@ app.get('/', (req, res) => {
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors:false });
   
   db.once('open', () => {
     app.listen(PORT, () => {
