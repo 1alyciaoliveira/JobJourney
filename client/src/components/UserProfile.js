@@ -11,6 +11,7 @@ function UserProfile() {
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [updatePassword] = useMutation(UPDATE_PASSWORD);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -28,14 +29,32 @@ function UserProfile() {
           password
         },
       });
+      setShowSuccessModal(true);
       console.log(response.data);
     } catch(error) {
       console.log(error);
     };
     handleClose();
-
   }
   };
+
+  const SuccessModal = ({ show, onClose }) => {
+    return (
+      <Modal show={show} onHide={onClose}>
+        <Modal.Header className="justify-content-center bg-success" closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center justify-content-center" >
+          Your password has been changed successfully!
+          <br/>
+          <br/>
+          <Button  variant='warning' onClick={onClose}>
+            Close
+          </Button>
+        </Modal.Body>
+      </Modal>
+    );
+}
 
   return (
     <div>
@@ -50,20 +69,6 @@ function UserProfile() {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            {/* <Form.Group  className="my-2" controlId="userName">
-              <Form.Label style={{ fontWeight: 'bold' }}>
-                <AiOutlineUser /> Enter your username
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                placeholder="Enter your user name"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-                style={{ borderRadius: '16px' }}
-              />
-            </Form.Group> */}
-
             <Form.Group className="my-2" controlId="oldPassword">
               <Form.Label style={{ fontWeight: 'bold' }}>
                 <AiOutlineLock /> Enter your current password
@@ -101,6 +106,8 @@ function UserProfile() {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* Render the success modal */}
+      <SuccessModal show={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
     </div>
   );
 }

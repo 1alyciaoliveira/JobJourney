@@ -10,14 +10,16 @@ const Pricing = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="price-heading clearfix">
-                                <h1>Bootstrap Pricing Table</h1>
+                                <h1>Enjoy the complete experience of JobTracker</h1>
+                                <h3 className="mb-3">Get a 30 day FREE trial and decide!</h3>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-10">
+                        <div className="col">
                             <div className="generic_content clearfix">
                                 <div className="generic_head_price clearfix">
                                     <div className="generic_head_content clearfix">
@@ -37,16 +39,16 @@ const Pricing = () => {
                                 </div>
                                 <div className="generic_feature_list">
                                     <ul>
-                                        <li><span>2GB</span> Bandwidth</li>
-                                        <li><span>150GB</span> Storage</li>
-                                        <li><span>12</span> Accounts</li>
+                                        <li><span>2GB</span> CV </li>
+                                        <li><span>150GB</span> Courses </li>
+                                        <li><span>12</span> Linkeid </li>
                                         <li><span>7</span> Host Domain</li>
                                         <li><span>24/7</span> Support</li>
                                     </ul>
                                 </div>
-                                <div className="generic_price_btn clearfix">
+                               {/*  <div className="generic_price_btn clearfix">
                                     <a className="" href="">Sign up</a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

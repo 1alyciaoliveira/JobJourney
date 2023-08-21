@@ -97,6 +97,7 @@ Empower your job search with the user-friendly Job Tracker application. Seamless
 2. Run `npm run build` to bundle React in production mode
 3. Run `npm run start` to initiate the app in localhost
 4. Click on the generated local port link
+5. Alternatively, you can visit the deployed app in [Heroku](https://ancient-everglades-97703-e6a603057067.herokuapp.com/)
 
 
 </br>
@@ -110,7 +111,7 @@ https://github.com/1alyciaoliveira/JobJourney/
 
 Deployed Application Page:
 
-ADD HEROKU Link here
+https://ancient-everglades-97703-e6a603057067.herokuapp.com/
 
 
 </br>

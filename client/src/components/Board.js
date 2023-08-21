@@ -173,7 +173,7 @@ const formatDate = (dateApplied) => {
         <Modal.Header className='justify-content-center bg-dmodal'closeButton >
           <Modal.Title>Detailed Job Application</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ maxHeight: '60vh', overflowY: 'auto' }}>
           {selectedJob && (
             <div>
               <p><span className="font-weight-bold">Applied on:</span> {selectedJob.dateApplied}</p>
