@@ -30,16 +30,14 @@ const typeDefs = gql`
     user: User
   }
 
+  type CheckoutSession {
+    url: String!
+  }
+
   type Query {
     me: User
-  }
-
-  type Query {
     jobs: [JobApplication]
-  }
-
-  type Query {
-    createCheckoutSession: String
+    createCheckoutSession: CheckoutSession
   }
 
 

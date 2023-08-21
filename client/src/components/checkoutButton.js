@@ -1,14 +1,13 @@
-import { useLazyQuery } from "@apollo/client"; //important to wait until the call to load
+import React from 'react';
+import { useLazyQuery } from "@apollo/client";
 import { QUERY_PAYMENT } from "../utils/queries";
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
 
 function CheckoutButton() {
     const [startCheckout, { loading, data, error }] = useLazyQuery(QUERY_PAYMENT, {
         onCompleted: (queryData) => {
             console.log(queryData);
-            let data = JSON.parse(queryData.createCheckoutSession);
-            console.log(data);
-            let checkoutURL = data.url;
+            const checkoutURL = queryData.createCheckoutSession.url;
             window.location.assign(checkoutURL);
         }
     });

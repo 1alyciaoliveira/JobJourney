@@ -18,7 +18,7 @@ const server = new ApolloServer({
 });
 
 const corsOption = {
-  origin: ['http://localhost:3000/graphQL','http://localhost:3000/graphQL'],
+  origin: ['http://localhost:3000/graphQL','http://localhost:3001/graphQL'],
   credentials: true
 };
 

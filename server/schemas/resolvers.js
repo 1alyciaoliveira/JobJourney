@@ -2,7 +2,8 @@ const { User, Jobs } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require('bcrypt');
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+dotenv = require('dotenv').config();
+const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
 const URL_HEROKU = 'http://localhost:3000'; //add heroku url
 
@@ -36,9 +37,9 @@ const resolvers = {
         cancel_url: URL_HEROKU + '/cancel'
       });
 
-      return JSON.stringify({
+      return {
         url: session.url
-      });
+      }
     }
   },
   Mutation: {
