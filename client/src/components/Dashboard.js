@@ -6,7 +6,8 @@ import Board from './Board';
 import ViewButton from './ViewButton';
 import TableDash from './TableDash';
 import Auth from '../utils/auth';
-
+import Pricing from './Pricing';
+import Paymente from './Payment';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -51,6 +52,8 @@ function Dashboard() {
       {showDashboard ? (
         <>
           <Main />
+          <Pricing/>
+          <Payment/>
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
         </>
