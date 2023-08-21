@@ -100,7 +100,8 @@ function TableDash() {
                 <td>{selectedJob.salary}</td>
                 <td>{selectedJob.comments}</td>
                 <td>{selectedJob.status}</td>
-                <td>{selectedJob.reminderDate}</td>
+                <td>{selectedJob.dateApplied }</td>
+                <td>{selectedJob.reminderDate }</td>
                 <td></td>
                 <td>
                 <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>

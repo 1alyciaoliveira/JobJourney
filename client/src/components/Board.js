@@ -7,7 +7,7 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_APPLICATION } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-import { BsExclamationDiamond , MdEventAvailable , MdHourglassFull, MdToday, MdWatchLater} from 'react-icons/bs';
+import { CiFaceSmile } from 'react-icons/ci';
 
 const Board = () => {
   
@@ -94,10 +94,12 @@ const formatDate = (dateApplied) => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      {job.reminderDate === currentDate && (
-                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                    {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
+                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        </div>
                       )}
-
                       <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
@@ -121,10 +123,12 @@ const formatDate = (dateApplied) => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      {job.reminderDate === currentDate && (
-                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                    {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
+                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        </div>
                       )}
-
                       <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
@@ -148,10 +152,12 @@ const formatDate = (dateApplied) => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                      {job.reminderDate === currentDate && (
-                        <BsExclamationDiamond style={{ display: 'block', margin: 'auto', color: 'red', fontSize: '1.5rem',}}/>
+                    {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
+                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
+                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        </div>
                       )}
-
                       <p className="card-text">{formatDate(job.dateApplied)}</p>    
                       <p className="card-text">{job.jobPosition} at {job.company}</p>
                       <p className="card-text">Current process step: {job.status}</p>
