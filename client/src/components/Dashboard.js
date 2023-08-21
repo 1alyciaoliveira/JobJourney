@@ -6,8 +6,7 @@ import Board from './Board';
 import ViewButton from './ViewButton';
 import TableDash from './TableDash';
 import Auth from '../utils/auth';
-import Pricing from './Pricing';
-import Payment from './Payment';
+
 import Subscription from './Subscription';
 
 function Dashboard() {
@@ -54,8 +53,6 @@ function Dashboard() {
         <>
           <Main />
           <Subscription/>
-          <Pricing/>
-          <Payment/>
           <ViewButton setShowTableDash={setShowTableDash} />
           {showTableDash ? <TableDash /> : <Board />}
         </>

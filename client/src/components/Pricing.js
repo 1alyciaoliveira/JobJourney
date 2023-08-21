@@ -46,9 +46,9 @@ const Pricing = () => {
                                         <li><span>24/7</span> Support</li>
                                     </ul>
                                 </div>
-                                <div className="generic_price_btn clearfix">
+                               {/*  <div className="generic_price_btn clearfix">
                                     <a className="" href="">Sign up</a>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
