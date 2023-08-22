@@ -73,7 +73,7 @@ function TableDash() {
 
   return (
     <div>
-      <div className="container table-responsive">
+      <div className="container table-responsive card-font">
         <h2>Job Applications</h2>
         <br/>
         <table className="table table-striped">
@@ -105,7 +105,7 @@ function TableDash() {
                   <div className="button-container">
                     <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
                     <Button
-                      variant="danger"
+                      variant="danger card-font"
                       onClick={(e) => handleDelete(e, selectedJob._id)}
                     >
                       Delete

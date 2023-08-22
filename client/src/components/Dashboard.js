@@ -34,7 +34,7 @@ function Dashboard() {
   }, [navigate]);
 
   return (
-    <div>
+    <div className='card-font'>
       <Header setShowDashboard={setShowDashboard} />
       {showDashboard ? (
         <>

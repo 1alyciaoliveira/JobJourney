@@ -83,7 +83,7 @@ const formatDate = (dateApplied) => {
       <Row className="d-flex justify-content-around">
         <Col md={4}>
           <Card className="column-status my-3">
-            <Card.Header className="column-header text-center">Applied</Card.Header>
+            <Card.Header className="column-header text-center card-font">Applied</Card.Header>
             <Card.Body>
             {status1Jobs.map((job, index) => (
                 <div
@@ -94,15 +94,16 @@ const formatDate = (dateApplied) => {
                 >
                   <div key={job._id} className="card">
                     <div className="card-body">
-                    {job.reminderDate === currentDate && (
-                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
-                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
-                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                      {job.reminderDate === currentDate && (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
+                          <br/>
+                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
                         </div>
                       )}
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
-                      <p className="card-text">{job.jobPosition} at {job.company}</p>
-                      <p className="card-text">Current process step: {job.status}</p>
+                      <br/>
+                      <p className="card-text  card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
+                      <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
+                      <p className="card-text card-font  text-right fs-4">🛈</p>
                     </div>
                   </div>
                 </div>
@@ -124,14 +125,15 @@ const formatDate = (dateApplied) => {
                   <div key={job._id} className="card">
                     <div className="card-body">
                     {job.reminderDate === currentDate && (
-                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
-                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
-                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
-                        </div>
-                      )}
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
-                      <p className="card-text">{job.jobPosition} at {job.company}</p>
-                      <p className="card-text">Current process step: {job.status}</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
+                        <br/>
+                        <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
+                      </div>
+                    )}
+                    <br/>
+                    <p className="card-text  card-font card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
+                    <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
+                    <p className="card-text card-font  text-right fs-4">🛈</p>
                     </div>
                   </div>
                 </div>
@@ -141,7 +143,7 @@ const formatDate = (dateApplied) => {
         </Col>
         <Col md={4}>
           <Card className="column-status my-3">
-            <Card.Header className="column-header text-center">Solved</Card.Header>
+            <Card.Header className="column-header text-center card-font">Solved</Card.Header>
             <Card.Body>
             {status3Jobs.map((job, index) => (
                 <div
@@ -153,14 +155,15 @@ const formatDate = (dateApplied) => {
                   <div key={job._id} className="card">
                     <div className="card-body">
                     {job.reminderDate === currentDate && (
-                        <div style={{ display: 'flex', alignItems: 'center', color: 'orange',}}>
-                          <CiFaceSmile style={{  fontSize: '1.5rem', marginRight: '10px' }} />
-                          <p style={{  fontSize: '1.1rem', marginTop: '20px' }}>You set a reminder today for this Job!</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
+                          <br/>
+                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
                         </div>
-                      )}
-                      <p className="card-text">{formatDate(job.dateApplied)}</p>    
-                      <p className="card-text">{job.jobPosition} at {job.company}</p>
-                      <p className="card-text">Current process step: {job.status}</p>
+                        )}
+                        <br/>
+                        <p className="card-text  card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
+                        <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
+                        <p className="card-text card-font  text-right fs-4">🛈</p>
                     </div>
                   </div>
                 </div>
@@ -170,40 +173,41 @@ const formatDate = (dateApplied) => {
         </Col>
       </Row>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header className='justify-content-center bg-dmodal'closeButton >
+        <Modal.Header className='justify-content-center bg-dmodal card-font'closeButton >
           <Modal.Title>Detailed Job Application</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: '60vh', overflowY: 'auto' }}>
           {selectedJob && (
             <div>
-              <p><span className="font-weight-bold">Applied on:</span> {selectedJob.dateApplied}</p>
-              <p><span className="font-weight-bold">Company:</span> {selectedJob.company}</p>
-              <p><span className="font-weight-bold">URL:</span>{selectedJob.url}</p>
-              <p><span className="font-weight-bold">Position:</span> {selectedJob.jobPosition}</p>
-              <p><span className="font-weight-bold">Status:</span> {selectedJob.status}</p>
-              <p><span className="font-weight-bold">Salary:</span> ${selectedJob.salary}</p>
-              <p><span className="font-weight-bold">Notes:</span><div>{selectedJob.comments}</div></p>
+              <p><span className="font-weight-bold card-font">Applied on: </span> {formatDate(selectedJob.dateApplied)}</p>
+              <p><span className="font-weight-bold card-font">Company: </span> {selectedJob.company}</p>
+              <p><span className="font-weight-bold card-font">URL: </span>{selectedJob.url}</p>
+              <p><span className="font-weight-bold card-font">Position: </span> {selectedJob.jobPosition}</p>
+              <p><span className="font-weight-bold card-font">Status: </span> {selectedJob.status}</p>
+              <p><span className="font-weight-bold card-font">Salary: </span> ${selectedJob.salary}</p>
+              <p><span className="font-weight-bold card-font">Notes: </span><div>{selectedJob.comments}</div></p>
+              <p><span className="font-weight-bold card-font">Reminder: </span>{selectedJob.reminderDate}</p>
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer className='justify-content-center bg-dmodal'>
+        <Modal.Footer className='justify-content-center bg-dmodal card-font'>
           <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-            <Modal.Header closeButton className="justify-content-center bg-warning">
+            <Modal.Header closeButton className="justify-content-center bg-warning card-font">
               <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="text-center justify-content-center" >
+            <Modal.Body className="text-center justify-content-center card-font" >
               Are you sure you want to delete this job application?
               <br/>
               <br/>
-              <Button className="mr-2 bg-dmodal" variant='dark' onClick={() => setShowDeleteModal(false)}>
+              <Button className="mr-2 bg-dmodal card-font" variant='dark' onClick={() => setShowDeleteModal(false)}>
                 Cancel
               </Button>
-              <Button variant="danger" onClick={() => {
+              <Button variant="danger card-font" onClick={() => {
                 confirmDelete(selectedJobIdToDelete);
                 window.location.reload();
               }} > 

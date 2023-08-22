@@ -41,14 +41,14 @@ function UserProfile() {
   const SuccessModal = ({ show, onClose }) => {
     return (
       <Modal show={show} onHide={onClose}>
-        <Modal.Header className="justify-content-center bg-success" closeButton>
+        <Modal.Header className="justify-content-center bg-success card-font" closeButton>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="text-center justify-content-center" >
+        <Modal.Body className="text-center justify-content-center card-font" >
           Your password has been changed successfully!
           <br/>
           <br/>
-          <Button  variant='warning' onClick={onClose}>
+          <Button  variant='warning card-font' onClick={onClose}>
             Close
           </Button>
         </Modal.Body>
@@ -63,12 +63,12 @@ function UserProfile() {
       </Button>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton style={{ backgroundColor: '#2f3e46', color: 'white' }}>
-          <Modal.Title className="align-items-center justify-content-center">
+          <Modal.Title className="align-items-center justify-content-center card-font">
             Change your password
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form className='card-font'>
             <Form.Group className="my-2" controlId="oldPassword">
               <Form.Label style={{ fontWeight: 'bold' }}>
                 <AiOutlineLock /> Enter your current password
@@ -97,7 +97,7 @@ function UserProfile() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: '#2f3e46', color: 'white', display: 'flex', justifyContent: 'center' }}>
+        <Modal.Footer className='card-font' style={{ backgroundColor: '#2f3e46', color: 'white', display: 'flex', justifyContent: 'center' }}>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
