@@ -103,7 +103,7 @@ const formatDate = (dateApplied) => {
                       <br/>
                       <p className="card-text  card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
                       <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
-                      <p className="card-text card-font  text-right fs-4">🛈</p>
+                      <p className="card-text card-font  text-right fs-4">🔍</p>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ const formatDate = (dateApplied) => {
                     <br/>
                     <p className="card-text  card-font card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
                     <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
-                    <p className="card-text card-font  text-right fs-4">🛈</p>
+                    <p className="card-text card-font  text-right fs-4">🔍</p>
                     </div>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ const formatDate = (dateApplied) => {
                         <br/>
                         <p className="card-text  card-font">Applied on <span className="font-weight-bold">{formatDate(job.dateApplied)}</span> to <span className="font-weight-bold">{job.company}</span> for the position of <span className="font-weight-bold">{job.jobPosition}</span>.</p>    
                         <p className="card-text card-font">The current status of this application is: <span className="font-weight-bold">{job.status}</span> </p>
-                        <p className="card-text card-font  text-right fs-4">🛈</p>
+                        <p className="card-text card-font  text-right fs-4">🔍</p>
                     </div>
                   </div>
                 </div>
