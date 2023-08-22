@@ -181,7 +181,7 @@ const formatDate = (dateApplied) => {
             <div>
               <p><span className="font-weight-bold card-font">Applied on: </span> {formatDate(selectedJob.dateApplied)}</p>
               <p><span className="font-weight-bold card-font">Company: </span> {selectedJob.company}</p>
-              <p><span className="font-weight-bold card-font">URL: </span>{selectedJob.url}</p>
+              <p><span className="font-weight-bold card-font">URL: </span><a href={selectedJob.url} target="_blank" rel="noopener noreferrer">{selectedJob.url}</a></p>
               <p><span className="font-weight-bold card-font">Position: </span> {selectedJob.jobPosition}</p>
               <p><span className="font-weight-bold card-font">Status: </span> {selectedJob.status}</p>
               <p><span className="font-weight-bold card-font">Salary: </span> ${selectedJob.salary}</p>
