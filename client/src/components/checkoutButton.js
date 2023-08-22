@@ -17,8 +17,8 @@ function CheckoutButton() {
     console.log(data);
 
     return (
-        <Button onClick={() => startCheckout()}>
-            donate!
+        <Button className="bg-warning" onClick={() => startCheckout()}>
+            Donate!
         </Button>
     )
 }

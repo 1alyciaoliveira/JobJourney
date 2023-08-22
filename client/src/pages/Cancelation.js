@@ -6,17 +6,26 @@ function Cancel() {
         <div className="content">
             <div className="wrapper-1">
                 <div className="wrapper-2">
-                    <h1 style = {{color:'red'}} className="title-thanks">T!</h1>
-                    <p>
+                    <h1 style={{ color: 'red' }} className="title-thanks">We understand...</h1>
 
-                        We want to express our heartfelt gratitude for your generous donation and for supporting, Jobjourney! Your contribution is a significant step in our journey to assist individuals in maintaining a more organized and efficient record of their job applications.
-                        
-                        We are excited about the positive impact Jobjourney will have on people's lives and how it will streamline their job search process.
+                    <div  className="mb-5" >
+                        <p>
+                            We're sorry to hear that you've decided not to make a donation at this time.
+                            We invite you to continue using the app and making the most of all the features we have to offer. If you ever decide to reconsider the possibility of supporting us, we'll be here with open arms. In the meantime, we're here to assist you every step of your professional journey and to make your experience with Jobjourney as beneficial as possible.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Thank you again for being part of our community.
+                        </p>
+                    </div>
 
-                        Thank you once again for believing in us and being a part of this exciting journey. Your support makes a difference and motivates us to keep moving forward.
-
-                        Warm regards,
-                        Jobjourney Team</p>
+                    <div>
+                        <p>
+                            Best regards,
+                            Jobjourney Team
+                        </p>
+                    </div>
                     <button className="btn btn-primary go-home">
                         go home
                     </button>
