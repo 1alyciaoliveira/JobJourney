@@ -12,8 +12,8 @@ function PageNotFound() {
                             This must be a mistake, please make sure you're in the correct page.
                         </p>
                     </div>
-                    <button className="btn btn-primary go-home">
-                        HomePage
+                    <button href="http://localhost:3000" className="btn btn-primary go-home">
+                        Go to Home Page
                     </button>
                 </div>
             </div>
