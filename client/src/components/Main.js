@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap components
+import { Card, Button, Modal, Form } from 'react-bootstrap'; // Import React Bootstrap components
 import { QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
@@ -155,36 +155,37 @@ const Main = () => {
             color: 'green',
             display: 'flex',
             flexDirection: 'Column',
-            fontSize: 'xx-large',
             fontWeight: 'bold',
+            fontFamily: "'Bricolage Grotesque', sans-serif"
         },
     }
 
     return (
         <div className="container-fluid bg-dmain py-4">
-            <h2 className="mb-5 ml-4">
+            <h2 className="mb-5 ml-4 text-center fs-sm-12 card-font">
             Welcome {meData.username} let´s track your job applications!
             </h2>
 
-            <div className="d-flex justify-content-around mb-3">
-                <div className="rounded p-3 bg-light text-center">
+            <div className="d-flex flex-wrap justify-content-around mb-3 card-font">
+                <div className="rounded p-3 bg-light text-center mb-2">
                     {/* <img src={totalJobApplicationsImage} alt="Total Job Applications" width="50" height="50" /> */}
-                    <p className="m-0">Total Job Applications  <span style={styles.indicatorsCards}>{jobCount}</span></p>
+                    <p className="m-0 fs-4 fs-sm-12">Total Job Applications  <span style={styles.indicatorsCards}>{jobCount}</span></p>
                 </div>
-                <div className="rounded p-3 bg-light text-center">
+                <div className="rounded p-3 bg-light text-center mb-2">
                     {/* <img src={pendingInterviewsImage} alt="Pending Interviews" width="50" height="50" /> */}
-                    <p className="m-0">Applications waiting for Interview <span style={styles.indicatorsCards}>{pendingInterviews}</span></p>
+                    <p className="m-0 fs-4 fs-sm-12">Applications waiting for Interview <span style={styles.indicatorsCards}>{pendingInterviews}</span></p>
                 </div>
-                <div className="rounded p-3 bg-light text-center">
+                <div className="rounded p-3 bg-light text-center mb-2">
                     {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
-                    <p className="m-0">Interview Ratio <span style={styles.indicatorsCards}>{interviewRatio}</span></p>
+                    <p className="m-0 fs-4 fs-sm-12">Interview Ratio <span style={styles.indicatorsCards}>{interviewRatio}</span></p>
                 </div>
-                <div className="rounded p-3 bg-light text-center">
+                <div className="rounded p-3 bg-light text-center mb-2">
                     {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
-                    <p className="m-0">Upcoming Interviews <span style={styles.indicatorsCards}>TBD</span></p>
+                    <p className="m-0 fs-4 fs-sm-12">Upcoming Interviews <span style={styles.indicatorsCards}>TBD</span></p>
                 </div>
                 <div>
-                    <Button className="rounded p-3 text-center" variant="success" onClick={handleShow}>
+                    <br/>
+                    <Button className="rounded p-3 text-center mb-2 card-font" variant="success card-font" onClick={handleShow}>
                         + Add Job
                     </Button>
                 </div>
@@ -193,11 +194,11 @@ const Main = () => {
 
 
             <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton className="justify-content-center bg-dmodal">
+                <Modal.Header closeButton className="justify-content-center bg-dmodal card-font">
                     <Modal.Title>Add Job Application</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
+                    <Form className='card-font' onSubmit={handleSubmit}>
                         <Form.Group controlId="company">
                             <Form.Label> <span style={{ color: 'red', fontWeight: 'bold' }}>*</span> Company</Form.Label>
                             <Form.Control
@@ -298,7 +299,7 @@ const Main = () => {
                         <br />
                     </Form>
                 </Modal.Body>
-                <Modal.Footer className="justify-content-center bg-dmodal">
+                <Modal.Footer className="justify-content-center bg-dmodal card-font">
                     <Button variant="warning" onClick={handleSubmit}>
                         Submit
                     </Button>
