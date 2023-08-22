@@ -117,7 +117,7 @@ https://ancient-everglades-97703-e6a603057067.herokuapp.com/
 </br>
 
 
-![Screenshot](./assets/screenshot.png)
+![Screenshot](./assets/screenshot.PNG)
 
 </br>
 

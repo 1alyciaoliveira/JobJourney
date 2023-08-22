@@ -93,6 +93,7 @@ function UserProfile() {
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderRadius: '16px' }}
               />
+              <br/>
               {oldPassword!=='' && oldPassword === password && (<div className="text-danger">New password cannot be the same as old one!</div>)}
             </Form.Group>
           </Form>
