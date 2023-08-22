@@ -96,7 +96,7 @@ function TableDash() {
                 <td>{selectedJob.company}</td>
                 <td>{selectedJob.url}</td>
                 <td>{selectedJob.jobPosition}</td>
-                <td>{selectedJob.salary}</td>
+                <td>${selectedJob.salary}</td>
                 <td>{selectedJob.comments}</td>
                 <td>{selectedJob.status}</td>
                 <td>{selectedJob.dateApplied }</td>
