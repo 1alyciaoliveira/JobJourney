@@ -8,7 +8,7 @@ function CheckoutButton() {
         onCompleted: (queryData) => {
             console.log(queryData);
             const checkoutURL = queryData.createCheckoutSession.url;
-            window.location.assign(checkoutURL);
+            window.open(checkoutURL, "_blank");
         }
     });
 
@@ -17,7 +17,7 @@ function CheckoutButton() {
     console.log(data);
 
     return (
-        <Button className="bg-warning" onClick={() => startCheckout()}>
+        <Button className="bg-warning" variant='warning' onClick={() => startCheckout()}>
             Donate!
         </Button>
     )

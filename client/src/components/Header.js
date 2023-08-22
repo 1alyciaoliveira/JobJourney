@@ -22,7 +22,7 @@ function Header(props) {
                         <button className="btn" onClick={() => window.location.reload()}>
                             <div className="d-flex align-items-center">
                                 <img src={logo} alt="JobJourney Logo" className="logo-image" />
-                                <h1 className="mb-4 mt-4 align-center">JobJourney</h1>
+                                <h2 style={{ color: '#354f52' }} className="mb-4 mt-4 align-center">JobJourney</h2>
                             </div>
                         </button>
                     </div>

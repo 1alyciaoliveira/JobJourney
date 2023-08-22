@@ -52,14 +52,14 @@ const Main = () => {
     }, [loading, data]);
 
     const jobCount = meData.jobCount;
-    // console.log('Total Job Applications:', jobCount);
+    
 
-    // console.log('Interview Count:',interviewCounter);
+    
     const interviewRatio = jobCount !== 0 ? (interviewCounter / jobCount).toFixed(2) : 0
-    // console.log('Interview Ratio:', interviewRatio);
+
 
     const pendingInterviews = jobCount - interviewCounter;
-    // console.log('Pending Interviews:', pendingInterviews);
+
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -113,7 +113,7 @@ const Main = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submit button clicked");
+        
 
         // Check if all mandatory fields are filled out
         const mandatoryFields = ['company', 'jobPosition', 'dateApplied', 'status'];
@@ -142,7 +142,7 @@ const Main = () => {
         })
             .then(({ data }) => {
                 // Do something with the response data if needed
-                console.log(data);
+                
                 handleClose();
                 window.location.reload();
             })
@@ -172,7 +172,7 @@ const Main = () => {
     return (
         <div className="container-fluid bg-dmain py-4">
             <h2 className="mb-5 ml-4 text-center fs-sm-12 card-font">
-            Welcome {meData.username} let´s track your job applications!
+            Welcome <span style={{ color: '#84a98c', fontWeight: 'text-bold' }}> {meData.username} </span>, let's track your job applications!
             </h2>
 
             <div className="d-flex flex-wrap justify-content-around mb-3 card-font">

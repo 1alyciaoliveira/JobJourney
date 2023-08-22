@@ -42,34 +42,13 @@ function TableDash() {
     }
   };
 
-  // const formatDate = (dateApplied) => {
-  //   // Return a blank string if dateApplied is empty or falsy
-  //   if (!dateApplied) {
-  //     return ''; 
-  //   }
-  //   const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-  //   const appliedDate = new Date(Date.parse(dateApplied) + timeZoneOffset);
-  //   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  //   // const formattedDate = appliedDate.toLocaleDateString('en-US', options);
-  
-  //   return formatDate;
-  // };
 
-  // const openModal = (job) => {
-  //   setSelectedJobIdToDelete(job._id);
-  //   setShowModal(true);
-  // };
 
   const handleDelete = (e, jobId) => {
     e.stopPropagation();
     setShowDeleteModal(true);
     setSelectedJobIdToDelete(jobId);
   };
-
-  // // Create a sorted copy of userJobs array
-  // const sortedUserJobs = [...userJobs].sort((jobA, jobB) =>
-  //   jobA.status.localeCompare(jobB.status)
-  // );
 
   return (
     <div>

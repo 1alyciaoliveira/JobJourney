@@ -33,8 +33,8 @@ const resolvers = {
           }
         ],
         mode: 'payment',
-        success_url: URL_HEROKU + '/success',
-        cancel_url: URL_HEROKU + '/cancel'
+        success_url: URL_HEROKU + 'success',
+        cancel_url: URL_HEROKU + 'cancel'
       });
 
       return {

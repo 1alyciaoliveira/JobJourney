@@ -26,9 +26,9 @@ function Success() {
                             Jobjourney Team
                         </p>
                     </div>
-                    <button className="btn btn-primary go-home">
-                        go home
-                    </button>
+                    <a href="http://ancient-everglades-97703-e6a603057067.herokuapp.com/dashboard" className="btn btn-primary go-home">
+                    Go to Dashboard
+                    </a>
                 </div>
             </div>
         </div>
