@@ -25,7 +25,7 @@ function Header(props) {
                             </div>
                         </button>
                     </div>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center card-font">
                     <UserProfile />
                     <button className="btn"  onClick={handleLogout}><span><i className="fas fa-sign-out-alt"></i></span>   Logout</button>
                 </div>

@@ -130,18 +130,18 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <div>
+        <div >
             {/* {userJobs.map((job) => ( */}
                 <div key={selectedJob._id}>
-            <Button variant="warning" onClick={() =>handleSelectJob(selectedJob)}>
+            <Button variant="warning card-font" onClick={() =>handleSelectJob(selectedJob)}>
                 Edit
             </Button>
             <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton className="justify-content-center bg-dmodal">
+                <Modal.Header closeButton className="justify-content-center bg-dmodal card-font">
                     <Modal.Title>Edit Job Application</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleUpdateJobApplication}>
+                    <Form className='card-font' onSubmit={handleUpdateJobApplication}>
                         <Form.Group controlId="company">
                             <Form.Label>Company</Form.Label>
                             <Form.Control
@@ -243,11 +243,11 @@ function BoardJobEdit({selectedJob, setSelectedJob}) {
                         <br />
                     </Form>
                 </Modal.Body>
-                <Modal.Footer className="justify-content-center bg-dmodal">
-                    <Button variant="secondary" onClick={handleClose}>
+                <Modal.Footer className="justify-content-center bg-dmodal card-font">
+                    <Button variant="secondary card-font" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="warning" onClick={handleUpdateJobApplication}>
+                    <Button variant="warning card-font" onClick={handleUpdateJobApplication}>
                         Update
                     </Button>
                 </Modal.Footer>

@@ -10083,4 +10083,8 @@ a.text-dark:hover, a.text-dark:focus {
   align-items: center;
   gap: 20px; /* Adjust the gap as needed */
 }
+
+.card-font {
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
 /*# sourceMappingURL=bootstrap.css.map */
