@@ -97,7 +97,7 @@ const formatDate = (dateApplied) => {
                       {job.reminderDate === currentDate && (
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
                           <br/>
-                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
+                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder for today! </p>
                         </div>
                       )}
                       <br/>
@@ -127,7 +127,7 @@ const formatDate = (dateApplied) => {
                     {job.reminderDate === currentDate && (
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
                         <br/>
-                        <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
+                        <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder for today! </p>
                       </div>
                     )}
                     <br/>
@@ -157,7 +157,7 @@ const formatDate = (dateApplied) => {
                     {job.reminderDate === currentDate && (
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'orange', backgroundColor: '',  }}>
                           <br/>
-                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder today for this Job!</p>
+                          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', textAlign: 'center', fontFamily: "'Bricolage Grotesque', sans-serif" }}>⏰ You set a reminder for today! </p>
                         </div>
                         )}
                         <br/>
