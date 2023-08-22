@@ -163,7 +163,7 @@ const Main = () => {
     return (
         <div className="container-fluid bg-dmain py-4">
             <h2 className="mb-5 ml-4 text-center fs-sm-12 card-font">
-            Welcome {meData.username} let´s track your job applications!
+            Welcome <span style={{ color: '#84a98c', fontWeight: 'text-bold' }}> {meData.username} </span>, let's track your job applications!
             </h2>
 
             <div className="d-flex flex-wrap justify-content-around mb-3 card-font">

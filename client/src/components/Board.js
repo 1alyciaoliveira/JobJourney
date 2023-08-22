@@ -83,7 +83,7 @@ const formatDate = (dateApplied) => {
       <Row className="d-flex justify-content-around">
         <Col md={4}>
           <Card className="column-status my-3">
-            <Card.Header className="column-header text-center card-font">Applied</Card.Header>
+            <Card.Header style={{ backgroundColor: '#84a98c' }} className="column-header text-center card-font">Applied</Card.Header>
             <Card.Body>
             {status1Jobs.map((job, index) => (
                 <div
@@ -113,7 +113,7 @@ const formatDate = (dateApplied) => {
         </Col>
         <Col md={4}>
           <Card className=" column-status my-3">
-            <Card.Header className="column-header text-center">In Progress</Card.Header>
+            <Card.Header style={{ backgroundColor: '#52796f' }} className="column-header text-center">In Progress</Card.Header>
             <Card.Body>
             {status2Jobs.map((job, index) => (
                 <div
@@ -143,7 +143,7 @@ const formatDate = (dateApplied) => {
         </Col>
         <Col md={4}>
           <Card className="column-status my-3">
-            <Card.Header className="column-header text-center card-font">Solved</Card.Header>
+            <Card.Header style={{ backgroundColor: '#354f52' }} className="column-header text-center card-font">Solved</Card.Header>
             <Card.Body>
             {status3Jobs.map((job, index) => (
                 <div
