@@ -11,7 +11,7 @@ function PageNotFound() {
                             This must be a mistake, please make sure you're in the correct page.
                         </p>
                     </div>
-                    <a href="http://localhost:3000" className="btn btn-primary go-homepage">
+                    <a href="https://ancient-everglades-97703-e6a603057067.herokuapp.com/" className="btn btn-primary go-homepage">
                         Go to Home Page
                     </a>
             </div>
