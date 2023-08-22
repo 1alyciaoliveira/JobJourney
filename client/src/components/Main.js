@@ -52,14 +52,14 @@ const Main = () => {
     }, [loading, data]);
 
     const jobCount = meData.jobCount;
-    // console.log('Total Job Applications:', jobCount);
+    
 
-    // console.log('Interview Count:',interviewCounter);
+    
     const interviewRatio = jobCount !== 0 ? (interviewCounter / jobCount).toFixed(2) : 0
-    // console.log('Interview Ratio:', interviewRatio);
+
 
     const pendingInterviews = jobCount - interviewCounter;
-    // console.log('Pending Interviews:', pendingInterviews);
+
 
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -113,7 +113,7 @@ const Main = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submit button clicked");
+        
 
         // Check if all mandatory fields are filled out
         const mandatoryFields = ['company', 'jobPosition', 'dateApplied', 'status'];
@@ -142,7 +142,7 @@ const Main = () => {
         })
             .then(({ data }) => {
                 // Do something with the response data if needed
-                console.log(data);
+                
                 handleClose();
                 window.location.reload();
             })
