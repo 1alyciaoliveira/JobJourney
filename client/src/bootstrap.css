@@ -10096,4 +10096,19 @@ a.text-dark:hover, a.text-dark:focus {
 .tfont {
   font-size: .7rem;
 }
+
+
+.tb-td {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowed text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.tb-td:hover {
+  overflow: visible; /* Show full content on hover */
+  white-space: normal;
+  z-index: 1; /* Make sure the tooltip appears on top */
+  position: relative;
+}
 /*# sourceMappingURL=bootstrap.css.map */

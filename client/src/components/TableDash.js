@@ -11,9 +11,9 @@ import Auth from '../utils/auth';
 function TableDash() {
 
   //Resizying style
-  const [isIphone, setIsIphone] = useState(window.innerWidth <= 992);
+  const [isIphone, setIsIphone] = useState(window.innerWidth <= 1199);
   const handleResize = () => {
-      setIsIphone(window.innerWidth <= 992);
+      setIsIphone(window.innerWidth <= 1199);
   };
 
   useEffect(() => {
@@ -134,10 +134,10 @@ function TableDash() {
 
   return (
     <div>
-      <div className="container table-responsive card-font">
+      <div className="container table-responsive card-font"> 
         <h2>Job Applications</h2>
         <br/>
-        <table className="table table-striped">
+        <table className="table table-striped ">
           <thead className="thead-dark text-center">
             <tr>
               <th>Company</th>
@@ -155,10 +155,10 @@ function TableDash() {
             {userJobs.map((selectedJob, index) => (
               <tr key={selectedJob._id} className="text-center">
                 <td>{selectedJob.company}</td>
-                <td>{selectedJob.url}</td>
+                <td className='tb-td' style={{ wordBreak: 'break-all'  }}>{selectedJob.url}</td>
                 <td>{selectedJob.jobPosition}</td>
                 <td>${selectedJob.salary}</td>
-                <td>{selectedJob.comments}</td>
+                <td className='tb-td' style={{  wordBreak: 'break-word' }}>{selectedJob.comments}</td>
                 <td>{selectedJob.status}</td>
                 <td>{selectedJob.dateApplied }</td>
                 <td>{selectedJob.reminderDate }</td>
