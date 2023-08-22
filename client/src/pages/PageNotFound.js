@@ -12,9 +12,9 @@ function PageNotFound() {
                             This must be a mistake, please make sure you're in the correct page.
                         </p>
                     </div>
-                    <button href="http://localhost:3000" className="btn btn-primary go-home">
+                    <a href="http://localhost:3000" className="btn btn-primary go-homepage">
                         Go to Home Page
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
