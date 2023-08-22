@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { QUERY_ME } from '../utils/queries';
@@ -9,6 +9,19 @@ import Auth from '../utils/auth';
 
 
 function TableDash() {
+
+  //Resizying style
+  const [isIphone, setIsIphone] = useState(window.innerWidth <= 992);
+  const handleResize = () => {
+      setIsIphone(window.innerWidth <= 992);
+  };
+
+  useEffect(() => {
+      window.addEventListener('resize', handleResize);
+      return () => {
+          window.removeEventListener('resize', handleResize);
+      };
+  }, []);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedJobIdToDelete, setSelectedJobIdToDelete] = useState(null);
@@ -50,6 +63,75 @@ function TableDash() {
     setSelectedJobIdToDelete(jobId);
   };
 
+  // Check if screen width is less than or equal to iPhone width
+  if (isIphone) { 
+    return (
+      <div>
+        <div>
+          <br/>
+        <div className="container card-font">
+          <h2>Job Applications</h2>
+          <div className="table-responsive">
+            <table className="table table-striped">
+              <thead className="thead-dark text-center tfont">
+                <tr>
+                  <th>Company</th>
+                  <th>Position</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userJobs.map((selectedJob, index) => (
+                  <tr key={selectedJob._id} className="text-center ">
+                    <td className="tfont ">{selectedJob.company}</td>
+                    <td className="tfont">{selectedJob.jobPosition}</td>
+                    <td className="tfont">{selectedJob.status}</td>
+                    <td className="tfont">
+                      <div className="button-container2">
+                        <BoardJobEdit selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+                        <Button
+                          variant="danger card-font"
+                          onClick={(e) => handleDelete(e, selectedJob._id)}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+
+    <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+          <Modal.Header className="justify-content-center bg-warning" closeButton>
+            <Modal.Title>Confirm Delete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center justify-content-center">
+            Are you sure you want to delete this job application?
+            <br/>
+            <br/>
+            <Button className="mr-2 bg-dmodal" variant='dark' onClick={() => setShowDeleteModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={() => {
+              setShowDeleteModal(false);
+              confirmDelete(selectedJobIdToDelete);
+              window.location.reload();
+            }} > 
+              Delete
+            </Button>
+          </Modal.Body>
+
+    </Modal>
+  </div>
+);
+
+  } else {
+
   return (
     <div>
       <div className="container table-responsive card-font">
@@ -66,7 +148,7 @@ function TableDash() {
               <th>Status</th>
               <th>Applied on</th>
               <th>Reminder Date</th>
-              <th></th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -121,5 +203,6 @@ function TableDash() {
     </div>
   );
 }
-
+}
 export default TableDash;
+
