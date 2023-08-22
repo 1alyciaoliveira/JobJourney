@@ -15,7 +15,7 @@ function UserProfile() {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-// Function that triggers when the user clicks the button on the modal and sends info to the DB.
+// Function that triggers when the user clicks the button on the modal and sends info to the DB..
   const handleChangePassword = async (newPassword) => {
 
 
@@ -31,6 +31,8 @@ function UserProfile() {
       });
       setShowSuccessModal(true);
       console.log(response.data);
+      setOldPassword('');
+      setPassword('')
     } catch(error) {
       console.log(error);
     };
