@@ -14,6 +14,7 @@ import SignForm from './components/SignForm';
 import Dashboard from './components/Dashboard';
 import Cancel from './pages/Cancelation';
 import Success from './pages/Success';
+import PageNotFound from './pages/PageNotFound';
 
 
 // Construct our main GraphQL API endpoint
@@ -59,6 +60,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Success" element={<Success />} />
           <Route path='/Cancel' element={<Cancel />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
 
