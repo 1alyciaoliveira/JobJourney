@@ -26,6 +26,7 @@ const Main = () => {
     const [interviewCounter, setInterviewCount] = useState(0);
     const [interviewRatioState, setInterviewRatio] = useState(0);
     const [pendingInterviewsState, setPendingInterviews] = useState(0);
+    const [averageSalary, setAverageSalary] = useState(0);
 
     // we use the useEffect hook so that the page waits until the data from the query has been retrieved, then stores it on meData.
     useEffect(() => {
@@ -38,7 +39,15 @@ const Main = () => {
             setInterviewCount(fetchedMeData.jobsApplied.filter(job => job.interview).length);
             setInterviewRatio((interviewCounter / jobCount).toFixed(2));
             setPendingInterviews(jobCount - interviewCounter);
-
+            
+            const validSalaries = fetchedMeData.jobsApplied.filter(application => application.salary !== "" && application.salary !== null).map(application => Number(application.salary));
+            const totalSalaries = validSalaries.reduce((sum, salary) => sum + salary, 0);
+            const avgSalary = validSalaries.length > 0 ? totalSalaries / validSalaries.length : 0;
+            const formattedAvgSalary = avgSalary.toLocaleString(undefined, {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            });
+            setAverageSalary(formattedAvgSalary);
         }
     }, [loading, data]);
 
@@ -181,7 +190,7 @@ const Main = () => {
                 </div>
                 <div className="rounded p-3 bg-light text-center mb-2">
                     {/* <img src={interviewsRatioImage} alt="Interviews Ratio" width="50" height="50" /> */}
-                    <p className="m-0 fs-4 fs-sm-12">Upcoming Interviews <span style={styles.indicatorsCards}>TBD</span></p>
+                    <p className="m-0 fs-4 fs-sm-12">Avg. Salary Expectation<span style={styles.indicatorsCards}>$ {averageSalary}</span></p>
                 </div>
                 <div>
                     <br/>
