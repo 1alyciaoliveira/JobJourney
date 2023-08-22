@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 dotenv = require('dotenv').config();
 const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
-const URL_HEROKU = 'http://localhost:3000'; //add heroku url
+const URL_HEROKU = 'https://ancient-everglades-97703-e6a603057067.herokuapp.com/'; //add heroku url
 
 //missing fixes in query and mutation to add authentication info and signToken.
 const resolvers = {

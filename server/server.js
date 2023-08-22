@@ -7,7 +7,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 
-const URL_HEROKU = 'http://localhost:3000'; //add heroku url
+const URL_HEROKU = 'https://ancient-everglades-97703-e6a603057067.herokuapp.com/'; //add heroku url
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -18,7 +18,7 @@ const server = new ApolloServer({
 });
 
 const corsOption = {
-  origin: ['http://localhost:3000/graphQL','http://localhost:3001/graphQL'],
+  origin: ['http://localhost:3000/graphQL','http://localhost:3001/graphQL', URL_HEROKU],
   credentials: true
 };
 
